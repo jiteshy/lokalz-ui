@@ -1,4 +1,5 @@
 {
+  "name": "lokalz-ui",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -16,7 +17,6 @@
   "engines": {
     "node": ">=18"
   },
-  "name": "with-tailwind",
   "packageManager": "npm@10.8.2",
   "workspaces": [
     "apps/*",

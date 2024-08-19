@@ -1,0 +1,63 @@
+"use client";
+
+import { CONFIG } from "@/utils/config";
+import { STORE_TYPES } from "@/utils/constants";
+import { Store } from "@repo/ui/types";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useSWR from "swr";
+
+export default function VendorMessagesPage() {
+  const { data: stores, isLoading } = useSWR<Store[]>(
+    `${CONFIG.API_BASE_PATH}/vendors`,
+  );
+
+  return (
+    <div>
+      <div className="flex justify-between items-center p-2 bg-slate-200 mb-3">
+        <div className="flex items-center gap-2 rounded">
+          <button className="border-0 text-slate-700 px-3 py-2 rounded text-sm bg-white font-semibold">
+            All
+          </button>
+        </div>
+      </div>
+
+      <div className="bg-white border border-text-300 w-full p-6 text-slate-700">
+        <h4 className="text-2xl font-semibold">All Vendor Messages</h4>
+        <div className="text-sm pt-2 text-slate-500">
+          List of all the messages sent by vendor using Vendor Onboarding form
+        </div>
+        <div className="pt-3">
+          {isLoading || !stores ? (
+            <FontAwesomeIcon icon={faCircleNotch} spin />
+          ) : (
+            <table className="w-full border border-slate-200">
+              <thead className="text-left">
+                <tr>
+                  <th className="px-6 py-3">Store Name</th>
+                  <th className="px-6 py-3">Owner Name</th>
+                  <th className="px-6 py-3">Email</th>
+                  <th className="px-6 py-3">Phone</th>
+                  <th className="px-6 py-3">Store Type</th>
+                  <th className="px-6 py-3">Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stores.map((store, index) => (
+                  <tr className="border-t border-t-slate-200" key={index}>
+                    <td className="px-6 py-3">{store.name}</td>
+                    <td className="px-6 py-3">{store.name}</td>
+                    <td className="px-6 py-3">{store.email}</td>
+                    <td className="px-6 py-3">{store.phone}</td>
+                    <td className="px-6 py-3">{STORE_TYPES[store.type]}</td>
+                    <td className="px-6 py-3">{store.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

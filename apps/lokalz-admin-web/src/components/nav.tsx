@@ -1,0 +1,32 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { signOut } from "@/auth";
+
+export const AdminNav = () => {
+  return (
+    <div className="px-6 py-5 mx-auto w-full">
+      <div className="relative flex items-center justify-between">
+        <h4 className="text-xl font-semibold text-slate-700">Dashboard</h4>
+        <ul className="flex items-center space-x-8">
+          <li>
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/login" });
+              }}
+            >
+              <button
+                type="submit"
+                className="text-slate-500 items-center pl-4 text-nowrap font-semibold inline-flex transition-colors duration-200 hover:text-slate-800"
+                aria-label="Logout"
+              >
+                <FontAwesomeIcon icon={faArrowRightToBracket} />
+                <span className="pl-2">Logout</span>
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
