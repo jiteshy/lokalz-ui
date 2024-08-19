@@ -32,7 +32,7 @@ export const StoreServices = ({ services }: { services: Services }) => {
           </span>
         </h2>
       </div>
-      <div className="grid max-w-screen-lg mx-auto space-y-6 lg:grid-cols-2 lg:space-y-0 lg:divide-x gap-x-20">
+      <div className="grid max-w-screen-lg mx-auto space-y-6 lg:grid-cols-2 lg:space-y-0 gap-x-20">
         {services &&
           services.categories.map((category: ServiceCategory) => (
             <div key={category.id} className="mr-5">
@@ -40,7 +40,7 @@ export const StoreServices = ({ services }: { services: Services }) => {
                 <h4 className="pb-3 text-2xl font-bold text-slate-600">
                   {category.categoryName}
                 </h4>
-                <hr className="border-b border-b-gray-300" />
+                <hr />
                 {category.categoryDescription && (
                   <p className="py-3 text-slate-600">
                     {category.categoryDescription}

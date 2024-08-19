@@ -15,7 +15,7 @@ export const Nav = () => {
   };
 
   return (
-    <div className="shadow-lg">
+    <div className="shadow">
       <div className="px-6 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-8 lg:px-24 mb-[2px]">
         <div className="relative flex items-center justify-between">
           <button
