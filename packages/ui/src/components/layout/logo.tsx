@@ -1,17 +1,12 @@
 import Image from "next/image";
-import logo from "../../assets/images/logo-64.png";
-import { cn } from "../../utils";
+import { LogoImage } from "@repo/ui/assets";
+import { cn } from "@repo/ui/utils";
 
 export const Logo = ({ iconOnly = false }: { iconOnly?: boolean }) => {
   return (
-    <div className="ui-flex ui-items-center">
-      <Image className="ui-w-7 ui-h-7" src={logo} alt="Logo icon" />
-      <span
-        className={cn(
-          "ui-pl-2 ui-text-2xl ui-text-gray-900",
-          iconOnly && "ui-hidden",
-        )}
-      >
+    <div className="flex items-center">
+      <Image className="w-7 h-7" src={LogoImage} alt="Logo icon" />
+      <span className={cn("pl-2 text-2xl text-gray-900", iconOnly && "hidden")}>
         Lokalz
       </span>
     </div>
