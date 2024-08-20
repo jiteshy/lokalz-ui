@@ -15,7 +15,7 @@ type StoresInput = {
 
 export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
   return (
-    <div className="bg-gray-100 pt-8 pb-16">
+    <div className="bg-gray-100 pt-0 md:pt-8 pb-5 md:pb-16">
       {isStoresDataLoading && (
         <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-6 md:px-10 lg:px-0">
           <h4 className="text-xl text-slate-800 mb-9 pb-3 border-b border-b-gray-300">
@@ -59,6 +59,9 @@ export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
                 <StoreCard details={store} />
               </Link>
             ))}
+          </div>
+          <div className="md:hidden pt-10 flex justify-center">
+            <div className="px-5 py-1 text-xs bg-indigo-50 text-slate-800 rounded-full border border-indigo-100 w-fit">That's all we've got!</div>
           </div>
         </div>
       )}

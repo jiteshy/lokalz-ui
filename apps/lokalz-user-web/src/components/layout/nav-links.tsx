@@ -5,14 +5,13 @@ import { usePathname } from "next/navigation";
 
 type NavLinksProps = {
   handleLinkClick: (route: string) => void;
-  className: string;
 };
 
-export const NavLinks = ({ handleLinkClick, className }: NavLinksProps) => {
+export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
   const pathname = usePathname();
 
   return (
-    <ul className={className}>
+    <ul className="items-center hidden space-x-8 md:flex">
       <li>
         <button
           onClick={() => handleLinkClick("/about")}

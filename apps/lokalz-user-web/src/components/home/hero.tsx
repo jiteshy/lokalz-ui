@@ -48,9 +48,9 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
   return (
     <>
       <div className="bg-indigo-50">
-        <div className="px-6 pt-16 pb-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-          <div className="max-w-xl mb-8 md:mx-auto text-center lg:max-w-2xl">
-            <h2 className="max-w-lg mb-6 font-sans text-2xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+        <div className="px-6 pt-12 md:pt-16 pb-6 md:pb-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+          <div className="max-w-xl mb-5 md:mb-8 md:mx-auto text-center lg:max-w-2xl">
+            <h2 className="max-w-lg mb-5 md:mb-8 font-sans text-2xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
               <span className="relative inline-block">
                 <svg
                   viewBox="0 0 52 24"
@@ -142,7 +142,9 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                   className="inline-flex text-nowrap items-center justify-center w-full h-12 px-4 md:px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                 >
                   {/* <span>Find Now</span> */}
-                  <span className="hidden md:block whitespace-nowrap">Find Now</span>
+                  <span className="hidden md:block whitespace-nowrap">
+                    Find Now
+                  </span>
                   <span className="md:hidden text-white">
                     <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
                   </span>
@@ -167,18 +169,18 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
             className={cn(
               filter === StoreType.FOOD_TRUCK &&
                 "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-4 text-center cursor-pointer hover:bg-slate-100",
+              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
             )}
           >
-            <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
+            <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-3">
                 <FontAwesomeIcon
-                  className="text-deep-purple-accent-700 text-xl md:text-2xl"
+                  className="text-deep-purple-accent-700 md:text-2xl"
                   icon={faTruck}
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-xs sm:text-sm whitespace-normal md:whitespace-nowrap">
+            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
               Food Trucks
             </p>
           </div>
@@ -186,18 +188,18 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
             onClick={() => onFilterClick(StoreType.SHOP)}
             className={cn(
               filter === StoreType.SHOP && "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-4 text-center cursor-pointer hover:bg-slate-100",
+              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
             )}
           >
-            <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
+            <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-4">
                 <FontAwesomeIcon
-                  className="text-deep-purple-accent-700 text-xl md:text-2xl"
+                  className="text-deep-purple-accent-700 md:text-2xl"
                   icon={faStore}
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-xs sm:text-sm whitespace-normal md:whitespace-nowrap">
+            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
               Local Market
             </p>
           </div>
@@ -206,18 +208,18 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
             className={cn(
               filter === StoreType.HOME_VENDOR &&
                 "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-4 text-center cursor-pointer hover:bg-slate-100",
+              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
             )}
           >
-            <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
+            <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-4">
                 <FontAwesomeIcon
-                  className="text-deep-purple-accent-700 text-xl md:text-2xl"
+                  className="text-deep-purple-accent-700 md:text-2xl"
                   icon={faHouseUser}
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-xs sm:text-sm whitespace-normal md:whitespace-nowrap">
+            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
               Home Vendors
             </p>
           </div>
@@ -225,19 +227,19 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
             onClick={() => onFilterClick(StoreType.OTHER)}
             className={cn(
               filter === StoreType.OTHER && "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-4 text-center cursor-pointer hover:bg-slate-100",
+              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
             )}
           >
-            <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
+            <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-3">
                 <FontAwesomeIcon
-                  className="text-deep-purple-accent-700 text-xl md:text-2xl"
+                  className="text-deep-purple-accent-700 md:text-2xl"
                   icon={faEllipsis}
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-xs sm:text-sm whitespace-normal md:whitespace-nowrap">
-              All Others
+            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
+              All<br className="md:hidden"/>Others
             </p>
           </div>
         </div>

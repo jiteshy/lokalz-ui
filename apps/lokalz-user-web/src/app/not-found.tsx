@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { NotFound } from "@repo/ui/components";
 
 export default function Error({
-  error
+  error,
 }: {
   error: Error & { digest?: string };
 }) {

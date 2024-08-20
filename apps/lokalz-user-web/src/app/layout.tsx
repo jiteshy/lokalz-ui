@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@repo/ui/utils";
 import { Footer } from "@/components/layout/footer";
-import { Nav } from "@/components/layout/nav";
 import { SWRProvider } from "@repo/ui/components";
+import { Nav } from "@/components/layout/nav";
 import "./globals.css";
 import "@repo/ui/styles.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -27,7 +27,9 @@ export default function RootLayout({
         <SWRProvider>
           <Nav />
           {children}
-          <Footer />
+          <div className="hidden md:block">
+            <Footer />
+          </div>
         </SWRProvider>
       </body>
     </html>
