@@ -61,7 +61,7 @@ export type MenuItem = {
 export type StoreSchedule = {
   storeId: string;
   schedules: ScheduleItem[];
-}
+};
 
 export type ScheduleItem = {
   from: number;
@@ -69,4 +69,4 @@ export type ScheduleItem = {
   date: number;
   dateStr: number;
   address: StoreAddress;
-}
+};

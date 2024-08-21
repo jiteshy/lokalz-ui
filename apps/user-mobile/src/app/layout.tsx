@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@repo/ui/utils";
 import { Footer } from "@repo/ui/user/components";
@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   title: "Lokalz",
   description:
     "App which brings the community closer with local businesses e.g. food trucks, art vendors etc.",
+};
+
+export const viewport: Viewport = {
+  viewportFit: "contain",
+  width: "device-width",
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({

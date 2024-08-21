@@ -14,16 +14,16 @@ import { APIS } from "@repo/ui/config";
 
 export const StorePage = ({ store }: { store: string }) => {
   const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
-    `${APIS.STORE.STORE_DETAILS}/${store}`
+    `${APIS.STORE.STORE_DETAILS}/${store}`,
   );
 
   const { data: menuData, isLoading: isMenuLoading } = useSWR<Menu>(
-    `${APIS.STORE.STORE_DETAILS}/${store}/menu`
+    `${APIS.STORE.STORE_DETAILS}/${store}/menu`,
   );
 
   const { data: scheduleData, isLoading: isScheduleLoading } =
     useSWR<StoreSchedule>(
-      `${APIS.STORE.STORE_DETAILS}/66a9a783b574320389bb867a/schedule`
+      `${APIS.STORE.STORE_DETAILS}/66a9a783b574320389bb867a/schedule`,
     );
 
   return (

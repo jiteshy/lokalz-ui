@@ -70,7 +70,7 @@ export const Schedule = ({
                 </div>
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </>
