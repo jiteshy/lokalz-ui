@@ -11,7 +11,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
+    // console.error(error); // TO-DO Fix this eslint issue on build
   }, [error]);
 
   return <Error reset={reset} />;

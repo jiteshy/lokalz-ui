@@ -48,7 +48,7 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
   return (
     <>
       <div className="bg-indigo-50">
-        <div className="px-6 pt-12 md:pt-16 pb-6 md:pb-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+        <div className="px-8 pt-12 md:pt-16 pb-6 md:pb-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className="max-w-xl mb-5 md:mb-8 md:mx-auto text-center lg:max-w-2xl">
             <h2 className="max-w-lg mb-5 md:mb-8 font-sans text-2xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
               <span className="relative inline-block">
@@ -161,7 +161,7 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
           </div>
         </div>
       </div>
-      <div className="relative px-6 pb-1 sm:px-0 bg-gray-100">
+      <div className="relative px-8 bg-gray-100">
         <div className="absolute inset-0 bg-indigo-50 h-1/2" />
         <div className="relative grid border-b-gray-300 rounded-lg mx-auto overflow-hidden bg-white divide-y shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm grid-cols-4 lg:max-w-screen-md">
           <div
@@ -239,9 +239,7 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
               </div>
             </div>
             <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
-              All
-              <br className="md:hidden" />
-              Others
+              All Others
             </p>
           </div>
         </div>

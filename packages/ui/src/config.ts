@@ -5,10 +5,11 @@ export const CONFIG = {
     "https://my-json-server.typicode.com/jiteshy/lokalz-fake-api2/menu",
 };
 
-export const API_BASE_PATH = "https://lokalz.ioyogi.com:8443/rest/v1";
+const API_BASE_PATH = "https://lokalz.ioyogi.com:8443/rest/v1";
 export const APIS = {
   STORE: {
     STORES_LIST: `${API_BASE_PATH}/store/zip`,
+    STORE_DETAILS: `${API_BASE_PATH}/store`,
   },
   THIRD_PARTY: {
     FETCH_IP: "https://api.ipify.org/?format=json",

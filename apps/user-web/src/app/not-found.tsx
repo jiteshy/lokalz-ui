@@ -9,7 +9,7 @@ export default function Error({
   error: Error & { digest?: string };
 }) {
   useEffect(() => {
-    console.error(error);
+    // console.error(error); // TO-DO Fix this eslint issue on build
   }, [error]);
 
   return <NotFound />;

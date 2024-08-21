@@ -6,9 +6,7 @@ export type Store = {
   phone: string;
   address: StoreAddress;
   imageUrl: string;
-  imgSrc: string; // TODO: Remove this, kept for hard coded vendor details page
   tags: Array<String>;
-  distance: string; // TODO: To be added later
   rating: string;
   type: StoreType;
   location: StoreLocation;
@@ -18,7 +16,7 @@ export type StoreAddress = {
   street: string;
   city: string;
   state: string;
-  zipCode: string;
+  zipCode: number;
 };
 
 export type StoreLocation = {
@@ -40,23 +38,35 @@ export enum StoreStatus { // TODO to be used in admin panel
   DELETED,
 }
 
-export type Services = {
-  categories: ServiceCategory[];
+export type Menu = {
+  menu: MenuCategory[];
 };
 
-export type ServiceCategory = {
-  id: string;
-  categoryCode: string;
-  categoryName: string;
-  categoryDescription: string;
+export type MenuCategory = {
+  category: string;
+  categoryDescription?: string;
   order: number;
-  items: ServiceItem[];
+  items: MenuItem[];
 };
 
-export type ServiceItem = {
-  id: string;
-  itemCode: string;
+export type MenuItem = {
   itemName: string;
-  itemDescription: string;
+  itemDescription?: string;
   price: string;
+  category: string;
+  order: number;
+  available: boolean;
 };
+
+export type StoreSchedule = {
+  storeId: string;
+  schedules: ScheduleItem[];
+}
+
+export type ScheduleItem = {
+  from: number;
+  to: number;
+  date: number;
+  dateStr: number;
+  address: StoreAddress;
+}

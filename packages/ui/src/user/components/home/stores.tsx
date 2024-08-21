@@ -17,7 +17,7 @@ export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
   return (
     <div className="bg-gray-100 pt-0 md:pt-8 pb-5 md:pb-16">
       {isStoresDataLoading && (
-        <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-6 md:px-10 lg:px-0">
+        <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-8 md:px-10 lg:px-0">
           <h4 className="text-xl text-slate-800 mb-9 pb-3 border-b border-b-gray-300">
             <FontAwesomeIcon icon={faCircleNotch} spin />
             <span className="pl-3">Finding local vendors..</span>
@@ -30,7 +30,7 @@ export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
         </div>
       )}
       {storesList?.length === 0 && (
-        <div className="px-6 mt-20 mb-40 text-center col-span-4">
+        <div className="px-8 mt-20 mb-40 text-center col-span-4">
           <FontAwesomeIcon
             icon={faCircleExclamation}
             className="text-7xl text-deep-purple-accent-400"
@@ -46,7 +46,7 @@ export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
         </div>
       )}
       {storesList?.length > 0 && (
-        <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-6 md:px-10 lg:px-0">
+        <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-8 md:px-10 lg:px-0">
           <h4 className="text-xl text-slate-800 mb-5 pb-3 border-b border-b-gray-300">
             Showing results in&nbsp;
             <span className="text-deep-purple-accent-400 font-semibold">

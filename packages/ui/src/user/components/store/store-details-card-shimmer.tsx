@@ -1,6 +1,6 @@
 export const StoreDetailsCardShimmer = () => {
   return (
-    <div className="px-4 pb-16 pt-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <>
       <div className="flex flex-col max-w-screen-lg overflow-hidden border rounded shadow lg:flex-row sm:mx-auto">
         <div className="relative h-48 md:h-96 lg:w-1/2 bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse">
           <svg
@@ -19,6 +19,6 @@ export const StoreDetailsCardShimmer = () => {
           <div className="w-3/4 h-4 rounded-lg bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

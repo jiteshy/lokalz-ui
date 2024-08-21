@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
   return (
-    <div className="px-4 pb-16 pt-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 bg-white">
-      <div className="flex flex-col max-w-screen-lg overflow-hidden border rounded shadow lg:flex-row sm:mx-auto">
+    <>
+      <div className="flex flex-col overflow-hidden border rounded shadow lg:flex-row">
         <div className="relative lg:w-1/2">
           <Image
-            src={storeData.imgSrc}
+            src={storeData.imageUrl}
             alt=""
             width={500}
             height={200}
@@ -27,14 +27,14 @@ export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
         <div className="flex flex-col justify-center p-6 bg-white lg:w-1/2">
           <div className="flex justify-between">
             <div>
-              <div className="px-4 py-2 mb-4 text-xs size-fit font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+              <div className="px-4 pt-2 pb-[6px] mb-4 text-xs size-fit font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
                 {STORE_TYPES[storeData.type]}
               </div>
               <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
                 {storeData.name}
               </h5>
             </div>
-            <div className="p-3 w-12 h-12 border border-slate-400 rounded-md bg-indigo-50 text-deep-purple-accent-400">
+            <div className="text-center pt-[7px] w-10 h-10 border border-slate-400 rounded-md text-deep-purple-accent-400">
               {storeData.rating}
             </div>
           </div>
@@ -42,7 +42,7 @@ export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
           <div className="flex gap-3">
             {storeData.tags.map((tag, index) => (
               <div key={index}>
-                <p className="inline-block px-3 py-2 mb-4 text-xs font-semibold tracking-wider text-teal-900 border border-slate-300 uppercase rounded-full bg-slate-200">
+                <p className="inline-block px-3 py-2 mb-4 text-xs font-semibold tracking-wider text-deep-purple-accent-400 border border-slate-400 uppercase rounded-full">
                   {tag}
                 </p>
               </div>
@@ -61,6 +61,6 @@ export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
