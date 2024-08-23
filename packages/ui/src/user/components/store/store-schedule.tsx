@@ -63,10 +63,14 @@ export const Schedule = ({
                       {getTime(schedule.from)} to {getTime(schedule.to)}
                     </div>
                   </div>
-                  <div className="text-slate-500">
-                    <FontAwesomeIcon icon={faLocationDot} />{" "}
-                    {formatAddress(schedule.address)}
-                  </div>
+                    <div className="text-sm text-slate-600">
+                      <div>
+                        {schedule.address.street}
+                      </div>
+                      <div>
+                        {schedule.address.city}{schedule.address.zipCode && ", " + schedule.address.zipCode}
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>

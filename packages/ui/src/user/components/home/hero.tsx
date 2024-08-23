@@ -100,7 +100,7 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                   <span
                     className={cn(
                       invalidText ? "text-red-accent-400" : "hidden",
-                      "italic text-sm",
+                      "italic text-sm"
                     )}
                   >
                     (Invalid Zip Code)
@@ -168,11 +168,13 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
         <div className="relative grid border-b-gray-300 rounded-lg mx-auto overflow-hidden bg-white divide-y shadow sm:divide-y-0 divide-x sm:max-w-screen-sm grid-cols-4 lg:max-w-screen-md">
           <div
             onClick={() => onFilterClick(StoreType.FOOD_TRUCK)}
-            className={cn(
-              filter === StoreType.FOOD_TRUCK &&
-                "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
-            )}
+            className={`${
+              filter === StoreType.FOOD_TRUCK
+                ? "bg-slate-100 border-b-deep-purple-accent-400"
+                : "border-b-slate-100"
+            }
+              "inline-block p-3 pb-2 !border-b-4 text-center cursor-pointer hover:bg-slate-100"
+            `}
           >
             <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-3">
@@ -188,10 +190,13 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
           </div>
           <div
             onClick={() => onFilterClick(StoreType.SHOP)}
-            className={cn(
-              filter === StoreType.SHOP && "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
-            )}
+            className={`${
+              filter === StoreType.SHOP
+                ? "bg-slate-100 border-b-deep-purple-accent-400"
+                : "border-b-slate-100"
+            }
+              "inline-block p-3 pb-2 !border-b-4 text-center cursor-pointer hover:bg-slate-100"
+            `}
           >
             <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-4">
@@ -207,11 +212,13 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
           </div>
           <div
             onClick={() => onFilterClick(StoreType.HOME_VENDOR)}
-            className={cn(
-              filter === StoreType.HOME_VENDOR &&
-                "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
-            )}
+            className={`${
+              filter === StoreType.HOME_VENDOR
+                ? "bg-slate-100 border-b-deep-purple-accent-400"
+                : "border-b-slate-100"
+            }
+              "inline-block p-3 pb-2 !border-b-4 text-center cursor-pointer hover:bg-slate-100"
+            `}
           >
             <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-4">
@@ -227,10 +234,13 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
           </div>
           <div
             onClick={() => onFilterClick(StoreType.OTHER)}
-            className={cn(
-              filter === StoreType.OTHER && "bg-slate-200 hover:bg-slate-200",
-              "inline-block p-3 pb-2 text-center cursor-pointer hover:bg-slate-100",
-            )}
+            className={`${
+              filter === StoreType.OTHER
+                ? "bg-slate-100 border-b-deep-purple-accent-400"
+                : "border-b-slate-100"
+            }
+              "inline-block p-3 pb-2 !border-b-4 text-center cursor-pointer hover:bg-slate-100"
+            `}
           >
             <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 mx-auto mb-2 rounded-full bg-indigo-50">
               <div className="p-3">

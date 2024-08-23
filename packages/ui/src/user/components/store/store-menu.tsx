@@ -17,7 +17,7 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
                 </h4>
                 <hr />
                 {menuCategory.description && (
-                  <p className="py-3 text-slate-600">
+                  <p className="py-3 text-sm text-slate-600 font-light">
                     {menuCategory.description}
                   </p>
                 )}
@@ -33,7 +33,7 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
                         <h6 className="mb-1 leading-5 text-gray-900">
                           {item.itemName}
                         </h6>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 font-light">
                           {item.description}
                         </p>
                       </div>

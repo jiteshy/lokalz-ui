@@ -26,7 +26,7 @@ export const StorePage = ({ store }: { store: string }) => {
 
   const { data: scheduleData, isLoading: isScheduleLoading } =
     useSWR<StoreSchedule>(
-      `${APIS.STORE.STORE_DETAILS}/66a9a783b574320389bb867a/schedule`,
+      `${APIS.STORE.STORE_DETAILS}/${store}/schedule`,
     );
 
   return (
