@@ -110,6 +110,8 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                   placeholder="E.g. 32256"
                   onChange={onTextChange}
                   type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   className={`${
                     invalidText &&
                     "border-red-accent-400 focus:border-red-accent-100 focus:shadow-red-accent-100"
@@ -163,7 +165,7 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
       </div>
       <div className="relative px-8 bg-gray-100">
         <div className="absolute inset-0 bg-indigo-50 h-1/2" />
-        <div className="relative grid border-b-gray-300 rounded-lg mx-auto overflow-hidden bg-white divide-y shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm grid-cols-4 lg:max-w-screen-md">
+        <div className="relative grid border-b-gray-300 rounded-lg mx-auto overflow-hidden bg-white divide-y shadow sm:divide-y-0 divide-x sm:max-w-screen-sm grid-cols-4 lg:max-w-screen-md">
           <div
             onClick={() => onFilterClick(StoreType.FOOD_TRUCK)}
             className={cn(
@@ -180,9 +182,9 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
-              Food Trucks
-            </p>
+            <div className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
+              Food <div className="sm:inline-block">Trucks</div>
+            </div>
           </div>
           <div
             onClick={() => onFilterClick(StoreType.SHOP)}
@@ -199,9 +201,9 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
-              Local Market
-            </p>
+            <div className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
+              Local <div className="sm:inline-block">Market</div>
+            </div>
           </div>
           <div
             onClick={() => onFilterClick(StoreType.HOME_VENDOR)}
@@ -219,9 +221,9 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
-              Home Vendors
-            </p>
+            <div className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
+              Home <div className="sm:inline-block">Vendors</div>
+            </div>
           </div>
           <div
             onClick={() => onFilterClick(StoreType.OTHER)}
@@ -238,9 +240,9 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
                 />
               </div>
             </div>
-            <p className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
-              All Others
-            </p>
+            <div className="tracking-wide text-gray-800 text-[11px] sm:text-sm whitespace-normal md:whitespace-nowrap">
+              All <div className="sm:inline-block">Others</div>
+            </div>
           </div>
         </div>
       </div>

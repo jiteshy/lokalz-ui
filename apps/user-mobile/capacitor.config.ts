@@ -2,7 +2,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "com.lokalz.app",
-  appName: "lokalz",
+  appName: "Lokalz",
   webDir: "out",
   ios: {
     contentInset: "always",
@@ -15,10 +15,7 @@ const config: CapacitorConfig = {
       backgroundColor: "#651fff",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
-      showSpinner: true,
-      androidSpinnerStyle: "large",
-      iosSpinnerStyle: "small",
-      spinnerColor: "#ffffff",
+      showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
       layoutName: "launch_screen",

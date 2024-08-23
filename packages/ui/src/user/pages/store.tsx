@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import Link from "next/link";
 import {
   StoreDetailsCard,
   StoreDetailsCardShimmer,
@@ -9,6 +10,8 @@ import {
   Schedule,
   StoreScheduleShimmer,
 } from "@repo/ui/user/components";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Store, Menu, StoreSchedule } from "@repo/ui/types";
 import { APIS } from "@repo/ui/config";
 
@@ -27,8 +30,13 @@ export const StorePage = ({ store }: { store: string }) => {
     );
 
   return (
-    <div className="px-8 pb-0 pt-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white">
+    <div className="px-8 pb-0 pt-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white">
       <div className="max-w-screen-lg sm:mx-auto">
+        <Link href="/">
+          <span className="text-deep-purple-accent-400 pb-4 inline-block">
+            <FontAwesomeIcon icon={faArrowLeftLong} /> Back to vendors
+          </span>
+        </Link>
         {(isStoreDataLoading || !storeData) && <StoreDetailsCardShimmer />}
         {storeData && <StoreDetailsCard storeData={storeData} />}
         <div className="my-16 md:my-20 flex flex-col md:flex-row gap-14">

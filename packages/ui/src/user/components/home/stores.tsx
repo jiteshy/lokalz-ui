@@ -15,7 +15,7 @@ type StoresInput = {
 
 export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
   return (
-    <div className="bg-gray-100 pt-0 md:pt-8 pb-5 md:pb-16">
+    <div className="pt-0 md:pt-8 pb-5 md:pb-16">
       {isStoresDataLoading && (
         <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-8 md:px-10 lg:px-0">
           <h4 className="text-xl text-slate-800 mb-9 pb-3 border-b border-b-gray-300">
@@ -48,20 +48,20 @@ export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
       {storesList?.length > 0 && (
         <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-8 md:px-10 lg:px-0">
           <h4 className="text-xl text-slate-800 mb-5 pb-3 border-b border-b-gray-300">
-            Showing results in&nbsp;
+            Showing vendors in&nbsp;
             <span className="text-deep-purple-accent-400 font-semibold">
               {storesList[0].address.zipCode}
             </span>
           </h4>
           <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {storesList.map((store: Store) => (
-              <Link key={store.id} href={`/store/${store.id}`}>
+              <Link key={store.id} href={`/store?id=${store.id}`}>
                 <StoreCard details={store} />
               </Link>
             ))}
           </div>
           <div className="md:hidden pt-10 flex justify-center">
-            <div className="px-5 py-1 text-xs bg-indigo-50 text-slate-800 rounded-full border border-indigo-100 w-fit">
+            <div className="px-5 py-1 text-xs bg-gray-200 text-slate-800 rounded-full border border-gray-300 w-fit">
               That's all we've got!
             </div>
           </div>

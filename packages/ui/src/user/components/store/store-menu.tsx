@@ -9,24 +9,24 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
       </div>
       <div className="grid max-w-screen-lg mx-auto space-y-6 lg:grid-cols-2 lg:space-y-0 gap-x-20">
         {menuData &&
-          menuData.menu?.map((menuCategory: MenuCategory, index: number) => (
-            <div key={index} className="mr-5">
+          menuData.menu?.map((menuCategory: MenuCategory) => (
+            <div key={menuCategory.id} className="mr-5">
               <div className="py-2 text-center">
                 <h4 className="pb-3 text-lg font-bold text-slate-600">
                   {menuCategory.category}
                 </h4>
                 <hr />
-                {menuCategory.categoryDescription && (
+                {menuCategory.description && (
                   <p className="py-3 text-slate-600">
-                    {menuCategory.categoryDescription}
+                    {menuCategory.description}
                   </p>
                 )}
               </div>
               <div className="mb-5">
-                {menuCategory.items.map((item: MenuItem, index: number) => (
+                {menuCategory.items.map((item: MenuItem) => (
                   <div
                     className="flex justify-between items-center"
-                    key={index}
+                    key={item.id}
                   >
                     <div className="px-3 sm:px-0">
                       <div className="py-3">
@@ -34,7 +34,7 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
                           {item.itemName}
                         </h6>
                         <p className="text-sm text-gray-600">
-                          {item.itemDescription}
+                          {item.description}
                         </p>
                       </div>
                     </div>

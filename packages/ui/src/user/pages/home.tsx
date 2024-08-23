@@ -39,7 +39,7 @@ export const HomePage = () => {
   }, [storesList, filter]);
 
   return (
-    <>
+    <div className="bg-gray-100">
       <Hero setZipCode={setZipCode} filter={filter} setFilter={setFilter} />
       <Stores
         storesList={filteredData}
@@ -47,6 +47,6 @@ export const HomePage = () => {
           isIpAddressLoading || isLocationLoading || isStoresDataLoading // FIX: Causes flicker on spinner
         }
       />
-    </>
+    </div>
   );
 };

@@ -43,15 +43,17 @@ export type Menu = {
 };
 
 export type MenuCategory = {
+  id: string;
   category: string;
-  categoryDescription?: string;
+  description?: string;
   order: number;
   items: MenuItem[];
 };
 
 export type MenuItem = {
+  id: string;
   itemName: string;
-  itemDescription?: string;
+  description?: string;
   price: string;
   category: string;
   order: number;
