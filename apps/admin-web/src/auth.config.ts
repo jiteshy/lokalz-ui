@@ -8,14 +8,23 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/admin");
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
-        return NextResponse.redirect(new URL("/login", nextUrl));
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return NextResponse.redirect(new URL("/admin", nextUrl));
+      const isOnLoginPage = nextUrl.pathname.startsWith("/login");
+      
+      let targetUrl;
+      if (isOnLoginPage) {
+        if (isLoggedIn) {
+          targetUrl = "/";
+        }
+      } else {
+        if (!isLoggedIn) {
+          targetUrl = "/login";
+        }
       }
+
+      if (targetUrl) {
+        return NextResponse.redirect(new URL(targetUrl, nextUrl));
+      }
+
       return true;
     },
   },

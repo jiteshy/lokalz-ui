@@ -10,7 +10,7 @@ export async function authenticate(
   try {
     await signIn("credentials", {
       keyPhrase: formData.get("keyPhrase"),
-      redirectTo: "/admin",
+      redirectTo: "/",
     });
   } catch (error) {
     if (error instanceof AuthError) {

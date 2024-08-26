@@ -36,7 +36,7 @@ export default function AdminDashboardPage() {
           </button>
         </div>
         <Link
-          href={"/admin/store"}
+          href={"/store"}
           className="px-3 py-2 text-sm bg-slate-700 text-slate-200 rounded hover:bg-slate-900"
         >
           <FontAwesomeIcon icon={faPlusCircle} />

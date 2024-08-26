@@ -23,7 +23,7 @@ export default function DashboardLayout({
 
       <div>
         <aside className="absolute top-0 left-0 bottom-0 w-[250px] min-h-screen bg-white border-r border-r-slate-300 text-slate-700">
-          <Link href={"/admin"}>
+          <Link href={"/"}>
             <div className="flex gap-2 items-end p-6 border-b border-b-slate-200">
               <Logo iconOnly={true} />
               <div className="text-2xl text-gray-900">
@@ -34,7 +34,7 @@ export default function DashboardLayout({
           </Link>
           <ul className="p-3">
             <li className="p-3 text-slate-500 hover:text-slate-800">
-              <Link href={"/admin"}>
+              <Link href={"/"}>
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <FontAwesomeIcon icon={faShop} />
@@ -52,7 +52,7 @@ export default function DashboardLayout({
               </div>
             </li>
             <li className="py-3 px-8 text-slate-500 hover:text-slate-800">
-              <Link href={"/admin/messages/user"}>
+              <Link href={"/messages/user"}>
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <FontAwesomeIcon icon={faCircleUser} />
@@ -62,7 +62,7 @@ export default function DashboardLayout({
               </Link>
             </li>
             <li className="py-3 px-8 text-slate-500 hover:text-slate-800">
-              <Link href={"/admin/messages/vendor"}>
+              <Link href={"/messages/vendor"}>
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <FontAwesomeIcon icon={faBuildingUser} />
@@ -72,7 +72,7 @@ export default function DashboardLayout({
               </Link>
             </li>
             <li className="p-3 text-slate-500 hover:text-slate-800">
-              <Link href={"/admin/subscription"}>
+              <Link href={"/subscription"}>
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <FontAwesomeIcon icon={faEnvelopeCircleCheck} />
