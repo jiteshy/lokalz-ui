@@ -2,7 +2,7 @@ import { signIn } from "@/auth";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex justify-center items-start md:items-center p-8 bg-white">
+    <div className="min-h-screen flex justify-center items-start items-center p-8 bg-white">
       <form action={async () => {
         "use server";
         await signIn("google");
