@@ -3,10 +3,12 @@ import { signIn } from "@/auth";
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex justify-center items-start items-center p-8 bg-white">
-      <form action={async () => {
-        "use server";
-        await signIn("google");
-      }}>
+      <form
+        action={async () => {
+          "use server";
+          await signIn("google");
+        }}
+      >
         <button
           type="submit"
           className="flex items-center justify-center gap-3 cursor-pointer rounded-full bg-slate-900 px-3 py-3 text-sm drop-shadow-md hover:bg-slate-800"

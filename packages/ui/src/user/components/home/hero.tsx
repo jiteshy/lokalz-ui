@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { faStore } from "@fortawesome/free-solid-svg-icons";
@@ -11,13 +11,14 @@ import { cn } from "@repo/ui/utils";
 
 const zipCodeRegex = /^\d{5}$/;
 
+type StoreTypeValue = StoreType | undefined;
 type HeroInputs = {
-  setZipCode: Dispatch<SetStateAction<string | undefined>>;
-  filter: StoreType | undefined;
-  setFilter: Dispatch<SetStateAction<StoreType | undefined>>;
+  updateZipCode: (zipCode: string) => void;
+  filter: StoreTypeValue;
+  updateFilter: (filter: StoreType) => void;
 };
 
-export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
+export const Hero = ({ updateZipCode, filter, updateFilter }: HeroInputs) => {
   const [text, setText] = useState<string>();
   const [invalidText, setInvalidText] = useState<boolean>(false);
 
@@ -30,19 +31,14 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
   const onFIndNowClick = () => {
     setInvalidText(false);
     if (text && zipCodeRegex.test(text)) {
-      setZipCode(text);
+      updateZipCode(text);
     } else {
       setInvalidText(true);
     }
   };
 
   const onFilterClick = (storeType: StoreType) => {
-    setFilter((previous) => {
-      if (previous === storeType) {
-        return undefined;
-      }
-      return storeType;
-    });
+    updateFilter(storeType);
   };
 
   return (
@@ -96,11 +92,11 @@ export const Hero = ({ setZipCode, filter, setFilter }: HeroInputs) => {
             >
               <div className="w-full">
                 <label htmlFor="zipcode" className="block mb-1 text-gray-700">
-                  Zip Code{" "}
+                  Zipcode{" "}
                   <span
                     className={cn(
                       invalidText ? "text-red-accent-400" : "hidden",
-                      "italic text-sm"
+                      "italic text-sm",
                     )}
                   >
                     (Invalid Zip Code)

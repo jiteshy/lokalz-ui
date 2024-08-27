@@ -9,7 +9,7 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnLoginPage = nextUrl.pathname.startsWith("/login");
-      
+
       let targetUrl;
       if (isOnLoginPage) {
         if (isLoggedIn) {

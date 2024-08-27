@@ -1,18 +1,25 @@
 "use client";
 
 import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Hero, Stores } from "@repo/ui/user/components";
 import { APIS } from "@repo/ui/config";
 import { StoreType, Store } from "@repo/ui/types";
 
+const zipCodeParam = "zipCode";
+const storeTypeParam = "storeType";
+
 export const HomePage = () => {
-  const [zipCode, setZipCode] = useState<string>();
-  const [filter, setFilter] = useState<StoreType>();
   const [filteredData, setFilteredData] = useState<Store[]>([]);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const storeType = searchParams.get(storeTypeParam);
+
   const { data: ipAddress, isLoading: isIpAddressLoading } = useSWR(
-    `${APIS.THIRD_PARTY.FETCH_IP}`,
+    !searchParams.has(zipCodeParam) ? `${APIS.THIRD_PARTY.FETCH_IP}` : null,
   );
   const { data: location, isLoading: isLocationLoading } = useSWR(
     ipAddress
@@ -20,27 +27,67 @@ export const HomePage = () => {
       : null,
   );
 
-  // TODO: Fix || condition
+  const zipCode = searchParams.get(zipCodeParam) || location?.postal;
   const { data: storesList, isLoading: isStoresDataLoading } = useSWR(
-    zipCode || location
-      ? `${APIS.STORE.STORES_LIST}/${zipCode || location.postal}`
-      : null,
+    zipCode ? `${APIS.STORE.STORES_LIST}/${zipCode}` : null,
   );
 
+  const addQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const removeQueryString = useCallback(
+    (name: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete(name);
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const updateZipCode = (zipCode: string) => {
+    const queryString = addQueryString(zipCodeParam, zipCode);
+    router.push(pathname + "?" + queryString);
+  };
+
+  const updateStoreType = (updatedStoreType: StoreType | undefined) => {
+    if (storeType === updatedStoreType?.toString()) {
+      updatedStoreType = undefined;
+    }
+
+    let queryString;
+    if (updatedStoreType) {
+      queryString = addQueryString(storeTypeParam, updatedStoreType);
+    } else {
+      queryString = removeQueryString(storeTypeParam);
+    }
+
+    router.push(pathname + (queryString ? "?" + queryString : ""));
+  };
+
   useEffect(() => {
-    if (!filter) {
+    if (!storeType) {
       setFilteredData(storesList);
     } else {
       const filteredData = storesList?.filter(
-        (store: Store) => store.type === filter,
+        (store: Store) => store.type === storeType,
       );
       setFilteredData(filteredData);
     }
-  }, [storesList, filter]);
+  }, [storesList, storeType]);
 
   return (
     <div className="bg-gray-100">
-      <Hero setZipCode={setZipCode} filter={filter} setFilter={setFilter} />
+      <Hero
+        updateZipCode={updateZipCode}
+        filter={storeType as StoreType}
+        updateFilter={updateStoreType}
+      />
       <Stores
         storesList={filteredData}
         isStoresDataLoading={
