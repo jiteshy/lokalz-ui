@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Hero, Stores } from "@repo/ui/user/components";
 import { APIS } from "@repo/ui/config";
@@ -11,6 +11,14 @@ const zipCodeParam = "zipCode";
 const storeTypeParam = "storeType";
 
 export const HomePage = () => {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  );
+}
+
+const HomeContent = () => {
   const [filteredData, setFilteredData] = useState<Store[]>([]);
 
   const router = useRouter();
