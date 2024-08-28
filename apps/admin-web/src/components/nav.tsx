@@ -12,7 +12,7 @@ export const AdminNav = () => {
     <div className="px-6 py-5 mx-auto w-full">
       <div className="relative flex items-center justify-between">
         <h4 className="text-xl font-semibold text-slate-700">
-          Welcome, {session?.user?.name}!
+          {session && `Welcome, ${session.user?.name}!`}
         </h4>
         <ul className="flex items-center space-x-8">
           <li>
