@@ -16,7 +16,7 @@ export const HomePage = () => {
       <HomeContent />
     </Suspense>
   );
-}
+};
 
 const HomeContent = () => {
   const [filteredData, setFilteredData] = useState<Store[]>([]);

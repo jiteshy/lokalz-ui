@@ -7,6 +7,9 @@ export const CONFIG = {
 
 const API_BASE_PATH = "https://lokalz.ioyogi.com:8443/rest/v1";
 export const APIS = {
+  AUTH: {
+    CALLBACK: `${API_BASE_PATH}/auth/login/callback`,
+  },
   STORE: {
     STORES_LIST: `${API_BASE_PATH}/store/zip`,
     STORE_DETAILS: `${API_BASE_PATH}/store`,

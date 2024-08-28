@@ -4,14 +4,3 @@ export const CONFIG = {
   API_BASE_PATH2:
     "https://my-json-server.typicode.com/jiteshy/lokalz-fake-api2/menu",
 };
-
-export const API_BASE_PATH = "https://lokalz.ioyogi.com:8443/rest/v1";
-export const APIS = {
-  STORE: {
-    STORES_LIST: `${API_BASE_PATH}/store/zip`,
-  },
-  THIRD_PARTY: {
-    FETCH_IP: "https://api.ipify.org/?format=json",
-    FETCH_LOCATION_FROM_IP: "https://ipapi.co/",
-  },
-};

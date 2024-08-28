@@ -5,6 +5,7 @@ import { SWRProvider } from "@repo/ui/components";
 import "./globals.css";
 import "@repo/ui/styles.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("bg-white", inter.className)}>
-        <SWRProvider>{children}</SWRProvider>
+        <SessionProvider>
+          <SWRProvider>{children}</SWRProvider>
+        </SessionProvider>
       </body>
     </html>
   );
