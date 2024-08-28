@@ -51,12 +51,16 @@ export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
           <hr className="border-b border-b-gray-300" />
           <div className="pt-3 text-sm text-slate-600 text-right">
             <div className="pt-2">
-              <span className="pr-3">{storeData.phone}</span>
-              <FontAwesomeIcon icon={faPhone} />
+              <a href={`tel:${storeData.phone}`} className="hover:underline text-deep-purple-accent-400">
+                <span className="pr-3">{storeData.phone}</span>
+                <FontAwesomeIcon icon={faPhone} />
+              </a>
             </div>
             <div className="pt-2">
-              <span className="pr-3">{storeData.email}</span>
-              <FontAwesomeIcon icon={faEnvelope} />
+              <a href={`mailto:${storeData.email}`} className="hover:underline text-deep-purple-accent-400">
+                <span className="pr-3">{storeData.email}</span>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </a>
             </div>
           </div>
         </div>

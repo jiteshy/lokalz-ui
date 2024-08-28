@@ -2,14 +2,27 @@ import { Menu, MenuCategory, MenuItem } from "@repo/ui/types";
 import { Title } from "../layout/title";
 
 export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
+  // Sort the menu by category and items inside each category
+  const sortedMenuData = menuData?.menu
+    .map((category: MenuCategory) => {
+      category.items.sort(
+        (item1: MenuItem, item2: MenuItem) => item1.order - item2.order
+      );
+      return category;
+    })
+    .sort(
+      (category1: MenuCategory, category2: MenuCategory) =>
+        category1.order - category2.order
+    );
+
   return (
     <>
       <div className="mb-10 md:mx-auto text-center lg:max-w-2xl md:mb-12">
         <Title title="Menu" />
       </div>
       <div className="grid max-w-screen-lg mx-auto space-y-6 lg:grid-cols-2 lg:space-y-0 gap-x-20">
-        {menuData &&
-          menuData.menu?.map((menuCategory: MenuCategory) => (
+        {sortedMenuData &&
+          sortedMenuData.map((menuCategory: MenuCategory) => (
             <div key={menuCategory.id} className="mr-5">
               <div className="py-2 text-center">
                 <h4 className="pb-3 text-lg font-bold text-slate-600">
