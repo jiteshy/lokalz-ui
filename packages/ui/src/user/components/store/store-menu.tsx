@@ -39,7 +39,9 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
                       </div>
                     </div>
                     {item.price && (
-                      <div className="text-gray-900">${item.price}</div>
+                      <div className="text-gray-900">
+                        ${Number(item.price).toFixed(2)}
+                      </div>
                     )}
                   </div>
                 ))}

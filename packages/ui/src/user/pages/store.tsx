@@ -27,7 +27,9 @@ export const StorePage = ({ store }: { store: string }) => {
   );
 
   const { data: scheduleData, isLoading: isScheduleLoading } =
-    useSWR<StoreSchedule>(`${APIS.STORE.STORE_DETAILS}/${store}/schedule`);
+    useSWR<StoreSchedule>(
+      `${APIS.STORE.STORE_DETAILS}/${store}/schedule/weekly`,
+    );
 
   return (
     <div className="px-8 pb-0 pt-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white">
