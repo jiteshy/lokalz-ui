@@ -1,12 +1,9 @@
-"use client";
-
-import { useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import { signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 
-export const AdminNav = () => {
-  const { data: session } = useSession();
+export const AdminNav = async () => {
+  const session = await auth();
 
   return (
     <div className="px-6 py-5 mx-auto w-full">
@@ -18,6 +15,7 @@ export const AdminNav = () => {
           <li>
             <form
               action={async () => {
+                "use server";
                 await signOut({ redirectTo: "/login" });
               }}
             >
