@@ -4,7 +4,7 @@ import { auth, signOut } from "@/auth";
 
 export const AdminNav = async () => {
   const session = await auth();
-
+  
   return (
     <div className="px-6 py-5 mx-auto w-full">
       <div className="relative flex items-center justify-between">

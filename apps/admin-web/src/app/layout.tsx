@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@repo/ui/utils";
-import { SWRProvider } from "@repo/ui/components";
 import "./globals.css";
 import "@repo/ui/styles.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
+import { SWRProvider } from "@/components/swr-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -31,13 +31,16 @@ export const Schedule = ({
       date.getFullYear() === now.getFullYear()
     );
   }, []);
-  
-  const getTime = useCallback((date: number) =>
-    new Date(date).toLocaleTimeString("en-us", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    }), []);
+
+  const getTime = useCallback(
+    (date: number) =>
+      new Date(date).toLocaleTimeString("en-us", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }),
+    [],
+  );
 
   const formattedSchedules: FormattedSchedule[] = storeSchedule?.schedules
     ?.filter((schedule: ScheduleItem) => new Date(schedule.from) >= currentDate)

@@ -1,6 +1,7 @@
 import { APIS } from "@repo/ui/config";
 import type { NextAuthConfig } from "next-auth";
 import { NextResponse } from "next/server";
+import { User } from "./utils/types";
 
 export const authConfig = {
   pages: {
@@ -32,7 +33,7 @@ export const authConfig = {
     // Called after google sign in
     async signIn({ user }) {
       if (user) {
-        const response = await fetch(APIS.AUTH.CALLBACK, {
+        const response = await fetch(APIS.AUTH.ADMIN.CALLBACK, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -40,11 +41,23 @@ export const authConfig = {
           },
           body: JSON.stringify(user),
         });
-        const token = await response.json();
-        console.log("token----", token);
+        const customUser: User = await response.json();
+        user.accessToken = customUser.token;
         return true;
       }
       return false;
+    },
+    async jwt({ token, user }) {
+      // Add the custom token fetched from backend after sign in
+      if (user) {
+        token.accessToken = user.accessToken;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      // Use the custom token fetched from backend after sign in
+      return { ...session, accessToken: token.accessToken };
     },
   },
   providers: [],

@@ -6,13 +6,13 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
   const sortedMenuData = menuData?.menu
     .map((category: MenuCategory) => {
       category.items.sort(
-        (item1: MenuItem, item2: MenuItem) => item1.order - item2.order
+        (item1: MenuItem, item2: MenuItem) => item1.order - item2.order,
       );
       return category;
     })
     .sort(
       (category1: MenuCategory, category2: MenuCategory) =>
-        category1.order - category2.order
+        category1.order - category2.order,
     );
 
   return (
