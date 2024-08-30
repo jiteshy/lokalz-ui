@@ -6,6 +6,7 @@ import "@repo/ui/styles.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SessionProvider } from "next-auth/react";
 import { SWRProvider } from "@/components/swr-provider";
+import { auth } from "@/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,15 +15,17 @@ export const metadata: Metadata = {
   description: "Admin panel for Lokalz app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en">
       <body className={cn("bg-white", inter.className)}>
-        <SessionProvider>
+        <SessionProvider session={session}>
           <SWRProvider>{children}</SWRProvider>
         </SessionProvider>
       </body>
