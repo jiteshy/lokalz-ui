@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ScheduleItem, StoreSchedule } from "@repo/ui/types";
 
@@ -73,6 +73,23 @@ export const Schedule = ({
         <div className="text-left w-full text-deep-purple-accent-400 font-sans text-3xl font-bold leading-none tracking-tight mb-5">
           <FontAwesomeIcon icon={faCalendarDays} />
         </div>
+        {storeSchedule.schedules.length === 0 && (
+          <div className="bg-slate-50 border-l-8 border-l-slate-300 p-2 pt-4 min-h-[72px] text-center w-full mb-2 shadow rounded">
+            <div className="flex gap-3 items-center">
+              <div className="text-slate-500 text-3xl w-16 text-center">
+                <FontAwesomeIcon icon={faBan} />
+              </div>
+              <div>
+                <div className="text-lg text-slate-800 mb-2 text-left">
+                  <div>No schedule available</div>
+                  <div className="text-sm text-slate-500">
+                    Please check back later.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         {formattedSchedules?.map(
           (schedule: FormattedSchedule, index: number) => (
             <div
