@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { SWRConfig } from "swr";
 
 export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data: session } = useSession({ required: true });
+  const { data: session } = useSession();
 
   const swrFetcher = useCallback((url: string) => {
     const headers = new Headers();
