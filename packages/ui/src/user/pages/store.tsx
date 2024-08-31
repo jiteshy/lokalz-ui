@@ -13,22 +13,22 @@ import {
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Store, Menu, StoreSchedule } from "@repo/ui/types";
-import { APIS } from "@repo/ui/config";
+import { USER_APIS } from "@repo/ui/config";
 
 export const StorePage = ({ store }: { store: string }) => {
   const router = useRouter();
 
   const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
-    `${APIS.STORE.STORE_DETAILS}/${store}`,
+    `${USER_APIS.STORE.STORE_DETAILS}/${store}`,
   );
 
   const { data: menuData, isLoading: isMenuLoading } = useSWR<Menu>(
-    `${APIS.STORE.STORE_DETAILS}/${store}/menu`,
+    `${USER_APIS.STORE.STORE_DETAILS}/${store}/menu`,
   );
 
   const { data: scheduleData, isLoading: isScheduleLoading } =
     useSWR<StoreSchedule>(
-      `${APIS.STORE.STORE_DETAILS}/${store}/schedule/weekly`,
+      `${USER_APIS.STORE.STORE_DETAILS}/${store}/schedule/weekly`,
     );
 
   return (

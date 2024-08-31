@@ -1,6 +1,6 @@
-export type User = {
-  name: string;
-  email: string;
-  image: string;
+import { User } from "next-auth";
+
+export interface CustomUser extends User {
   token: string;
-};
+  role: string;
+}

@@ -9,8 +9,8 @@ export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
 
   const swrFetcher = useCallback((url: string) => {
     const headers = new Headers();
-    if (session?.accessToken) {
-      headers.append("Authorization", session.accessToken);
+    if (session?.user?.accessToken) {
+      headers.append("Authorization", `Bearer ${session.user.accessToken}`);
     }
     return fetch(url, {
       headers: headers,

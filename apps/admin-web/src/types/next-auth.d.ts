@@ -1,16 +1,11 @@
 import { DefaultSession, DefaultUser } from "next-auth";
 import { DefaultJWT } from "@auth/core/jwt";
 
+interface CustomProps {
+  accessToken: string;
+  role: string;
+}
+
 declare module "next-auth" {
-  interface User {
-    accessToken: string & DefaultUser;
-  }
-
-  interface Session {
-    accessToken: string & DefaultSession;
-  }
-
-  interface JWT {
-    accessToken: string & DefaultJWT;
-  }
+  interface User extends DefaultUser, CustomProps {}
 }

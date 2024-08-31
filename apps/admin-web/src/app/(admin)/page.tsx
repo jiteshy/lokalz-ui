@@ -1,6 +1,5 @@
 "use client";
 
-import { CONFIG } from "@/utils/config";
 import { STORE_TYPES } from "@/utils/constants";
 import { Store } from "@repo/ui/types";
 import {
@@ -12,10 +11,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import useSWR from "swr";
+import { ADMIN_APIS } from "@repo/ui/config";
 
 export default function AdminDashboardPage() {
   const { data: stores, isLoading } = useSWR<Store[]>(
-    `${CONFIG.API_BASE_PATH}/vendors`,
+    `${ADMIN_APIS.STORE.STORES_LIST}?page=0`,
   );
 
   return (
@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {stores.map((store, index) => (
+                {stores?.map((store, index) => (
                   <tr className="border-t border-t-slate-200" key={index}>
                     <td className="px-6 py-3">{store.name}</td>
                     <td className="px-6 py-3">{store.email}</td>

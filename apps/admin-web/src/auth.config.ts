@@ -1,7 +1,7 @@
-import { APIS } from "@repo/ui/config";
+import { ADMIN_APIS } from "@repo/ui/config";
 import type { NextAuthConfig } from "next-auth";
 import { NextResponse } from "next/server";
-import { User } from "./utils/types";
+import { CustomUser } from "./utils/types";
 
 export const authConfig = {
   pages: {
@@ -33,7 +33,7 @@ export const authConfig = {
     // Called after google sign in
     async signIn({ user }) {
       if (user) {
-        const response = await fetch(APIS.AUTH.ADMIN.CALLBACK, {
+        const response = await fetch(ADMIN_APIS.AUTH.ADMIN.CALLBACK, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -41,8 +41,9 @@ export const authConfig = {
           },
           body: JSON.stringify(user),
         });
-        const customUser: User = await response.json();
+        const customUser: CustomUser = await response.json();
         user.accessToken = customUser.token;
+        user.role = customUser.role;
         return true;
       }
       return false;
@@ -51,13 +52,21 @@ export const authConfig = {
       // Add the custom token fetched from backend after sign in
       if (user) {
         token.accessToken = user.accessToken;
+        token.role = user.role;
       }
 
       return token;
     },
     async session({ session, token }) {
       // Use the custom token fetched from backend after sign in
-      return { ...session, accessToken: token.accessToken };
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: token.role as string,
+          accessToken: token.accessToken as string,
+        },
+      };
     },
   },
   providers: [],

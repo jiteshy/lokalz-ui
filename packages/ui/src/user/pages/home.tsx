@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Hero, Stores } from "@repo/ui/user/components";
-import { APIS } from "@repo/ui/config";
+import { USER_APIS } from "@repo/ui/config";
 import { StoreType, Store } from "@repo/ui/types";
 
 const zipCodeParam = "zipCode";
@@ -27,17 +27,19 @@ const HomeContent = () => {
   const storeType = searchParams.get(storeTypeParam);
 
   const { data: ipAddress, isLoading: isIpAddressLoading } = useSWR(
-    !searchParams.has(zipCodeParam) ? `${APIS.THIRD_PARTY.FETCH_IP}` : null,
+    !searchParams.has(zipCodeParam)
+      ? `${USER_APIS.THIRD_PARTY.FETCH_IP}`
+      : null,
   );
   const { data: location, isLoading: isLocationLoading } = useSWR(
     ipAddress
-      ? `${APIS.THIRD_PARTY.FETCH_LOCATION_FROM_IP}/${ipAddress.ip}/json/`
+      ? `${USER_APIS.THIRD_PARTY.FETCH_LOCATION_FROM_IP}/${ipAddress.ip}/json/`
       : null,
   );
 
   const zipCode = searchParams.get(zipCodeParam) || location?.postal;
   const { data: storesList, isLoading: isStoresDataLoading } = useSWR(
-    zipCode ? `${APIS.STORE.STORES_LIST}/${zipCode}` : null,
+    zipCode ? `${USER_APIS.STORE.STORES_LIST}/${zipCode}` : null,
   );
 
   const addQueryString = useCallback(
