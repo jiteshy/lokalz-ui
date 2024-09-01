@@ -1,5 +1,5 @@
 export type Store = {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   email: string;
@@ -7,9 +7,9 @@ export type Store = {
   address: StoreAddress;
   imageUrl: string;
   tags: Array<String>;
-  rating: string;
+  rating?: string;
   type: StoreType;
-  location: StoreLocation;
+  location?: StoreLocation;
 };
 
 export type StoreAddress = {
