@@ -74,7 +74,7 @@ export const Hero = ({ updateZipCode, filter, updateFilter }: HeroInputs) => {
               </span>
               <span className="relative inline px-2">
                 {/* <div className="absolute inset-0 transform -skew-x-12 bg-teal-accent-400" /> */}
-                <span className="relative text-gray-900 bg-teal-accent-400 px-2 text-nowrap">
+                <span className="relative text-gray-900 bg-teal-accent-400 px-2 whitespace-nowrap">
                   local vendors
                 </span>
               </span>
@@ -137,7 +137,7 @@ export const Hero = ({ updateZipCode, filter, updateFilter }: HeroInputs) => {
                 <button
                   type="submit"
                   onClick={onFIndNowClick}
-                  className="inline-flex text-nowrap items-center justify-center w-full h-12 px-4 md:px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  className="inline-flex whitespace-nowrap items-center justify-center w-full h-12 px-4 md:px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                 >
                   {/* <span>Find Now</span> */}
                   <span className="hidden md:block whitespace-nowrap">
@@ -150,7 +150,7 @@ export const Hero = ({ updateZipCode, filter, updateFilter }: HeroInputs) => {
                 {/* <a
                   href="/"
                   aria-label=""
-                  className="items-center pl-4 text-nowrap font-semibold hidden xl:inline-flex text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
+                  className="items-center pl-4 whitespace-nowrap font-semibold hidden xl:inline-flex text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
                 >
                   Learn more
                 </a> */}

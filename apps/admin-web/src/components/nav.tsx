@@ -21,7 +21,7 @@ export const AdminNav = async () => {
             >
               <button
                 type="submit"
-                className="text-slate-700 items-center pl-4 text-nowrap font-semibold inline-flex transition-colors duration-200 hover:text-slate-800"
+                className="text-slate-700 items-center pl-4 whitespace-nowrap font-semibold inline-flex transition-colors duration-200 hover:text-slate-800"
                 aria-label="Logout"
               >
                 <FontAwesomeIcon icon={faArrowRightToBracket} />

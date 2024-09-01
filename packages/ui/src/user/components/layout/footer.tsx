@@ -46,31 +46,31 @@ export const Footer = () => (
                 </div>
                 <Link
                   href={"/about"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white text-nowrap"
+                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
                 >
                   About Us
                 </Link>
                 <Link
                   href={"/future"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white text-nowrap"
+                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
                 >
                   What&apos;s Coming?
                 </Link>
                 <Link
                   href={"/onboard"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white text-nowrap"
+                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
                 >
                   Vendor Onboarding
                 </Link>
                 <Link
                   href={"/contact"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white text-nowrap"
+                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
                 >
                   Contact Us
                 </Link>
                 <Link
                   href={"/terms"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white text-nowrap"
+                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
                 >
                   Terms & Conditions
                 </Link>

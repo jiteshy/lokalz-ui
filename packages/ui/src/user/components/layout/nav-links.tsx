@@ -19,7 +19,7 @@ export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
             pathname === "/about"
               ? "text-deep-purple-accent-700"
               : "text-gray-800",
-            "items-center pl-4 text-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
+            "items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
           )}
           aria-label="About Us"
         >
@@ -33,7 +33,7 @@ export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
             pathname === "/onboard"
               ? "text-deep-purple-accent-700"
               : "text-gray-800",
-            "items-center pl-4 text-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
+            "items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
           )}
           aria-label="Vendor Onboarding"
         >
@@ -47,7 +47,7 @@ export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
             pathname === "/future"
               ? "text-deep-purple-accent-700"
               : "text-gray-800",
-            "items-center pl-4 text-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
+            "items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
           )}
           aria-label="What's Coming"
         >

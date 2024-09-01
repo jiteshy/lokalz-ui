@@ -24,7 +24,7 @@ export const columns: ColumnDef<Store>[] = [
     accessorKey: "name",
     enableHiding: false,
     meta: {
-      cellClassName: "text-nowrap",
+      cellClassName: "whitespace-nowrap",
     },
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
@@ -38,21 +38,21 @@ export const columns: ColumnDef<Store>[] = [
     accessorKey: "email",
     header: "Email",
     meta: {
-      cellClassName: "text-nowrap",
+      cellClassName: "whitespace-nowrap",
     },
   },
   {
     accessorKey: "phone",
     header: "Phone",
     meta: {
-      cellClassName: "text-nowrap",
+      cellClassName: "whitespace-nowrap",
     },
   },
   {
     accessorKey: "type",
     enableHiding: false,
     meta: {
-      cellClassName: "text-nowrap",
+      cellClassName: "whitespace-nowrap",
     },
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Type" />
@@ -63,7 +63,7 @@ export const columns: ColumnDef<Store>[] = [
     accessorKey: "tags",
     header: "Tags",
     meta: {
-      cellClassName: "text-nowrap",
+      cellClassName: "whitespace-nowrap",
     },
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");

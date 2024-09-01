@@ -18,7 +18,7 @@ export const NavLinksMobile = ({ handleLinkClick }: NavLinksProps) => {
       <li>
         <button
           onClick={() => handleLinkClick("/")}
-          className="items-center text-lg text-nowrap text-deep-purple-accent-400"
+          className="items-center text-lg whitespace-nowrap text-deep-purple-accent-400"
           aria-label="About Us"
         >
           <FontAwesomeIcon
@@ -31,7 +31,7 @@ export const NavLinksMobile = ({ handleLinkClick }: NavLinksProps) => {
       <li>
         <button
           onClick={() => handleLinkClick("/about")}
-          className="items-center text-lg text-nowrap text-deep-purple-accent-400"
+          className="items-center text-lg whitespace-nowrap text-deep-purple-accent-400"
           aria-label="About Us"
         >
           <FontAwesomeIcon
@@ -44,7 +44,7 @@ export const NavLinksMobile = ({ handleLinkClick }: NavLinksProps) => {
       <li>
         <button
           onClick={() => handleLinkClick("/onboard")}
-          className="items-center text-lg text-nowrap text-deep-purple-accent-400"
+          className="items-center text-lg whitespace-nowrap text-deep-purple-accent-400"
           aria-label="About Us"
         >
           <FontAwesomeIcon icon={faStore} />
@@ -54,7 +54,7 @@ export const NavLinksMobile = ({ handleLinkClick }: NavLinksProps) => {
       <li>
         <button
           onClick={() => handleLinkClick("/future")}
-          className="items-center text-lg text-nowrap text-deep-purple-accent-400"
+          className="items-center text-lg whitespace-nowrap text-deep-purple-accent-400"
           aria-label="About Us"
         >
           <FontAwesomeIcon icon={faLayerGroup} />
@@ -65,7 +65,7 @@ export const NavLinksMobile = ({ handleLinkClick }: NavLinksProps) => {
       <li>
         <button
           onClick={() => handleLinkClick("/contact")}
-          className="items-center text-lg text-nowrap text-deep-purple-accent-400"
+          className="items-center text-lg whitespace-nowrap text-deep-purple-accent-400"
           aria-label="About Us"
         >
           <FontAwesomeIcon icon={faEnvelope} />
@@ -75,7 +75,7 @@ export const NavLinksMobile = ({ handleLinkClick }: NavLinksProps) => {
       <li>
         <button
           onClick={() => handleLinkClick("/terms")}
-          className="items-center text-lg text-nowrap text-deep-purple-accent-400"
+          className="items-center text-lg whitespace-nowrap text-deep-purple-accent-400"
           aria-label="About Us"
         >
           <FontAwesomeIcon icon={faFileShield} />
