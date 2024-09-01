@@ -1,7 +1,22 @@
-import { ADMIN_APIS } from "@repo/ui/config";
-import type { NextAuthConfig } from "next-auth";
+import type { NextAuthConfig, User } from "next-auth";
 import { NextResponse } from "next/server";
-import { CustomUser } from "./utils/types";
+import { CustomUser } from "@/utils/types";
+import { getUserFromDB } from "@/utils/helper";
+import { JWT } from "next-auth/jwt";
+
+const mergeCustomUser = (token: JWT, customUser: User | CustomUser) => {
+  token.accessToken = customUser.accessToken;
+  token.role = customUser.role;
+
+  return token;
+};
+
+const isTokenValid = (token: string | undefined) => {
+  if (!token) return false;
+  // Check token expiry
+  const expiresAt = JSON.parse(atob(token.split(".")[1])).exp * 1000;
+  return Date.now() < expiresAt;
+};
 
 export const authConfig = {
   pages: {
@@ -33,29 +48,32 @@ export const authConfig = {
     // Called after google sign in
     async signIn({ user }) {
       if (user) {
-        const response = await fetch(ADMIN_APIS.AUTH.ADMIN.CALLBACK, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        });
-        const customUser: CustomUser = await response.json();
+        const customUser: CustomUser = await getUserFromDB(user);
         user.accessToken = customUser.token;
         user.role = customUser.role;
         return true;
       }
       return false;
     },
-    async jwt({ token, user }) {
-      // Add the custom token fetched from backend after sign in
-      if (user) {
-        token.accessToken = user.accessToken;
-        token.role = user.role;
+    async jwt({ token, user, account }) {
+      // Add the custom token fetched from backend after initial sign in
+      if (account && user) {
+        return mergeCustomUser(token, user);
       }
 
-      return token;
+      // Return previous token if the access token has not expired yet
+      if (isTokenValid(token.accessToken)) {
+        return token;
+      }
+
+      // Access token has expired, try to update it
+      console.log("Token is invalid, refreshing..");
+      const customUser: CustomUser = await getUserFromDB({
+        name: token.name,
+        email: token.email,
+        image: token.picture,
+      });
+      return mergeCustomUser(token, customUser);
     },
     async session({ session, token }) {
       // Use the custom token fetched from backend after sign in
