@@ -11,7 +11,7 @@ export default function NewStorePage() {
     <div>
       <div className="flex justify-end items-center p-2 bg-slate-200 mb-3">
         <Link
-          href={"/"}
+          href={"/store/list"}
           className="px-3 py-2 text-sm bg-slate-700 text-slate-200 rounded hover:bg-slate-900"
         >
           <FontAwesomeIcon icon={faCircleLeft} />

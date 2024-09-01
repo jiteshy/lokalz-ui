@@ -1,5 +1,6 @@
 import { DefaultSession, DefaultUser } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
+import "@tanstack/react-table";
 
 interface CustomProps {
   accessToken: string;
@@ -11,6 +12,12 @@ declare module "next-auth" {
 }
 
 declare module "next-auth/jwt" {
-  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   interface JWT extends DefaultJWT, CustomProps {}
+}
+
+declare module "@tanstack/react-table" {
+  interface ColumnMeta {
+    headerClassName?: string;
+    cellClassName?: string;
+  }
 }

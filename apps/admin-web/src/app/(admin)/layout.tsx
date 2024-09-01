@@ -34,7 +34,7 @@ export default function DashboardLayout({
           </Link>
           <ul className="p-3">
             <li className="p-3 text-slate-500 hover:text-slate-800">
-              <Link href={"/"}>
+              <Link href={"/store/list"}>
                 <div className="flex items-center">
                   <div className="w-6 h-6">
                     <FontAwesomeIcon icon={faShop} />

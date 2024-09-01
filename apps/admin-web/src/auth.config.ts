@@ -5,7 +5,7 @@ import { getUserFromDB } from "@/utils/helper";
 import { JWT } from "next-auth/jwt";
 
 const mergeCustomUser = (token: JWT, customUser: User | CustomUser) => {
-  token.accessToken = customUser.accessToken;
+  token.accessToken = (customUser as CustomUser).token;
   token.role = customUser.role;
 
   return token;
@@ -67,12 +67,12 @@ export const authConfig = {
       }
 
       // Access token has expired, try to update it
-      console.log("Token is invalid, refreshing..");
       const customUser: CustomUser = await getUserFromDB({
         name: token.name,
         email: token.email,
         image: token.picture,
       });
+      console.log("Token is invalid, refreshing..", token, customUser);
       return mergeCustomUser(token, customUser);
     },
     async session({ session, token }) {
