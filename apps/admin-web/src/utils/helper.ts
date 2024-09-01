@@ -6,14 +6,20 @@ import { CustomUser } from "@/utils/types";
 export const getUserFromDB = async (
   user: Partial<User>,
 ): Promise<CustomUser> => {
-  const response = await fetch(ADMIN_APIS.AUTH.ADMIN.CALLBACK, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
-  const customUser: CustomUser = await response.json();
-  return customUser;
+  // TO-DO: Not working after deployment without try catch
+  try {
+    const response = await fetch(ADMIN_APIS.AUTH.ADMIN.CALLBACK, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    const customUser: CustomUser = await response.json();
+    return customUser;
+  } catch (error) {
+    console.error(error);
+    return {accessToken: '', role: '', token: ''};
+  }
 };
