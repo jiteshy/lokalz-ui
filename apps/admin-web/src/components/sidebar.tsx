@@ -16,12 +16,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export const SideBar = ({ width }: { width: string }) => {
+export const SideBar = () => {
   const pathName = usePathname();
 
   return (
     <aside
-      className={`absolute top-0 left-0 bottom-0 w-[${width}px] min-h-screen bg-white shadow border-r border-r-slate-200 text-slate-700`}
+      className={`absolute top-0 left-0 bottom-0 min-h-screen bg-white shadow border-r border-r-slate-200 text-slate-700`}
     >
       <Link href={"/store/list"}>
         <div className="flex gap-2 items-end p-6">
