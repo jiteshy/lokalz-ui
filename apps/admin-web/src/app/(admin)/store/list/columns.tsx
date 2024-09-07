@@ -12,14 +12,31 @@ import { Button } from "@/components/ui/button";
 
 import { STORE_TYPES } from "@repo/ui/constants";
 import { Store } from "@repo/ui/types";
-import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
+import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
 
-export const visibleColumns = ["name", "email", "phone", "type"];
+type RowActions = {
+  onEdit: (storeId: string) => void;
+  onInactive: (storeId: string) => void;
+  onDelete: (storeId: string) => void;
+};
 
-export const columns: ColumnDef<Store>[] = [
+export const visibleColumns: VisibilityState = {
+  name: true,
+  description: false,
+  email: false,
+  phone: false,
+  type: true,
+  status: true,
+  tags: false,
+}
+
+export const getStoreColumns = ({
+  onEdit,
+  onInactive,
+  onDelete,
+}: RowActions): ColumnDef<Store>[] => [
   {
     accessorKey: "name",
     enableHiding: false,
@@ -60,6 +77,15 @@ export const columns: ColumnDef<Store>[] = [
     cell: ({ row }) => STORE_TYPES[row.getValue("type") as string],
   },
   {
+    accessorKey: "status",
+    meta: {
+      cellClassName: "whitespace-nowrap",
+    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Status" />
+    ),
+  },
+  {
     accessorKey: "tags",
     header: "Tags",
     meta: {
@@ -86,9 +112,11 @@ export const columns: ColumnDef<Store>[] = [
   {
     id: "actions",
     enableHiding: false,
+    meta: {
+      cellClassName: "text-right",
+    },
     cell: ({ row }) => {
       const { id: storeId } = row.original;
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -99,11 +127,15 @@ export const columns: ColumnDef<Store>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <Link href={`/store/${storeId}`}>Edit</Link>
+            <DropdownMenuItem className="cursor-pointer" onClick={() => onEdit(storeId!)}>
+              Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => {}}>On Hold</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer" onClick={() => onInactive(storeId!)}>
+              Deactivate
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer" onClick={() => onDelete(storeId!)}>
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

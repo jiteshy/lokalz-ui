@@ -9,6 +9,7 @@ export type Store = {
   tags: Array<String>;
   rating?: string;
   type: StoreType;
+  status: StoreStatus;
   location?: StoreLocation;
 };
 
@@ -31,11 +32,11 @@ export enum StoreType {
   OTHER = "OTHER",
 }
 
-export enum StoreStatus { // TODO to be used in admin panel
-  ACTIVE,
-  INACTIVE,
-  ONHOLD, // Thought - show in upcoming??
-  DELETED,
+export enum StoreStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  ONHOLD = "ONHOLD",
+  DELETED = "DELETED",
 }
 
 export type Menu = {

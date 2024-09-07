@@ -33,16 +33,18 @@ import { EyeNoneIcon } from "@radix-ui/react-icons";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  visibleColumns?: VisibilityState;
 }
 
-export function DataTable<TData, TValue>({
+export function   DataTable<TData, TValue>({
   columns,
   data,
+  visibleColumns,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(visibleColumns || {});
 
   const table = useReactTable({
     data,

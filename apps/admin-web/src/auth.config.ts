@@ -72,7 +72,6 @@ export const authConfig = {
         email: token.email,
         image: token.picture,
       });
-      console.log("Token is invalid, refreshing..", token, customUser);
       return mergeCustomUser(token, customUser);
     },
     async session({ session, token }) {

@@ -1,17 +1,95 @@
 "use client";
 
-import { Store } from "@repo/ui/types";
-import { faCircleNotch, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { Store, StoreStatus } from "@repo/ui/types";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import useSWR from "swr";
 import { ADMIN_APIS } from "@repo/ui/config";
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./columns";
+import { getStoreColumns, visibleColumns } from "./columns";
+import Loading from "@/app/loading";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { useAxios } from "@/hooks/use-axios";
+import { ColumnDef } from "@tanstack/react-table";
 
 export default function StoresListPage() {
+  const { toast } = useToast();
+  const axios = useAxios();
+  const router = useRouter();
+  const [filteredStores, setFilteredStores] = useState<Store[]>([]);
+  const [currentFilter, setCurrentFilter] = useState<StoreStatus>();
   const { data: stores, isLoading } = useSWR<Store[]>(
-    `${ADMIN_APIS.STORE.STORES_LIST}?page=0`,
+    `${ADMIN_APIS.STORE.STORES_LIST}?page=0`
+  );
+
+  useEffect(() => {
+    if (stores && stores.length) {
+      setFilteredStores(stores);
+    }
+  }, [stores]);
+
+  const handleFilterClick = (status?: StoreStatus) => {
+    if (stores && stores.length) {
+      if (status) {
+        setFilteredStores(
+          stores.filter((store: Store) => store.status === status)
+        );
+      } else {
+        setFilteredStores(stores);
+      }
+    }
+    setCurrentFilter(status);
+  };
+
+  const onEdit = useCallback(
+    (storeId: string) => router.push(`/store/${storeId}`),
+    []
+  );
+  const onInactive = useCallback((storeId: string) => {
+    axios.put(`/store/${storeId}/status/${StoreStatus.INACTIVE}`).then(
+      () => {
+        toast({
+          title: "Success!",
+          duration: 5000,
+          description: "Store is deactivated successfully.",
+        });
+      },
+      () => {
+        toast({
+          variant: "destructive",
+          duration: 5000,
+          title: "Failure!",
+          description: "Store deactivation failed.",
+        });
+      }
+    );
+  }, []);
+  const onDelete = useCallback((storeId: string) => {
+    axios.delete(`/store/${storeId}`).then(
+      () => {
+        toast({
+          title: "Success!",
+          duration: 5000,
+          description: "Store is deleted successfully.",
+        });
+      },
+      () => {
+        toast({
+          variant: "destructive",
+          duration: 5000,
+          title: "Failure!",
+          description: "Store delete failed.",
+        });
+      }
+    );
+  }, []);
+
+  const columns: ColumnDef<Store>[] = useMemo(
+    () => getStoreColumns({ onEdit, onInactive, onDelete }),
+    []
   );
 
   return (
@@ -23,22 +101,34 @@ export default function StoresListPage() {
         </div>
         <div className="flex justify-between items-center p-2 bg-slate-100 rounded mt-4">
           <div className="flex items-center gap-2 rounded">
-            <button className="border-0 text-slate-700 px-3 py-2 rounded text-sm bg-white font-semibold">
+            <button
+              onClick={() => handleFilterClick()}
+              className={`border-0 text-slate-500 px-3 py-2 rounded text-sm ${!currentFilter ? "bg-white font-semibold text-slate-900 shadow" : "hover:text-slate-900"}`}
+            >
               All
             </button>
-            <button className="border-0 text-slate-500 px-3 py-2 rounded text-sm hover:text-slate-900">
+            <button
+              onClick={() => handleFilterClick(StoreStatus.ACTIVE)}
+              className={`border-0 text-slate-500 px-3 py-2 rounded text-sm ${currentFilter === StoreStatus.ACTIVE ? "bg-white font-semibold text-slate-900 shadow" : "hover:text-slate-900"}`}
+            >
               Active
             </button>
-            <button className="border-0 text-slate-500 px-3 py-2 rounded text-sm hover:text-slate-900">
+            <button
+              onClick={() => handleFilterClick(StoreStatus.ONHOLD)}
+              className={`border-0 text-slate-500 px-3 py-2 rounded text-sm ${currentFilter === StoreStatus.ONHOLD ? "bg-white font-semibold text-slate-900 shadow" : "hover:text-slate-900"}`}
+            >
               On-Hold
             </button>
-            <button className="border-0 text-slate-500 px-3 py-2 rounded text-sm hover:text-slate-900">
+            <button
+              onClick={() => handleFilterClick(StoreStatus.INACTIVE)}
+              className={`border-0 text-slate-500 px-3 py-2 rounded text-sm ${currentFilter === StoreStatus.INACTIVE ? "bg-white font-semibold text-slate-900 shadow" : "hover:text-slate-900"}`}
+            >
               Inactive
             </button>
           </div>
           <Link
             href={"/store/new"}
-            className="px-3 py-2 text-sm bg-slate-700 text-slate-200 rounded hover:bg-slate-900"
+            className="px-3 py-2 text-sm bg-slate-700 text-slate-200 rounded shadow hover:bg-slate-900"
           >
             <FontAwesomeIcon icon={faPlusCircle} />
             <span className="pl-2">Add Store</span>
@@ -46,10 +136,10 @@ export default function StoresListPage() {
         </div>
 
         <div className="pt-3">
-          {isLoading || !stores ? (
-            <FontAwesomeIcon icon={faCircleNotch} spin />
+          {isLoading ? (
+            <Loading />
           ) : (
-            <DataTable columns={columns} data={stores} />
+            <DataTable columns={columns} data={filteredStores} visibleColumns={visibleColumns} />
           )}
         </div>
       </div>

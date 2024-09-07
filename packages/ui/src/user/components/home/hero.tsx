@@ -8,8 +8,7 @@ import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { StoreType } from "@repo/ui/types";
 import { cn } from "@repo/ui/utils";
-
-const zipCodeRegex = /^\d{5}$/;
+import { ZIPCODE_REGEX } from "@repo/ui/config";
 
 type StoreTypeValue = StoreType | undefined;
 type HeroInputs = {
@@ -30,7 +29,7 @@ export const Hero = ({ updateZipCode, filter, updateFilter }: HeroInputs) => {
 
   const onFIndNowClick = () => {
     setInvalidText(false);
-    if (text && zipCodeRegex.test(text)) {
+    if (text && ZIPCODE_REGEX.test(text)) {
       updateZipCode(text);
     } else {
       setInvalidText(true);

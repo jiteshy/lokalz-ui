@@ -20,5 +20,9 @@ export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
     [session?.user?.accessToken],
   );
 
-  return <SWRConfig value={{ fetcher: swrFetcher }}>{children}</SWRConfig>;
+  return (
+    <SWRConfig value={{ fetcher: swrFetcher, revalidateOnMount: true }}>
+      {children}
+    </SWRConfig>
+  );
 };

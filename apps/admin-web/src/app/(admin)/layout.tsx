@@ -83,7 +83,7 @@ export default function DashboardLayout({
             </li>
           </ul>
         </aside>
-        <div className="ml-[250px] px-6 py-3">{children}</div>
+        <div className="ml-[250px] px-6 pt-3 pb-6">{children}</div>
       </div>
     </main>
   );
