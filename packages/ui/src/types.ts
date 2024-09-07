@@ -9,7 +9,7 @@ export type Store = {
   tags: Array<String>;
   rating?: string;
   type: StoreType;
-  status: StoreStatus;
+  status?: StoreStatus;
   location?: StoreLocation;
 };
 
