@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { auth, signOut } from "@/auth";
+import { ExitIcon } from "@radix-ui/react-icons";
 
 export const AdminNav = async () => {
   const session = await auth();
@@ -21,10 +22,10 @@ export const AdminNav = async () => {
             >
               <button
                 type="submit"
-                className="text-slate-700 items-center pl-4 whitespace-nowrap font-semibold inline-flex transition-colors duration-200 hover:text-slate-800"
+                className="text-slate-700 items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-slate-800"
                 aria-label="Logout"
               >
-                <FontAwesomeIcon icon={faArrowRightToBracket} />
+                <ExitIcon className="w-5 h-5" />
                 <span className="pl-2">Logout</span>
               </button>
             </form>
