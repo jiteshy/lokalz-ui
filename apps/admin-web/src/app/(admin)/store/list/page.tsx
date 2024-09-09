@@ -57,13 +57,14 @@ export default function StoresListPage() {
         storeStatus === StoreStatus.ACTIVE
           ? StoreStatus.INACTIVE
           : StoreStatus.ACTIVE;
+      const successMessage = `Store is marked ${storeStatus.toLowerCase()} successfully.`;
       return axios.put(`/store/${storeId}/status/${statusToUpdate}`).then(
         async () => {
           await mutate();
           toast({
             title: "Success!",
             duration: 5000,
-            description: "Store is deactivated successfully.",
+            description: successMessage,
           });
         },
         () => {
@@ -71,7 +72,7 @@ export default function StoresListPage() {
             variant: "destructive",
             duration: 5000,
             title: "Failure!",
-            description: "Store deactivation failed.",
+            description: successMessage,
           });
         },
       );
