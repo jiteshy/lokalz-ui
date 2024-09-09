@@ -57,7 +57,7 @@ export default function StoresListPage() {
         storeStatus === StoreStatus.ACTIVE
           ? StoreStatus.INACTIVE
           : StoreStatus.ACTIVE;
-      const successMessage = `Store is marked ${storeStatus.toLowerCase()} successfully.`;
+      const successMessage = `Store is marked ${statusToUpdate.toLowerCase()} successfully.`;
       return axios.put(`/store/${storeId}/status/${statusToUpdate}`).then(
         async () => {
           await mutate();
