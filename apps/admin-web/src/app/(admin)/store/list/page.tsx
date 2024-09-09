@@ -21,13 +21,16 @@ export default function StoresListPage() {
   const router = useRouter();
   const [filteredStores, setFilteredStores] = useState<Store[]>([]);
   const [currentFilter, setCurrentFilter] = useState<StoreStatus>();
-  const { data: stores, isLoading } = useSWR<Store[]>(
-    `${ADMIN_APIS.STORE.STORES_LIST}?page=0`
-  );
+  const {
+    data: stores,
+    isLoading,
+    mutate,
+  } = useSWR<Store[]>(`${ADMIN_APIS.STORE.STORES_LIST}?page=0`);
 
   useEffect(() => {
     if (stores && stores.length) {
       setFilteredStores(stores);
+      handleFilterClick(currentFilter);
     }
   }, [stores]);
 
@@ -35,7 +38,7 @@ export default function StoresListPage() {
     if (stores && stores.length) {
       if (status) {
         setFilteredStores(
-          stores.filter((store: Store) => store.status === status)
+          stores.filter((store: Store) => store.status === status),
         );
       } else {
         setFilteredStores(stores);
@@ -46,30 +49,39 @@ export default function StoresListPage() {
 
   const onEdit = useCallback(
     (storeId: string) => router.push(`/store/${storeId}`),
-    []
+    [],
   );
-  const onInactive = useCallback((storeId: string) => {
-    axios.put(`/store/${storeId}/status/${StoreStatus.INACTIVE}`).then(
-      () => {
-        toast({
-          title: "Success!",
-          duration: 5000,
-          description: "Store is deactivated successfully.",
-        });
-      },
-      () => {
-        toast({
-          variant: "destructive",
-          duration: 5000,
-          title: "Failure!",
-          description: "Store deactivation failed.",
-        });
-      }
-    );
-  }, []);
+  const onStatusChange = useCallback(
+    (storeId: string, storeStatus: StoreStatus) => {
+      const statusToUpdate =
+        storeStatus === StoreStatus.ACTIVE
+          ? StoreStatus.INACTIVE
+          : StoreStatus.ACTIVE;
+      return axios.put(`/store/${storeId}/status/${statusToUpdate}`).then(
+        async () => {
+          await mutate();
+          toast({
+            title: "Success!",
+            duration: 5000,
+            description: "Store is deactivated successfully.",
+          });
+        },
+        () => {
+          toast({
+            variant: "destructive",
+            duration: 5000,
+            title: "Failure!",
+            description: "Store deactivation failed.",
+          });
+        },
+      );
+    },
+    [],
+  );
   const onDelete = useCallback((storeId: string) => {
-    axios.delete(`/store/${storeId}`).then(
-      () => {
+    return axios.delete(`/store/${storeId}?execute=true`).then(
+      async () => {
+        await mutate();
         toast({
           title: "Success!",
           duration: 5000,
@@ -83,13 +95,13 @@ export default function StoresListPage() {
           title: "Failure!",
           description: "Store delete failed.",
         });
-      }
+      },
     );
   }, []);
 
   const columns: ColumnDef<Store>[] = useMemo(
-    () => getStoreColumns({ onEdit, onInactive, onDelete }),
-    []
+    () => getStoreColumns({ onEdit, onStatusChange, onDelete }),
+    [],
   );
 
   return (
@@ -139,7 +151,11 @@ export default function StoresListPage() {
           {isLoading ? (
             <Loading />
           ) : (
-            <DataTable columns={columns} data={filteredStores} visibleColumns={visibleColumns} />
+            <DataTable
+              columns={columns}
+              data={filteredStores}
+              visibleColumns={visibleColumns}
+            />
           )}
         </div>
       </div>

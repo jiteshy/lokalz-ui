@@ -21,7 +21,13 @@ export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   return (
-    <SWRConfig value={{ fetcher: swrFetcher, revalidateOnMount: true }}>
+    <SWRConfig
+      value={{
+        fetcher: swrFetcher,
+        revalidateOnMount: true,
+        revalidateOnFocus: true,
+      }}
+    >
       {children}
     </SWRConfig>
   );

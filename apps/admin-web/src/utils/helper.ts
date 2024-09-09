@@ -12,6 +12,6 @@ export const getUserFromDB = async (
     return response.data;
   } catch (error) {
     console.error(error);
-    return {accessToken: '', role: '', token: ''};
+    return { accessToken: "", role: "", token: "" };
   }
 };

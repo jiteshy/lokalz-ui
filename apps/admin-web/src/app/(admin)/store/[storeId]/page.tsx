@@ -109,12 +109,13 @@ export default function StoreCreateUpdatePage() {
 
   const onSubmit = (values: z.infer<typeof storeFormSchema>) => {
     const storeData = createStoreData(values);
-    axios.post("/store", storeData).then(
+    const axiosAction = storeData ? axios.put : axios.post;
+    axiosAction("/store", storeData).then(
       () => {
         toast({
           title: "Success!",
           duration: 5000,
-          description: "Store created successfully.",
+          description: `Store ${storeData ? "updated" : "created"} successfully.`,
         });
         if (isNewStore) {
           storeForm.reset(createFormData());
@@ -125,7 +126,7 @@ export default function StoreCreateUpdatePage() {
           variant: "destructive",
           duration: 5000,
           title: "Failure!",
-          description: "Store creation failed.",
+          description: `Store ${storeData ? "update" : "creation"} failed.`,
         });
       },
     );
@@ -181,7 +182,11 @@ export default function StoreCreateUpdatePage() {
                   <FormItem>
                     <FormLabel>Contact Email*</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter contact email" {...field} />
+                      <Input
+                        placeholder="Enter contact email"
+                        {...field}
+                        disabled
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -209,6 +214,7 @@ export default function StoreCreateUpdatePage() {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled
                     >
                       <FormControl>
                         <SelectTrigger>

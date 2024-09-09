@@ -36,7 +36,7 @@ interface DataTableProps<TData, TValue> {
   visibleColumns?: VisibilityState;
 }
 
-export function   DataTable<TData, TValue>({
+export function DataTable<TData, TValue>({
   columns,
   data,
   visibleColumns,
@@ -44,7 +44,9 @@ export function   DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(visibleColumns || {});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
+    visibleColumns || {},
+  );
 
   const table = useReactTable({
     data,
