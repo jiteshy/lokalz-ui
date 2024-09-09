@@ -93,7 +93,7 @@ export default function StoreCreateUpdatePage() {
   const isNewStore = storeId === "new";
 
   const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
-    !isNewStore ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null,
+    !isNewStore ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null
   );
 
   const storeForm = useForm<z.infer<typeof storeFormSchema>>({
@@ -109,8 +109,10 @@ export default function StoreCreateUpdatePage() {
 
   const onSubmit = (values: z.infer<typeof storeFormSchema>) => {
     const storeData = createStoreData(values);
-    const axiosAction = storeData ? axios.put : axios.post;
-    axiosAction("/store", storeData).then(
+    const axiosAction = storeData
+      ? axios.put(`/store/${storeId}`, storeData)
+      : axios.post("/store", storeData);
+    axiosAction.then(
       () => {
         toast({
           title: "Success!",
@@ -128,7 +130,7 @@ export default function StoreCreateUpdatePage() {
           title: "Failure!",
           description: `Store ${storeData ? "update" : "creation"} failed.`,
         });
-      },
+      }
     );
   };
 
