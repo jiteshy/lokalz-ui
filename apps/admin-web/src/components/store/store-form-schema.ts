@@ -1,5 +1,3 @@
-"use client";
-
 import { ZIPCODE_REGEX } from "@repo/ui/config";
 import { z } from "zod";
 
