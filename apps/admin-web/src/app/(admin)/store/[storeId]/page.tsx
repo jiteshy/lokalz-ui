@@ -64,10 +64,10 @@ export default function StoreCreateUpdatePage() {
           <StoreForm storeId={storeId} />
         </TabsContent>
         <TabsContent value="menu" className="pt-3">
-          Change your password here.
+          Update Menu
         </TabsContent>
         <TabsContent value="schedule" className="pt-3">
-          Change your password here.
+          Update Schedule
         </TabsContent>
       </Tabs>
     </div>
