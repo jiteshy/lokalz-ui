@@ -17,7 +17,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
@@ -25,6 +24,12 @@ import { Input } from "@/components/ui/input";
 import { RowActionsProps } from "./columns";
 import { Row } from "@tanstack/react-table";
 import { Store, StoreStatus } from "@repo/ui/types";
+import {
+  CheckCircledIcon,
+  CircleBackslashIcon,
+  CrossCircledIcon,
+  Pencil2Icon,
+} from "@radix-ui/react-icons";
 
 export const RowActions = ({
   row,
@@ -65,24 +70,37 @@ export const RowActions = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => onEdit(storeId!)}
           >
-            Edit
+            <div className="flex gap-2 items-center">
+              <Pencil2Icon className="w-4 h-4" />
+              Edit
+            </div>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => onStatusChange(storeId!, storeStatus!)}
           >
-            {storeStatus === StoreStatus.ACTIVE
-              ? "Mark Inactive"
-              : "Mark Active"}
+            {storeStatus === StoreStatus.ACTIVE ? (
+              <div className="flex gap-2 items-center">
+                <CircleBackslashIcon className="w-4 h-4" />
+                Mark Inactive
+              </div>
+            ) : (
+              <div className="flex gap-2 items-center">
+                <CheckCircledIcon className="w-4 h-4" />
+                Mark Active
+              </div>
+            )}
           </DropdownMenuItem>
           <DialogTrigger asChild>
             <DropdownMenuItem className="cursor-pointer text-red-accent-400 hover:text-red-accent-700">
-              Delete
+              <div className="flex gap-2 items-center">
+                <CrossCircledIcon className="w-4 h-4" />
+                Delete
+              </div>
             </DropdownMenuItem>
           </DialogTrigger>
         </DropdownMenuContent>

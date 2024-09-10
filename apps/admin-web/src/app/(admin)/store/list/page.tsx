@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { useAxios } from "@/hooks/use-axios";
 import { ColumnDef } from "@tanstack/react-table";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 export default function StoresListPage() {
   const { toast } = useToast();
@@ -141,9 +142,9 @@ export default function StoresListPage() {
           </div>
           <Link
             href={"/store/new"}
-            className="px-3 py-2 text-sm bg-slate-700 text-slate-200 rounded shadow hover:bg-slate-900"
+            className="px-3 py-2 flex text-sm bg-slate-700 text-slate-200 rounded shadow hover:bg-slate-900"
           >
-            <FontAwesomeIcon icon={faPlusCircle} />
+            <PlusIcon className="w-5 h-5" />
             <span className="pl-2">Add Store</span>
           </Link>
         </div>
