@@ -27,7 +27,7 @@ export const ADMIN_APIS = {
 
 export const ZIPCODE_REGEX = /^\d{5}$/;
 
-export const US_STATES = {
+export const US_STATES: Record<string, string> = {
   AL: "Alabama",
   AK: "Alaska",
   AS: "American Samoa",

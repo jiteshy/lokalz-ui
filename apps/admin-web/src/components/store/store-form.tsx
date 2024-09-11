@@ -32,6 +32,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { CheckIcon, EraserIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
+import { AxiosResponse } from "axios";
 
 const createFormData = (store?: Store): z.infer<typeof storeFormSchema> =>
   store
@@ -44,7 +45,7 @@ const createFormData = (store?: Store): z.infer<typeof storeFormSchema> =>
           street: store.address?.street,
           city: store.address?.city,
           state: store.address?.state,
-          zipCode: store.address?.zipCode.toString(),
+          zipCode: store.address?.zipCode?.toString(),
         },
         tags: store.tags.join(","),
         type: store.type,
@@ -85,18 +86,19 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
   const router = useRouter();
   const axios = useAxios();
 
-  const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
-    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null,
-  );
-
   const storeForm = useForm<z.infer<typeof storeFormSchema>>({
     resolver: zodResolver(storeFormSchema),
     defaultValues: createFormData(),
   });
 
+  const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
+    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null,
+  );
+
   useEffect(() => {
     if (storeData) {
-      storeForm.reset(createFormData(storeData));
+      const formData = createFormData(storeData);
+      storeForm.reset(formData);
     }
   }, [storeData]);
 
@@ -107,14 +109,20 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
       : axios.post("/store", storeData);
 
     axiosAction.then(
-      () => {
+      (response: AxiosResponse) => {
         toast({
           title: "Success!",
           duration: 5000,
           description: `Store ${storeId ? "updated" : "created"} successfully.`,
         });
+        // Redirect if new store was created
         if (!storeId) {
-          router.push(`/store/list`);
+          const newStoreId = response.data?.objectId;
+          if (newStoreId) {
+            router.push(`/store/${newStoreId}`);
+          } else {
+            router.push("/store/list");
+          }
         }
       },
       () => {
@@ -135,6 +143,7 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
       ) : (
         <Form {...storeForm}>
           <form
+            key={storeForm.watch("email")}
             onSubmit={storeForm.handleSubmit(onSubmit)}
             className="space-y-3"
           >
@@ -186,10 +195,10 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
               name="type"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Store Type</FormLabel>
+                  <FormLabel>Store Type*</FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
                     disabled={!!storeId}
                   >
                     <FormControl>
@@ -199,7 +208,9 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
                     </FormControl>
                     <SelectContent>
                       {Object.entries(StoreType).map(([key, value]) => (
-                        <SelectItem value={key}>{value}</SelectItem>
+                        <SelectItem key={key} value={key}>
+                          {value}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -253,10 +264,7 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>State*</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a state" />
@@ -264,7 +272,9 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
                     </FormControl>
                     <SelectContent>
                       {Object.entries(US_STATES).map(([key, value]) => (
-                        <SelectItem value={key}>{value}</SelectItem>
+                        <SelectItem key={key} value={key}>
+                          {value}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

@@ -40,7 +40,7 @@ export default function StoreCreateUpdatePage() {
       </div>
 
       <Tabs defaultValue="store" className="w-full pt-5">
-        <TabsList className="grid sm:w-3/4 m-auto grid-cols-3 h-12 mb-3 px-[6px] text-center bg-slate-200">
+        <TabsList className="grid sm:w-3/4 m-auto grid-cols-3 h-12 mb-3 px-[6px] text-center bg-slate-100">
           <TabsTrigger value="store" className="py-2">
             <div className="flex gap-2">
               <IdCardIcon className="w-5 h-5" />
