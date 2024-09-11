@@ -92,7 +92,7 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
   });
 
   const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
-    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null,
+    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null
   );
 
   useEffect(() => {
@@ -102,38 +102,46 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
     }
   }, [storeData]);
 
+  useEffect(() => {
+    // Set submitted values as the base for reset after form submit
+    if (storeForm.formState.isSubmitSuccessful) {
+      storeForm.reset(storeForm.getValues());
+    }
+  }, [storeForm.formState, storeForm.reset]);
+
+  const onSubmitSuccess = (response: AxiosResponse) => {
+    toast({
+      title: "Success!",
+      duration: 5000,
+      description: `Store ${storeId ? "updated" : "created"} successfully.`,
+    });
+    // Redirect if new store was created
+    if (!storeId) {
+      const newStoreId = response.data?.objectId;
+      if (newStoreId) {
+        router.push(`/store/${newStoreId}`);
+      } else {
+        router.push("/store/list");
+      }
+    }
+  };
+
+  const onSubmitError = () => {
+    toast({
+      variant: "destructive",
+      duration: 5000,
+      title: "Failure!",
+      description: `Store ${storeId ? "update" : "creation"} failed.`,
+    });
+  };
+
   const onSubmit = (values: z.infer<typeof storeFormSchema>) => {
     const storeData = createStoreData(values);
     const axiosAction = storeId
       ? axios.put(`/store/${storeId}`, storeData)
       : axios.post("/store", storeData);
 
-    axiosAction.then(
-      (response: AxiosResponse) => {
-        toast({
-          title: "Success!",
-          duration: 5000,
-          description: `Store ${storeId ? "updated" : "created"} successfully.`,
-        });
-        // Redirect if new store was created
-        if (!storeId) {
-          const newStoreId = response.data?.objectId;
-          if (newStoreId) {
-            router.push(`/store/${newStoreId}`);
-          } else {
-            router.push("/store/list");
-          }
-        }
-      },
-      () => {
-        toast({
-          variant: "destructive",
-          duration: 5000,
-          title: "Failure!",
-          description: `Store ${storeId ? "update" : "creation"} failed.`,
-        });
-      },
-    );
+    axiosAction.then(onSubmitSuccess, onSubmitError);
   };
 
   return (
@@ -143,7 +151,7 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
       ) : (
         <Form {...storeForm}>
           <form
-            key={storeForm.watch("email")}
+            key={storeId && storeForm.watch("email")}
             onSubmit={storeForm.handleSubmit(onSubmit)}
             className="space-y-3"
           >
