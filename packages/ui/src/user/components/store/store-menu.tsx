@@ -1,17 +1,18 @@
-import { Menu, MenuCategory, MenuItem } from "@repo/ui/types";
+import { StoreMenu, StoreMenuCategory, StoreMenuItem } from "@repo/ui/types";
 import { Title } from "../layout/title";
 
-export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
+export const StoreMenuDetails = ({ menuData }: { menuData: StoreMenu }) => {
   // Sort the menu by category and items inside each category
   const sortedMenuData = menuData?.menu
-    .map((category: MenuCategory) => {
+    .map((category: StoreMenuCategory) => {
       category.items.sort(
-        (item1: MenuItem, item2: MenuItem) => item1.order - item2.order,
+        (item1: StoreMenuItem, item2: StoreMenuItem) =>
+          item1.order - item2.order,
       );
       return category;
     })
     .sort(
-      (category1: MenuCategory, category2: MenuCategory) =>
+      (category1: StoreMenuCategory, category2: StoreMenuCategory) =>
         category1.order - category2.order,
     );
 
@@ -22,7 +23,7 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
       </div>
       <div className="grid max-w-screen-lg mx-auto space-y-6 lg:grid-cols-2 lg:space-y-0 gap-x-20">
         {sortedMenuData &&
-          sortedMenuData.map((menuCategory: MenuCategory) => (
+          sortedMenuData.map((menuCategory: StoreMenuCategory) => (
             <div key={menuCategory.id} className="mr-5">
               <div className="py-2 text-center">
                 <h4 className="pb-3 text-lg font-bold text-slate-600">
@@ -36,7 +37,7 @@ export const StoreMenu = ({ menuData }: { menuData: Menu }) => {
                 )}
               </div>
               <div className="mb-5">
-                {menuCategory.items.map((item: MenuItem) => (
+                {menuCategory.items.map((item: StoreMenuItem) => (
                   <div
                     className="flex justify-between items-center"
                     key={item.id}

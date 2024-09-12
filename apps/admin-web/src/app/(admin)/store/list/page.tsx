@@ -1,13 +1,14 @@
 "use client";
 
 import { Store, StoreStatus } from "@repo/ui/types";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import useSWR from "swr";
 import { ADMIN_APIS } from "@repo/ui/config";
 import { DataTable } from "@/components/ui/data-table";
-import { getStoreColumns, visibleColumns } from "./columns";
+import {
+  getStoreColumns,
+  visibleColumns,
+} from "@/components/store-list/store-columns";
 import Loading from "@/app/loading";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAxios } from "@/hooks/use-axios";
 import { ColumnDef } from "@tanstack/react-table";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button";
 
 export default function StoresListPage() {
   const { toast } = useToast();
@@ -140,12 +142,11 @@ export default function StoresListPage() {
               Inactive
             </button>
           </div>
-          <Link
-            href={"/store/new"}
-            className="px-3 py-2 flex text-sm bg-slate-700 text-slate-200 rounded shadow hover:bg-slate-900"
-          >
-            <PlusIcon className="w-5 h-5" />
-            <span className="pl-2">Add Store</span>
+          <Link href={"/store/new"}>
+            <Button>
+              <PlusIcon className="w-5 h-5" />
+              <span className="pl-2">Add Store</span>
+            </Button>
           </Link>
         </div>
 

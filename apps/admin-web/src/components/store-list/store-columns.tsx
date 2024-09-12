@@ -5,9 +5,9 @@ import { Store, StoreStatus } from "@repo/ui/types";
 import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
-import { RowActions } from "./row-actions";
+import { StoreRowActions } from "./store-row-actions";
 
-export type RowActionsProps = {
+export type StoreRowActionsProps = {
   onEdit: (storeId: string) => void;
   onStatusChange: (storeId: string, storeStatus: StoreStatus) => Promise<void>;
   onDelete: (storeId: string) => Promise<void>;
@@ -27,7 +27,7 @@ export const getStoreColumns = ({
   onEdit,
   onStatusChange,
   onDelete,
-}: RowActionsProps): ColumnDef<Store>[] => [
+}: StoreRowActionsProps): ColumnDef<Store>[] => [
   {
     accessorKey: "name",
     enableHiding: false,
@@ -108,7 +108,7 @@ export const getStoreColumns = ({
     },
     cell: ({ row }) => {
       const actions = { onEdit, onStatusChange, onDelete };
-      return <RowActions row={row} actions={actions} />;
+      return <StoreRowActions row={row} actions={actions} />;
     },
   },
 ];

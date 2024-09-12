@@ -39,25 +39,25 @@ export enum StoreStatus {
   DELETED = "DELETED",
 }
 
-export type Menu = {
-  menu: MenuCategory[];
+export type StoreMenu = {
+  menu: StoreMenuCategory[];
 };
 
-export type MenuCategory = {
-  id: string;
+export type StoreMenuCategory = {
+  id?: string;
   category: string;
   description?: string;
-  order: number;
-  items: MenuItem[];
+  order?: number;
+  items: StoreMenuItem[];
 };
 
-export type MenuItem = {
-  id: string;
+export type StoreMenuItem = {
+  id?: string;
   itemName: string;
   description?: string;
   price: string;
   category: string;
-  order: number;
+  order?: number;
   available: boolean;
 };
 

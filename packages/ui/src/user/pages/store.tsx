@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 import {
   StoreDetailsCard,
   StoreDetailsCardShimmer,
-  StoreMenu,
+  StoreMenuDetails,
   StoreMenuShimmer,
   Schedule,
   StoreScheduleShimmer,
 } from "@repo/ui/user/components";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Store, Menu, StoreSchedule } from "@repo/ui/types";
+import { Store, StoreMenu, StoreSchedule } from "@repo/ui/types";
 import { USER_APIS } from "@repo/ui/config";
 
 export const StorePage = ({ store }: { store: string }) => {
@@ -22,7 +22,7 @@ export const StorePage = ({ store }: { store: string }) => {
     `${USER_APIS.STORE.STORE_DETAILS}/${store}`,
   );
 
-  const { data: menuData, isLoading: isMenuLoading } = useSWR<Menu>(
+  const { data: menuData, isLoading: isMenuLoading } = useSWR<StoreMenu>(
     `${USER_APIS.STORE.STORE_DETAILS}/${store}/menu`,
   );
 
@@ -48,7 +48,7 @@ export const StorePage = ({ store }: { store: string }) => {
           </div>
           <div className="w-full mt-5 md:mt-0 md:w-6/12 lg:w-8/12">
             {(isMenuLoading || !menuData) && <StoreMenuShimmer />}
-            {menuData && <StoreMenu menuData={menuData} />}
+            {menuData && <StoreMenuDetails menuData={menuData} />}
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { RowActionsProps } from "./columns";
+import { StoreRowActionsProps } from "./store-columns";
 import { Row } from "@tanstack/react-table";
 import { Store, StoreStatus } from "@repo/ui/types";
 import {
@@ -31,12 +31,12 @@ import {
   Pencil2Icon,
 } from "@radix-ui/react-icons";
 
-export const RowActions = ({
+export const StoreRowActions = ({
   row,
   actions: { onEdit, onStatusChange, onDelete },
 }: {
   row: Row<Store>;
-  actions: RowActionsProps;
+  actions: StoreRowActionsProps;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");

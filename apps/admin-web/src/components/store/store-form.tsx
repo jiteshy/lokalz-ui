@@ -92,7 +92,7 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
   });
 
   const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
-    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null
+    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}` : null,
   );
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
     if (!storeId) {
       const newStoreId = response.data?.objectId;
       if (newStoreId) {
-        router.push(`/store/${newStoreId}`);
+        router.push(`/store/${newStoreId}?tab=menu`);
       } else {
         router.push("/store/list");
       }

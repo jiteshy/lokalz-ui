@@ -1,21 +1,40 @@
 "use client";
 
+import { useState } from "react";
 import { StoreForm } from "@/components/store/store-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import {
   ArrowLeftIcon,
   CalendarIcon,
   IdCardIcon,
   ReaderIcon,
 } from "@radix-ui/react-icons";
+import { MenuForm } from "@/components/store/menu/menu-form";
+import { Button } from "@/components/ui/button";
 
 export default function StoreCreateUpdatePage() {
+  const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState<string>(initialTab || "store");
+
   let { storeId } = useParams<{ storeId: string }>();
   if (storeId === "new") {
     storeId = "";
   }
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    router.push(`${pathName}?tab=${value}`);
+  };
 
   return (
     <div className="bg-white border border-text-300 w-full p-6 text-slate-700">
@@ -29,18 +48,22 @@ export default function StoreCreateUpdatePage() {
           </div>
         </div>
         <div className="pt-1">
-          <Link
-            href={"/store/list"}
-            className="px-3 py-2 flex text-sm bg-slate-700 text-slate-200 rounded hover:bg-slate-900"
-          >
-            <ArrowLeftIcon className="w-5 h-5" />
-            <span className="pl-2">Go Back</span>
+          <Link href={"/store/list"}>
+            <Button>
+              <ArrowLeftIcon className="w-5 h-5" />
+              <span className="pl-2">Go Back</span>
+            </Button>
           </Link>
         </div>
       </div>
 
-      <Tabs defaultValue="store" className="w-full pt-5">
-        <TabsList className="grid sm:w-3/4 m-auto grid-cols-3 h-12 mb-3 px-[6px] text-center bg-slate-100">
+      <Tabs
+        value={activeTab}
+        defaultValue="store"
+        onValueChange={handleTabChange}
+        className="w-full pt-5"
+      >
+        <TabsList className="grid sm:max-w-screen-lg m-auto grid-cols-3 h-12 mb-3 px-[6px] text-center bg-slate-100">
           <TabsTrigger value="store" className="py-2">
             <div className="flex gap-2">
               <IdCardIcon className="w-5 h-5" />
@@ -64,7 +87,7 @@ export default function StoreCreateUpdatePage() {
           <StoreForm storeId={storeId} />
         </TabsContent>
         <TabsContent value="menu" className="pt-3">
-          Update Menu
+          <MenuForm storeId={storeId} />
         </TabsContent>
         <TabsContent value="schedule" className="pt-3">
           Update Schedule
