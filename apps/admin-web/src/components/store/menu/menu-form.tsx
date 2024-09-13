@@ -201,10 +201,37 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     return Promise.resolve();
   };
 
+  const onChangeMenuItemAvailability = (itemId: string) => {
+    const clonedStoreMenu: StoreMenuCategory[] = [];
+    currentStoreMenu.forEach((menu) => {
+      const clonedItems: StoreMenuItem[] = [];
+      menu.items.forEach((item) => {
+        if (item.id === itemId) {
+          item.available = !item.available;
+        }
+        clonedItems.push({ ...item });
+      });
+      clonedStoreMenu.push({
+        ...menu,
+        items: clonedItems,
+      });
+    });
+    setCurrentStoreMenu(clonedStoreMenu);
+  };
+
   const columns: ColumnDef<StoreMenuItem>[] = useMemo(
-    () => getMenuItemColumns({ onEditMenuItem, onDeleteMenuItem }),
+    () =>
+      getMenuItemColumns({
+        onEditMenuItem,
+        onDeleteMenuItem,
+        onChangeMenuItemAvailability,
+      }),
     [currentStoreMenu],
   );
+
+  const handleMenuSave = () => {
+    console.log("Saving menu --", currentStoreMenu);
+  };
 
   return isStoreMenuLoading ? (
     <Loading />
@@ -225,7 +252,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
             </Button>
           </CategorySheet>
 
-          <Button type="submit">
+          <Button type="submit" onClick={handleMenuSave}>
             <CheckIcon className="w-5 h-5" />
             <span className="pl-2">Save Menu</span>
           </Button>

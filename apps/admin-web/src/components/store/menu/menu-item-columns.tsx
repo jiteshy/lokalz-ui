@@ -11,11 +11,13 @@ import { DeleteConfirmation } from "../delete-confirmation";
 export type MenuItemRowActionsProps = {
   onEditMenuItem: (updatedMenuItem: StoreMenuItem) => boolean;
   onDeleteMenuItem: (itemId: string) => Promise<void>;
+  onChangeMenuItemAvailability: (itemId: string) => void;
 };
 
 export const getMenuItemColumns = ({
   onEditMenuItem,
   onDeleteMenuItem,
+  onChangeMenuItemAvailability,
 }: MenuItemRowActionsProps): ColumnDef<StoreMenuItem>[] => [
   {
     accessorKey: "itemName",
@@ -37,7 +39,12 @@ export const getMenuItemColumns = ({
   {
     accessorKey: "available",
     header: "Item Available?",
-    cell: ({ row }) => <Checkbox checked={row.original.available} />,
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.original.available}
+        onCheckedChange={() => onChangeMenuItemAvailability(row.original.id)}
+      />
+    ),
   },
   {
     id: "actions",
