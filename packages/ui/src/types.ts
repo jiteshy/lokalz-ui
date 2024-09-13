@@ -44,7 +44,7 @@ export type StoreMenu = {
 };
 
 export type StoreMenuCategory = {
-  id?: string;
+  id: string;
   category: string;
   description?: string;
   order?: number;
@@ -52,7 +52,7 @@ export type StoreMenuCategory = {
 };
 
 export type StoreMenuItem = {
-  id?: string;
+  id: string;
   itemName: string;
   description?: string;
   price: string;

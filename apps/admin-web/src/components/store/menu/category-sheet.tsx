@@ -38,6 +38,7 @@ const categoryFormSchema = z.object({
 });
 
 const initialCategoryValues: StoreMenuCategory = {
+  id: Math.random().toString().slice(2, 10),
   category: "",
   description: "",
   items: [],
@@ -74,7 +75,7 @@ export const CategorySheet = ({
       const category: StoreMenuCategory = {
         category: values.category,
         description: values.description,
-        id: categoryData?.id,
+        id: categoryData?.id || initialCategoryValues.id,
         order: categoryData?.order,
         items: categoryData?.items || [],
       };

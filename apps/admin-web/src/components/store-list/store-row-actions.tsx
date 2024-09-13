@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -43,6 +43,12 @@ export const StoreRowActions = ({
   const [error, setError] = useState<string>();
   const { id: storeId, name: storeName, status: storeStatus } = row.original;
 
+  useEffect(() => {
+    if (!open && inputValue) {
+      setInputValue("");
+    }
+  }, [open]);
+
   const handleInputValueChange = (event: React.FormEvent<HTMLInputElement>) => {
     setInputValue(event.currentTarget.value);
     setError("");
@@ -54,6 +60,7 @@ export const StoreRowActions = ({
     } else {
       setError("");
       onDelete(storeId!).then(() => {
+        setInputValue("");
         setOpen(false);
       });
     }

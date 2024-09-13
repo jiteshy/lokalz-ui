@@ -25,7 +25,7 @@ export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         fetcher: swrFetcher,
         revalidateOnMount: true,
-        revalidateOnFocus: true,
+        revalidateOnFocus: false,
       }}
     >
       {children}

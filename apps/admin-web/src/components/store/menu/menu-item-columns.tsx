@@ -5,10 +5,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { CrossCircledIcon, Pencil2Icon } from "@radix-ui/react-icons";
+import { MenuItemSheet } from "./menu-item-sheet";
+import { DeleteConfirmation } from "../delete-confirmation";
 
 export type MenuItemRowActionsProps = {
-  onEditMenuItem: (itemId: string, category: string) => void;
-  onDeleteMenuItem: (itemId: string, category: string) => void;
+  onEditMenuItem: (updatedMenuItem: StoreMenuItem) => boolean;
+  onDeleteMenuItem: (itemId: string) => Promise<void>;
 };
 
 export const getMenuItemColumns = ({
@@ -25,6 +27,7 @@ export const getMenuItemColumns = ({
   {
     accessorKey: "description",
     header: "Item Description",
+    cell: ({ row }) => row.original.description || "--",
   },
   {
     accessorKey: "price",
@@ -43,24 +46,29 @@ export const getMenuItemColumns = ({
       cellClassName: "text-right",
     },
     cell: ({ row }) => {
-      const { id: itemId, category: itemCategory } = row.original;
+      const { id: itemId, category: itemCategory, itemName } = row.original;
       return (
         <div className="flex gap-2">
-          <Button
-            onClick={() => onEditMenuItem(itemId!, itemCategory)}
-            variant="ghost"
-            className="h-8 w-8 p-0"
+          <MenuItemSheet
+            category={itemCategory}
+            menuItemData={row.original}
+            onMenuItemSubmit={onEditMenuItem}
           >
-            <Pencil2Icon className="w-5 h-5" />
-          </Button>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <Pencil2Icon className="w-5 h-5" />
+            </Button>
+          </MenuItemSheet>
 
-          <Button
-            onClick={() => onDeleteMenuItem(itemId!, itemCategory)}
-            variant="ghost"
-            className="h-8 w-8 p-0"
+          <DeleteConfirmation
+            entity="Menu Item"
+            entityId={itemId}
+            comparePhrase={itemName}
+            onDelete={onDeleteMenuItem}
           >
-            <CrossCircledIcon className="w-5 h-5 text-red-accent-400" />
-          </Button>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <CrossCircledIcon className="w-5 h-5 text-red-accent-400" />
+            </Button>
+          </DeleteConfirmation>
         </div>
       );
     },

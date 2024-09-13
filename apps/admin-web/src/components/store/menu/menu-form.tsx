@@ -11,13 +11,20 @@ import {
 } from "@/components/ui/accordion";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
-import { CrossCircledIcon, Pencil2Icon, PlusCircledIcon, PlusIcon } from "@radix-ui/react-icons";
+import {
+  CheckIcon,
+  CrossCircledIcon,
+  Pencil2Icon,
+  PlusCircledIcon,
+  PlusIcon,
+} from "@radix-ui/react-icons";
 import { useEffect, useMemo, useState } from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { getMenuItemColumns } from "./menu-item-columns";
 import { CategorySheet } from "./category-sheet";
 import { MenuItemSheet } from "./menu-item-sheet";
+import { DeleteConfirmation } from "../delete-confirmation";
 
 export const MenuForm = ({ storeId }: { storeId: string }) => {
   const { toast } = useToast();
@@ -35,7 +42,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     }
   }, [storeMenu]);
 
-  const onCategoryAdd = (newCategory: StoreMenuCategory) => {
+  const onAddCategory = (newCategory: StoreMenuCategory) => {
     const categoryExists = currentStoreMenu.filter(
       (menuCategory) =>
         menuCategory.category.toLowerCase() ===
@@ -61,7 +68,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     }
   };
 
-  const onCategoryUpdate = (updatedCategory: StoreMenuCategory) => {
+  const onEditCategory = (updatedCategory: StoreMenuCategory) => {
     const categoryToUpdate = currentStoreMenu.filter(
       (menuCategory) => menuCategory.id === updatedCategory.id,
     )[0];
@@ -86,22 +93,117 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     }
   };
 
-  const onMenuItemAdd = (newMenuItem: StoreMenuItem) => {
-    console.log("Add menu item--", newMenuItem);
-    return true;
-  }
-
-  const onEditMenuItem = (itemId: string, category: string) => {
-    console.log("Editing - ", category, itemId);
+  const onDeleteCategory = (categoryId: string) => {
+    const filteredCategories = currentStoreMenu.filter(
+      (menuCategory) => menuCategory.id !== categoryId,
+    );
+    setCurrentStoreMenu(filteredCategories);
+    toast({
+      title: "Success!",
+      duration: 5000,
+      description: "Category deleted. Click save when you're done.",
+    });
+    return Promise.resolve();
   };
 
-  const onDeleteMenuItem = (itemId: string, category: string) => {
-    console.log("Deleting - ", category, itemId);
+  const cloneStoreMenu = (): StoreMenuCategory[] => {
+    const clonedStoreMenu: StoreMenuCategory[] = [];
+    currentStoreMenu.forEach((menu) => {
+      const clonedItems: StoreMenuItem[] = [];
+      menu.items.forEach((item) => clonedItems.push({ ...item }));
+      clonedStoreMenu.push({
+        ...menu,
+        items: clonedItems,
+      });
+    });
+    return clonedStoreMenu;
+  };
+
+  const onAddMenuItem = (newMenuItem: StoreMenuItem) => {
+    const newStoreMenu: StoreMenuCategory[] = cloneStoreMenu();
+    const categoryObj = newStoreMenu.filter(
+      (menuCategory) => menuCategory.category === newMenuItem.category,
+    )[0];
+
+    const itemExists = categoryObj.items.filter(
+      (menuItem) => menuItem.itemName === newMenuItem.itemName,
+    )[0];
+    if (!itemExists) {
+      categoryObj.items.push(newMenuItem);
+      setCurrentStoreMenu(newStoreMenu);
+      toast({
+        title: "Success!",
+        duration: 5000,
+        description: "Menu item added. Click save when you're done.",
+      });
+      return true;
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Failure!",
+        duration: 5000,
+        description: "Menu item already exists.",
+      });
+      return false;
+    }
+  };
+
+  const onEditMenuItem = (updatedMenuItem: StoreMenuItem) => {
+    const newStoreMenu: StoreMenuCategory[] = cloneStoreMenu();
+    const categoryObj = newStoreMenu.filter(
+      (menuCategory) => menuCategory.category === updatedMenuItem.category,
+    )[0];
+    const existingItem = categoryObj.items.filter(
+      (menuItem) => menuItem.id === updatedMenuItem.id,
+    )[0];
+    if (existingItem) {
+      existingItem.itemName = updatedMenuItem.itemName;
+      existingItem.price = updatedMenuItem.price;
+      existingItem.description = updatedMenuItem.description;
+      setCurrentStoreMenu(newStoreMenu);
+      toast({
+        title: "Success!",
+        duration: 5000,
+        description: "Menu Item updated. Click save when you're done.",
+      });
+      return true;
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Failure!",
+        duration: 5000,
+        description: "Menu Item does not exist.",
+      });
+      return false;
+    }
+  };
+
+  const onDeleteMenuItem = (itemId: string) => {
+    const clonedStoreMenu: StoreMenuCategory[] = [];
+    currentStoreMenu.forEach((menu) => {
+      const clonedItems: StoreMenuItem[] = [];
+      menu.items.forEach((item) => {
+        if (item.id !== itemId) {
+          clonedItems.push({ ...item });
+        }
+      });
+      clonedStoreMenu.push({
+        ...menu,
+        items: clonedItems,
+      });
+    });
+    setCurrentStoreMenu(clonedStoreMenu);
+    toast({
+      title: "Success!",
+      duration: 5000,
+      description: "Menu Item deleted. Click save when you're done.",
+    });
+    return Promise.resolve();
   };
 
   const columns: ColumnDef<StoreMenuItem>[] = useMemo(
     () => getMenuItemColumns({ onEditMenuItem, onDeleteMenuItem }),
-    [],
+    [currentStoreMenu],
   );
 
   return isStoreMenuLoading ? (
@@ -115,12 +217,19 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
             (Expand below categories to see items)
           </span>
         </h4>
-        <CategorySheet onCategorySubmit={onCategoryAdd}>
-          <Button>
-            <PlusIcon className="w-5 h-5" />
-            Add Menu Category
+        <div className="flex items-center gap-3">
+          <CategorySheet onCategorySubmit={onAddCategory}>
+            <Button variant={"outline"} className="shadow">
+              <PlusIcon className="w-5 h-5" />
+              Add Menu Category
+            </Button>
+          </CategorySheet>
+
+          <Button type="submit">
+            <CheckIcon className="w-5 h-5" />
+            <span className="pl-2">Save Menu</span>
           </Button>
-        </CategorySheet>
+        </div>
       </div>
       {currentStoreMenu.length === 0 ? (
         <div className="w-full text-center py-40">
@@ -145,7 +254,10 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
                       {menuCategory.description}
                     </div>
                     <div className="w-full text-right">
-                      <MenuItemSheet category={menuCategory.category} onMenuItemSubmit={onMenuItemAdd}>
+                      <MenuItemSheet
+                        category={menuCategory.category}
+                        onMenuItemSubmit={onAddMenuItem}
+                      >
                         <Button variant={"link"}>
                           <div className="flex gap-2 items-center">
                             <PlusCircledIcon className="w-4 h-4" />
@@ -155,7 +267,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
                       </MenuItemSheet>
                       <CategorySheet
                         categoryData={menuCategory}
-                        onCategorySubmit={onCategoryUpdate}
+                        onCategorySubmit={onEditCategory}
                       >
                         <Button variant={"link"}>
                           <div className="flex gap-2 items-center">
@@ -164,15 +276,22 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
                           </div>
                         </Button>
                       </CategorySheet>
-                      <Button
-                        variant={"link"}
-                        className="!pr-0 hover:text-red-accent-400"
+                      <DeleteConfirmation
+                        entity="Category"
+                        entityId={menuCategory.id}
+                        comparePhrase={menuCategory.category}
+                        onDelete={onDeleteCategory}
                       >
-                        <div className="flex gap-2 items-center">
-                          <CrossCircledIcon className="w-4 h-4 text-red-accent-400" />
-                          Delete Category
-                        </div>
-                      </Button>
+                        <Button
+                          variant={"link"}
+                          className="!pr-0 hover:text-red-accent-400"
+                        >
+                          <div className="flex gap-2 items-center">
+                            <CrossCircledIcon className="w-4 h-4 text-red-accent-400" />
+                            Delete Category
+                          </div>
+                        </Button>
+                      </DeleteConfirmation>
                     </div>
                   </div>
                   <DataTable columns={columns} data={menuCategory.items} />

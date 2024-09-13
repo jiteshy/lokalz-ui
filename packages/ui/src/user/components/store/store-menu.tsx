@@ -2,18 +2,19 @@ import { StoreMenu, StoreMenuCategory, StoreMenuItem } from "@repo/ui/types";
 import { Title } from "../layout/title";
 
 export const StoreMenuDetails = ({ menuData }: { menuData: StoreMenu }) => {
+  // TO-DO: Remove ! after order once optional is removed from type
   // Sort the menu by category and items inside each category
   const sortedMenuData = menuData?.menu
     .map((category: StoreMenuCategory) => {
       category.items.sort(
         (item1: StoreMenuItem, item2: StoreMenuItem) =>
-          item1.order - item2.order,
+          item1.order! - item2.order!,
       );
       return category;
     })
     .sort(
       (category1: StoreMenuCategory, category2: StoreMenuCategory) =>
-        category1.order - category2.order,
+        category1.order! - category2.order!,
     );
 
   return (

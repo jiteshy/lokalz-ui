@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { StoreMenuItem } from "@repo/ui/types";
 import {
   Sheet,
@@ -34,26 +34,27 @@ const menuItemFormSchema = z.object({
   description: z
     .string()
     .max(100, { message: "Description should be max 100 chars." }),
-  price: z
+  price: z.coerce
     .string()
-    .min(1, { message: "Name is required." })
-    .max(10, { message: "Name should be max 10 chars." }),
+    .min(1, { message: "Price is required." })
+    .max(10, { message: "Price should be max 10 chars." }),
 });
 
-const initialMenuItemValues = (category: string): StoreMenuItem => ({
+type MenuItemSheetProps = {
+  category: string;
+  menuItemData?: StoreMenuItem;
+  onMenuItemSubmit: (menuItem: StoreMenuItem) => boolean;
+  children: ReactNode;
+};
+
+const generateInitialMenuItemValues = (category: string): StoreMenuItem => ({
+  id: Math.random().toString().slice(2, 10),
   itemName: "",
   description: "",
   price: "",
   available: true,
   category: category,
 });
-
-type MenuItemSheetProps = {
-  category: string;
-  menuItemData?: StoreMenuItem;
-  onMenuItemSubmit: (newMenuItem: StoreMenuItem) => boolean;
-  children: ReactNode;
-};
 
 export const MenuItemSheet = ({
   category,
@@ -62,30 +63,35 @@ export const MenuItemSheet = ({
   children,
 }: MenuItemSheetProps) => {
   const [open, setOpen] = useState(false);
+  const initialMenuItemValues = useMemo(
+    () => generateInitialMenuItemValues(category),
+    [category],
+  );
+
   const menuItemForm = useForm<z.infer<typeof menuItemFormSchema>>({
     resolver: zodResolver(menuItemFormSchema),
-    defaultValues: menuItemData || initialMenuItemValues(category),
+    defaultValues: menuItemData || initialMenuItemValues,
   });
 
   // TO-DO: Causing multiple re-renders
   useEffect(() => {
     if (!open) {
-      menuItemForm.reset(initialMenuItemValues(category));
+      menuItemForm.reset(initialMenuItemValues);
     } else {
-      menuItemForm.reset(menuItemData || initialMenuItemValues(category));
+      menuItemForm.reset(menuItemData || initialMenuItemValues);
     }
   }, [open]);
 
   const onSubmit = (values: z.infer<typeof menuItemFormSchema>) => {
     if (values.itemName && values.price) {
       const menuItem: StoreMenuItem = {
-        id: menuItemData?.id,
+        id: menuItemData?.id || initialMenuItemValues.id,
         itemName: values.itemName,
         description: values.description,
         price: values.price,
         category: category,
         order: menuItemData?.order,
-        available: menuItemData?.available || true
+        available: menuItemData?.available || true,
       };
       const success = onMenuItemSubmit(menuItem);
       if (success) {
@@ -101,8 +107,8 @@ export const MenuItemSheet = ({
         <SheetHeader className="pb-2 border-b border-b-slate-200">
           <SheetTitle>{menuItemData ? "Update" : "Add"} Menu Item</SheetTitle>
           <SheetDescription>
-            {menuItemData ? "Update" : "Create a new"} menu item. Click save when
-            you're done.
+            {menuItemData ? "Update" : "Create a new"} menu item. Click save
+            when you're done.
           </SheetDescription>
         </SheetHeader>
         <Form {...menuItemForm}>
@@ -128,7 +134,9 @@ export const MenuItemSheet = ({
               name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-normal">Menu Item Price*</FormLabel>
+                  <FormLabel className="font-normal">
+                    Menu Item Price*
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Enter menu item price" {...field} />
                   </FormControl>
