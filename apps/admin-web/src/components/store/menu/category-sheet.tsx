@@ -38,9 +38,10 @@ const categoryFormSchema = z.object({
 });
 
 const initialCategoryValues: StoreMenuCategory = {
-  id: Math.random().toString().slice(2, 10),
+  id: "",
   category: "",
   description: "",
+  order: 0,
   items: [],
 };
 
@@ -75,8 +76,8 @@ export const CategorySheet = ({
       const category: StoreMenuCategory = {
         category: values.category,
         description: values.description,
-        id: categoryData?.id || initialCategoryValues.id,
-        order: categoryData?.order,
+        id: categoryData?.id || Date.now().toString(), //Date.now().toString() is used as a unique identifier for new category
+        order: categoryData?.order || 0,
         items: categoryData?.items || [],
       };
       const success = onCategorySubmit(category);

@@ -47,7 +47,7 @@ export type StoreMenuCategory = {
   id: string;
   category: string;
   description?: string;
-  order?: number;
+  order: number;
   items: StoreMenuItem[];
 };
 
@@ -57,7 +57,7 @@ export type StoreMenuItem = {
   description?: string;
   price: string;
   category: string;
-  order?: number;
+  order: number;
   available: boolean;
 };
 

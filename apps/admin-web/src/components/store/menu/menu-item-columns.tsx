@@ -1,24 +1,49 @@
 "use client";
 
 import { StoreMenuItem } from "@repo/ui/types";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { CrossCircledIcon, Pencil2Icon } from "@radix-ui/react-icons";
+import {
+  CrossCircledIcon,
+  DragHandleDots2Icon,
+  Pencil2Icon,
+} from "@radix-ui/react-icons";
 import { MenuItemSheet } from "./menu-item-sheet";
 import { DeleteConfirmation } from "../delete-confirmation";
+import { SortableItem } from "@/components/ui/sortable-item";
+import { useSortable } from "@dnd-kit/sortable";
 
 export type MenuItemRowActionsProps = {
+  draggableRows?: boolean;
   onEditMenuItem: (updatedMenuItem: StoreMenuItem) => boolean;
   onDeleteMenuItem: (itemId: string) => Promise<void>;
   onChangeMenuItemAvailability: (itemId: string) => void;
 };
 
 export const getMenuItemColumns = ({
+  draggableRows,
   onEditMenuItem,
   onDeleteMenuItem,
   onChangeMenuItemAvailability,
 }: MenuItemRowActionsProps): ColumnDef<StoreMenuItem>[] => [
+  ...(draggableRows
+    ? [
+        {
+          accessorKey: " ",
+          cell: ({ row }: { row: Row<StoreMenuItem> }) => {
+            const { attributes, listeners } = useSortable({
+              id: row.id,
+            });
+            return (
+              <div {...attributes} {...listeners}>
+                <DragHandleDots2Icon className="h-5 w-5 hover:cursor-grab active:cursor-grabbing" />
+              </div>
+            );
+          },
+        },
+      ]
+    : []),
   {
     accessorKey: "itemName",
     header: "Item Name",

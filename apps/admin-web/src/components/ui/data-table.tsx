@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import {
+  Cell,
   ColumnDef,
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  Row,
   SortingState,
   useReactTable,
   VisibilityState,
@@ -29,17 +31,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EyeNoneIcon } from "@radix-ui/react-icons";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   visibleColumns?: VisibilityState;
+  draggableRows?: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   visibleColumns,
+  draggableRows,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -54,6 +60,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getRowId: (row) => (row as any).id, // All the tables are assumed to have a id prop in row data. This id is used for draggale rows.
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
@@ -127,24 +134,15 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className={cell.column.columnDef.meta?.cellClassName}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table
+                .getRowModel()
+                .rows.map((row) =>
+                  draggableRows ? (
+                    <DraggableTableRowWrapper key={row.id} row={row} />
+                  ) : (
+                    <TableRowWrapper key={row.id} row={row} />
+                  ),
+                )
             ) : (
               <TableRow>
                 <TableCell
@@ -161,6 +159,45 @@ export function DataTable<TData, TValue>({
     </div>
   );
 }
+
+const DraggableTableRowWrapper = ({ row }: { row: Row<unknown> }) => {
+  const { setNodeRef, transform, transition, isDragging } = useSortable({
+    id: row.id,
+  });
+  return (
+    <TableRow
+      data-state={row.getIsSelected() && "selected"}
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition: transition,
+        backgroundColor: isDragging ? "rgb(241, 245, 249)" : "inherit",
+        opacity: isDragging ? 0.8 : 1,
+        zIndex: isDragging ? 1 : 0,
+      }}
+    >
+      {row.getVisibleCells().map((cell) => (
+        <TableCellWrapper key={cell.id} cell={cell} />
+      ))}
+    </TableRow>
+  );
+};
+
+const TableRowWrapper = ({ row }: { row: Row<unknown> }) => {
+  return (
+    <TableRow data-state={row.getIsSelected() && "selected"}>
+      {row.getVisibleCells().map((cell) => (
+        <TableCellWrapper key={cell.id} cell={cell} />
+      ))}
+    </TableRow>
+  );
+};
+
+const TableCellWrapper = ({ cell }: { cell: Cell<unknown, unknown> }) => (
+  <TableCell className={cell.column.columnDef.meta?.cellClassName}>
+    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+  </TableCell>
+);
 
 function DebouncedInput({
   value: initialValue,

@@ -48,12 +48,13 @@ type MenuItemSheetProps = {
 };
 
 const generateInitialMenuItemValues = (category: string): StoreMenuItem => ({
-  id: Math.random().toString().slice(2, 10),
+  id: "",
   itemName: "",
   description: "",
   price: "",
   available: true,
   category: category,
+  order: 0
 });
 
 export const MenuItemSheet = ({
@@ -85,12 +86,12 @@ export const MenuItemSheet = ({
   const onSubmit = (values: z.infer<typeof menuItemFormSchema>) => {
     if (values.itemName && values.price) {
       const menuItem: StoreMenuItem = {
-        id: menuItemData?.id || initialMenuItemValues.id,
+        id: menuItemData?.id || Date.now().toString(), //Date.now().toString() is used as a unique identifier for new menu item
         itemName: values.itemName,
         description: values.description,
         price: values.price,
         category: category,
-        order: menuItemData?.order,
+        order: menuItemData?.order || 0,
         available: menuItemData?.available || true,
       };
       const success = onMenuItemSubmit(menuItem);
