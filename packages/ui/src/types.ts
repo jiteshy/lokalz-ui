@@ -63,13 +63,13 @@ export type StoreMenuItem = {
 
 export type StoreSchedule = {
   storeId: string;
-  schedules: ScheduleItem[];
+  schedules: StoreScheduleItem[];
 };
 
-export type ScheduleItem = {
+export type StoreScheduleItem = {
   from: number;
   to: number;
   date: number;
-  dateStr: number;
   address: StoreAddress;
+  existing?: boolean;
 };

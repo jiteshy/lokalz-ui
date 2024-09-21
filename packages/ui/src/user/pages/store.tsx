@@ -44,7 +44,9 @@ export const StorePage = ({ store }: { store: string }) => {
         <div className="my-16 md:my-20 flex flex-col md:flex-row gap-14">
           <div className="w-full md:w-6/12 lg:w-4/12">
             {(isScheduleLoading || !scheduleData) && <StoreScheduleShimmer />}
-            {scheduleData && <Schedule storeSchedule={scheduleData} />}
+            {scheduleData && (
+              <Schedule storeSchedules={scheduleData.schedules} />
+            )}
           </div>
           <div className="w-full mt-5 md:mt-0 md:w-6/12 lg:w-8/12">
             {(isMenuLoading || !menuData) && <StoreMenuShimmer />}

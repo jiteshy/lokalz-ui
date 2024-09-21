@@ -38,7 +38,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
   const { toast } = useToast();
   const axios = useAxios();
   const [currentStoreMenu, setCurrentStoreMenu] = useState<StoreMenuCategory[]>(
-    []
+    [],
   );
   const [menuChanged, setMenuChanged] = useState<boolean>(false);
   const [submittingMenu, setSubmittingMenu] = useState<boolean>(false);
@@ -47,11 +47,11 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     isLoading: isStoreMenuLoading,
     mutate,
   } = useSWR<StoreMenu>(
-    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}/menu` : null
+    storeId ? `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}/menu` : null,
   );
 
   useEffect(() => {
-    if (storeMenu?.menu.length) {
+    if (storeMenu?.menu?.length) {
       const sortedMenu: StoreMenuCategory[] = [];
       const clonedMenu = cloneStoreMenu(storeMenu.menu);
       clonedMenu.sort((cat1, cat2) => cat1.order - cat2.order);
@@ -67,7 +67,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     const categoryExists = currentStoreMenu.filter(
       (menuCategory) =>
         menuCategory.category.toLowerCase() ===
-        newCategory.category.toLocaleLowerCase()
+        newCategory.category.toLocaleLowerCase(),
     )[0];
     if (!categoryExists) {
       const clonedMenu = cloneStoreMenu();
@@ -89,7 +89,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
 
   const onEditCategory = (updatedCategory: StoreMenuCategory) => {
     const categoryToUpdate = currentStoreMenu.filter(
-      (menuCategory) => menuCategory.id === updatedCategory.id
+      (menuCategory) => menuCategory.id === updatedCategory.id,
     )[0];
     if (categoryToUpdate) {
       categoryToUpdate.category = updatedCategory.category;
@@ -110,7 +110,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
 
   const onDeleteCategory = (categoryId: string) => {
     const filteredCategories = currentStoreMenu.filter(
-      (menuCategory) => menuCategory.id !== categoryId
+      (menuCategory) => menuCategory.id !== categoryId,
     );
     setCurrentStoreMenu(filteredCategories);
     setMenuChanged(true);
@@ -118,7 +118,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
   };
 
   const cloneStoreMenu = (
-    storeMenu?: StoreMenuCategory[]
+    storeMenu?: StoreMenuCategory[],
   ): StoreMenuCategory[] => {
     const clonedStoreMenu: StoreMenuCategory[] = [];
     (storeMenu || currentStoreMenu).forEach((menu) => {
@@ -135,11 +135,11 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
   const onAddMenuItem = (newMenuItem: StoreMenuItem) => {
     const newStoreMenu: StoreMenuCategory[] = cloneStoreMenu();
     const categoryObj = newStoreMenu.filter(
-      (menuCategory) => menuCategory.category === newMenuItem.category
+      (menuCategory) => menuCategory.category === newMenuItem.category,
     )[0];
 
     const itemExists = categoryObj.items.filter(
-      (menuItem) => menuItem.itemName === newMenuItem.itemName
+      (menuItem) => menuItem.itemName === newMenuItem.itemName,
     )[0];
     if (!itemExists) {
       newMenuItem.order = categoryObj.items.length + 1;
@@ -161,10 +161,10 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
   const onEditMenuItem = (updatedMenuItem: StoreMenuItem) => {
     const newStoreMenu: StoreMenuCategory[] = cloneStoreMenu();
     const categoryObj = newStoreMenu.filter(
-      (menuCategory) => menuCategory.category === updatedMenuItem.category
+      (menuCategory) => menuCategory.category === updatedMenuItem.category,
     )[0];
     const existingItem = categoryObj.items.filter(
-      (menuItem) => menuItem.id === updatedMenuItem.id
+      (menuItem) => menuItem.id === updatedMenuItem.id,
     )[0];
     if (existingItem) {
       existingItem.itemName = updatedMenuItem.itemName;
@@ -230,7 +230,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
         onDeleteMenuItem,
         onChangeMenuItemAvailability,
       }),
-    [currentStoreMenu]
+    [currentStoreMenu],
   );
 
   const reorderMenuCategories = (e: DragEndEvent) => {
@@ -238,10 +238,10 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     if (e.active.id !== e.over.id) {
       setCurrentStoreMenu((storeMenu) => {
         const oldIdx = storeMenu.findIndex(
-          (menuCategory) => menuCategory.id === e.active.id
+          (menuCategory) => menuCategory.id === e.active.id,
         );
         const newIdx = storeMenu.findIndex(
-          (menuCategory) => menuCategory.id === e.over!.id
+          (menuCategory) => menuCategory.id === e.over!.id,
         );
         const reorderedCategories = arrayMove(storeMenu, oldIdx, newIdx);
         reorderedCategories.forEach((item, index) => (item.order = index + 1));
@@ -256,16 +256,16 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     if (e.active.id !== e.over.id) {
       const clonedMenu = cloneStoreMenu();
       const currentCategoryIndex = clonedMenu.findIndex(
-        (menuCategory) => menuCategory.id === categoryId
+        (menuCategory) => menuCategory.id === categoryId,
       );
       const menuItems: StoreMenuItem[] = clonedMenu.filter(
-        (menuCategory) => menuCategory.id === categoryId
+        (menuCategory) => menuCategory.id === categoryId,
       )[0].items;
       const oldIdx = menuItems.findIndex(
-        (menuCategory) => menuCategory.id === e.active.id
+        (menuCategory) => menuCategory.id === e.active.id,
       );
       const newIdx = menuItems.findIndex(
-        (menuCategory) => menuCategory.id === e.over!.id
+        (menuCategory) => menuCategory.id === e.over!.id,
       );
       const reorderedItems = arrayMove(menuItems, oldIdx, newIdx);
       reorderedItems.forEach((item, index) => (item.order = index + 1));
@@ -277,7 +277,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
 
   const handleMenuSave = () => {
     const emptyCategories = currentStoreMenu.filter(
-      (category) => category.items.length === 0
+      (category) => category.items.length === 0,
     );
     if (emptyCategories.length > 0) {
       toast({
@@ -310,7 +310,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
             description: `Store menu update failed.`,
           });
           setSubmittingMenu(false);
-        }
+        },
       );
     }
   };
@@ -339,7 +339,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
           </Button>
         </div>
       </div>
-      <div className="w-full text-right text-sm italic text-red-accent-400 h-5 pt-3">
+      <div className="w-full text-right text-xs italic text-red-accent-400 h-5 pt-3">
         {menuChanged && currentStoreMenu.length
           ? "Unsaved changes. Click Save Menu above when you're done."
           : ""}

@@ -14,10 +14,12 @@ import {
   ArrowLeftIcon,
   CalendarIcon,
   IdCardIcon,
+  LightningBoltIcon,
   ReaderIcon,
 } from "@radix-ui/react-icons";
 import { MenuForm } from "@/components/store/menu/menu-form";
 import { Button } from "@/components/ui/button";
+import { ScheduleForm } from "@/components/store/schedule/schedule-form";
 
 export default function StoreCreateUpdatePage() {
   const router = useRouter();
@@ -63,7 +65,7 @@ export default function StoreCreateUpdatePage() {
         onValueChange={handleTabChange}
         className="w-full pt-5"
       >
-        <TabsList className="grid sm:max-w-screen-lg m-auto grid-cols-3 h-12 mb-3 px-[6px] text-center bg-slate-100">
+        <TabsList className="grid sm:max-w-screen-lg m-auto grid-cols-4 h-12 mb-3 px-[6px] text-center bg-slate-100">
           <TabsTrigger value="store" className="py-2">
             <div className="flex gap-2">
               <IdCardIcon className="w-5 h-5" />
@@ -82,6 +84,12 @@ export default function StoreCreateUpdatePage() {
               Schedule
             </div>
           </TabsTrigger>
+          <TabsTrigger value="publish" className="py-2" disabled={!storeId}>
+            <div className="flex gap-2">
+              <LightningBoltIcon className="w-5 h-5" />
+              Publish
+            </div>
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="store" className="pt-3">
           <StoreForm storeId={storeId} />
@@ -90,7 +98,10 @@ export default function StoreCreateUpdatePage() {
           <MenuForm storeId={storeId} />
         </TabsContent>
         <TabsContent value="schedule" className="pt-3">
-          Update Schedule
+          <ScheduleForm storeId={storeId} />
+        </TabsContent>
+        <TabsContent value="publish" className="pt-3">
+          Publish Store
         </TabsContent>
       </Tabs>
     </div>

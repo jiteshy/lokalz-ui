@@ -12,4 +12,5 @@ export * from "./store/store-details-card-shimmer";
 export * from "./store/store-menu";
 export * from "./store/store-menu-shimmer";
 export * from "./store/store-schedule";
+export * from "./store/store-schedule-item";
 export * from "./store/store-schedule-shimmer";

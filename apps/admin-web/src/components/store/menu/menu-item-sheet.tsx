@@ -54,7 +54,7 @@ const generateInitialMenuItemValues = (category: string): StoreMenuItem => ({
   price: "",
   available: true,
   category: category,
-  order: 0
+  order: 0,
 });
 
 export const MenuItemSheet = ({

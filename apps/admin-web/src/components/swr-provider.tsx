@@ -15,7 +15,10 @@ export const SWRProvider = ({ children }: { children: React.ReactNode }) => {
       }
       return fetch(url, {
         headers: headers,
-      }).then((response) => response.json());
+      }).then(
+        (response) => response.json(),
+        (error) => console.warn(error),
+      );
     },
     [session?.user?.accessToken],
   );
