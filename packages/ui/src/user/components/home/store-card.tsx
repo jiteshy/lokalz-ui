@@ -28,9 +28,11 @@ export const StoreCard = (props: { details: Store }) => {
             </div>
           </div>
         </div>
-        <div className="px-2 py-1 border border-gray-300 rounded-md text-deep-purple-accent-400">
-          {rating}
-        </div>
+        {Number(rating) > 0 && (
+          <div className="px-2 py-1 border border-gray-300 rounded-md text-deep-purple-accent-400">
+            {rating}
+          </div>
+        )}
       </div>
     </div>
   );

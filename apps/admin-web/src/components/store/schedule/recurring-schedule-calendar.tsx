@@ -1,4 +1,5 @@
 import { Calendar } from "@/components/ui/calendar";
+import { addDays } from "date-fns";
 import { Dispatch, SetStateAction } from "react";
 import { DateRange } from "react-day-picker";
 
@@ -16,14 +17,13 @@ export const RecurringScheduleCalendar = ({
   return (
     <Calendar
       mode="range"
-      disabled={{ before: new Date() }}
+      disabled={{ before: new Date(), after: addDays(new Date(), 60) }}
       selected={dateRange}
       month={month}
       onMonthChange={setMonth}
       onSelect={setDateRange}
-      onWeekNumberClick={console.log}
       min={14}
-      max={180}
+      max={60}
       className="rounded-md border"
       classNames={{
         day_today: "border bg-deep-purple-accent-400 text-white",

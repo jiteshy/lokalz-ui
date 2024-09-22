@@ -30,8 +30,11 @@ export const ScheduleDelete = ({
             Delete {schedule ? "Schedule" : "All Schedules"}
           </DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete{" "}
-            {schedule ? "the schedule" : "all the schedules"}?
+            Are you sure you want to{" "}
+            {schedule
+              ? "delete the schedule"
+              : "remove all the newly added schedules"}
+            ?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="pt-5">

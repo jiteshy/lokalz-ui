@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  CheckIcon,
-  Pencil2Icon,
-  ReloadIcon,
-  TrashIcon,
-} from "@radix-ui/react-icons";
+import { CheckIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DateRange } from "react-day-picker";
 import { FixedScheduleCalendar } from "./fixed-schedule-calendar";
+import { RecurringScheduleCalendar } from "./recurring-schedule-calendar";
+import { ScheduleCalendarHeader } from "./schedule-calendar-header";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useToast } from "@/hooks/use-toast";
 import { StoreSchedule, StoreScheduleItem } from "@repo/ui/types";
 import { ScheduleItem } from "@repo/ui/user/components";
@@ -27,8 +27,48 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   const axios = useAxios();
   const [dates, setDates] = useState<Date[] | undefined>([]);
   const [disabledDates, setDisabledDates] = useState<Date[]>([]);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [month, setMonth] = useState<Date>(new Date());
+  const [weekDays, setWeekDays] = useState<string[]>([]);
+  const [scheduleType, setScheduleType] = useState<"fixed" | "recurring">(
+    "fixed",
+  );
   // Use ADMIN API - getting cors
+  let sampleData: StoreScheduleItem[] = [
+    {
+      from: 1727197200000,
+      to: 1727211600000,
+      date: 1727150400000,
+      address: {
+        street: "12000 test 1",
+        city: "Jacksonville 1",
+        state: "CO",
+        zipCode: 11111,
+      },
+    },
+    {
+      from: 1727370000000,
+      to: 1727384400000,
+      date: 1727323200000,
+      address: {
+        street: "12000 test 2",
+        city: "Jacksonville 2",
+        state: "CO",
+        zipCode: 11112,
+      },
+    },
+    {
+      from: 1727542800000,
+      to: 1727557200000,
+      date: 1727496000000,
+      address: {
+        street: "12000 test 3",
+        city: "Jacksonville 3",
+        state: "CO",
+        zipCode: 11113,
+      },
+    },
+  ];
   const {
     data: scheduleData,
     isLoading: isScheduleLoading,
@@ -40,13 +80,15 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   const [submittingSchedule, setSubmittingSchedule] = useState<boolean>(false);
 
   useEffect(() => {
-    if (scheduleData?.schedules?.length) {
-      scheduleData.schedules.forEach((schedule) => {
-        schedule.existing = true;
-      });
-      setSchedules(scheduleData.schedules);
-      setCalendarInitialDates(scheduleData.schedules);
-    }
+    // if (scheduleData?.schedules?.length) {
+    //   setSchedules(scheduleData.schedules);
+    //   setCalendarInitialDates();
+    // }
+    sampleData.forEach((schedule) => {
+      schedule.existing = true;
+    });
+    setSchedules(sampleData);
+    setCalendarInitialDates(sampleData);
   }, [scheduleData]);
 
   useEffect(() => {
@@ -89,8 +131,40 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   };
 
   const resetCalendar = () => {
-    setCalendarInitialDates(scheduleData?.schedules || []);
+    setCalendarInitialDates(sampleData);
     setMonth(new Date());
+    setDateRange(undefined);
+    setWeekDays([]);
+  };
+
+  const handleScheduleTabChange = (value: string) => {
+    setScheduleType(value as "fixed" | "recurring");
+    resetCalendar();
+  };
+
+  const validateRecurringSelections = (): string => {
+    if (!(dateRange?.from && dateRange?.to)) {
+      return "Select a date range with a minimum of 2 weeks.";
+    }
+    if (!weekDays?.length) {
+      return "Select at least one week day.";
+    }
+    return "";
+  };
+  const createRecurringSchedules = () => {};
+
+  const handleCreateSchedule = () => {
+    const error = validateRecurringSelections();
+    if (error) {
+      toast({
+        variant: "destructive",
+        duration: 5000,
+        title: "Invalid Selections!",
+        description: error,
+      });
+    } else {
+      createRecurringSchedules();
+    }
   };
 
   const onScheduleDelete = (schedule?: StoreScheduleItem) => {
@@ -217,7 +291,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
         <h4 className="text-xl">
           Store Schedule
           <span className="text-xs text-slate-500 pl-2">
-            (Create/update your schedules below.)
+            (Create/update your schedule below.)
           </span>
         </h4>
         <div className="flex items-center gap-3">
@@ -232,27 +306,94 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
           ? "Schedules in yellow are unsaved changes. Click Save Schedule above when you're done."
           : ""}
       </div>
-      <div className="pb-6 flex gap-8">
+      <div className="pb-6 pt-3 flex gap-8">
         <div className="min-w-[360px]">
-          <div className="pb-3 flex justify-end">
-            <ScheduleDelete onScheduleDelete={resetCalendar}>
-              <Button
-                variant={"link"}
-                disabled={dates?.length === disabledDates.length}
-                className="text-sm underline flex gap-2 items-center !pr-0"
-              >
-                <ReloadIcon className="w-3 h-3" />
-                Reset Calendar
+          <Tabs value={scheduleType} onValueChange={handleScheduleTabChange}>
+            <TabsList className="grid w-full grid-cols-1">
+              <TabsTrigger value="fixed">Fixed Schedule</TabsTrigger>
+              {/* <TabsTrigger value="recurring">Recurring Schedule</TabsTrigger> */}
+            </TabsList>
+            <TabsContent value="fixed">
+              <ScheduleCalendarHeader
+                type="fixed"
+                showResetBtn={dates?.length !== disabledDates.length}
+                onReset={resetCalendar}
+              />
+              <FixedScheduleCalendar
+                month={month}
+                setMonth={setMonth}
+                dates={dates}
+                setDates={setDates}
+                disabledDates={disabledDates}
+              />
+            </TabsContent>
+            <TabsContent value="recurring">
+              <ScheduleCalendarHeader
+                type="recurring"
+                onReset={resetCalendar}
+              />
+              <div className="py-3 px-5">
+                <ToggleGroup
+                  type="multiple"
+                  className="flex justify-between w-full"
+                  value={weekDays}
+                  onValueChange={setWeekDays}
+                >
+                  <ToggleGroupItem
+                    value="sunday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    S
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="monday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    M
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="tueday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    T
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="wednesday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    W
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="thursday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    T
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="friday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    F
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="saturday"
+                    className="border border-slate-400 rounded-full data-[state=on]:text-white data-[state=on]:bg-deep-purple-accent-700"
+                  >
+                    S
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
+              <RecurringScheduleCalendar
+                month={month}
+                setMonth={setMonth}
+                dateRange={dateRange}
+                setDateRange={setDateRange}
+              />
+              <Button onClick={handleCreateSchedule} className="w-full mt-6">
+                Create Schedule
               </Button>
-            </ScheduleDelete>
-          </div>
-          <FixedScheduleCalendar
-            month={month}
-            setMonth={setMonth}
-            dates={dates}
-            setDates={setDates}
-            disabledDates={disabledDates}
-          />
+            </TabsContent>
+          </Tabs>
         </div>
         <div className="w-full">
           {schedules.length === 0 && (
@@ -277,6 +418,14 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
                         Update All Schedules
                       </Button>
                     </ScheduleEdit>
+                    {/* <ScheduleDelete onScheduleDelete={onScheduleDelete}>
+                      <Button
+                        variant="link"
+                        className="flex items-center gap-2 text-sm underline text-red-accent-700"
+                      >
+                        Delete All
+                      </Button>
+                    </ScheduleDelete> */}
                   </div>
                 )}
               </div>

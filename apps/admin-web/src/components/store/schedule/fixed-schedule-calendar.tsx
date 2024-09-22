@@ -1,6 +1,7 @@
 "use client";
 
 import { Calendar } from "@/components/ui/calendar";
+import { addDays } from "date-fns";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export const FixedScheduleCalendar = ({
@@ -38,7 +39,11 @@ export const FixedScheduleCalendar = ({
   return (
     <Calendar
       mode="multiple"
-      disabled={[{ before: new Date() }, ...disabledDates]}
+      disabled={[
+        { before: new Date() },
+        { after: addDays(new Date(), 30) },
+        ...disabledDates,
+      ]}
       selected={dates}
       month={month}
       onMonthChange={setMonth}

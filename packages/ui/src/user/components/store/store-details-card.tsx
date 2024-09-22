@@ -34,9 +34,11 @@ export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
                 {storeData.name}
               </h5>
             </div>
-            <div className="text-center pt-[7px] w-10 h-10 border border-slate-400 rounded-md text-deep-purple-accent-400">
-              {storeData.rating}
-            </div>
+            {Number(storeData.rating) > 0 && (
+              <div className="text-center pt-[7px] w-10 h-10 border border-slate-400 rounded-md text-deep-purple-accent-400">
+                {storeData.rating}
+              </div>
+            )}
           </div>
           <p className="mb-5 text-gray-800">{storeData.description}</p>
           <div className="flex gap-3">

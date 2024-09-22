@@ -1,7 +1,7 @@
 "use client";
 
 import { STORE_TYPES } from "@repo/ui/constants";
-import { Store, StoreStatus } from "@repo/ui/types";
+import { Store } from "@repo/ui/types";
 import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +9,7 @@ import { StoreRowActions } from "./store-row-actions";
 
 export type StoreRowActionsProps = {
   onEdit: (storeId: string) => void;
-  onStatusChange: (storeId: string, storeStatus: StoreStatus) => Promise<void>;
+  onMarkInactive: (storeId: string) => Promise<void>;
   onDelete: (storeId: string) => Promise<void>;
 };
 
@@ -25,7 +25,7 @@ export const visibleColumns: VisibilityState = {
 
 export const getStoreColumns = ({
   onEdit,
-  onStatusChange,
+  onMarkInactive,
   onDelete,
 }: StoreRowActionsProps): ColumnDef<Store>[] => [
   {
@@ -107,7 +107,7 @@ export const getStoreColumns = ({
       cellClassName: "text-right",
     },
     cell: ({ row }) => {
-      const actions = { onEdit, onStatusChange, onDelete };
+      const actions = { onEdit, onMarkInactive, onDelete };
       return <StoreRowActions row={row} actions={actions} />;
     },
   },

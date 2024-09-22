@@ -15,7 +15,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Store, StoreMenu, StoreSchedule } from "@repo/ui/types";
 import { USER_APIS } from "@repo/ui/config";
 
-export const StorePage = ({ store }: { store: string }) => {
+export const StorePage = ({
+  store,
+  isPreview,
+}: {
+  store: string;
+  isPreview?: boolean;
+}) => {
   const router = useRouter();
 
   const { data: storeData, isLoading: isStoreDataLoading } = useSWR<Store>(
@@ -34,11 +40,13 @@ export const StorePage = ({ store }: { store: string }) => {
   return (
     <div className="px-8 pb-0 pt-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white">
       <div className="max-w-screen-lg sm:mx-auto">
-        <button onClick={() => router.back()}>
-          <span className="text-deep-purple-accent-400 pb-4 inline-block">
-            <FontAwesomeIcon icon={faArrowLeftLong} /> Back to vendors
-          </span>
-        </button>
+        {!isPreview && (
+          <button onClick={() => router.back()}>
+            <span className="text-deep-purple-accent-400 pb-4 inline-block">
+              <FontAwesomeIcon icon={faArrowLeftLong} /> Back to vendors
+            </span>
+          </button>
+        )}
         {(isStoreDataLoading || !storeData) && <StoreDetailsCardShimmer />}
         {storeData && <StoreDetailsCard storeData={storeData} />}
         <div className="my-16 md:my-20 flex flex-col md:flex-row gap-14">

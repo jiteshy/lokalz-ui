@@ -33,7 +33,7 @@ import {
 
 export const StoreRowActions = ({
   row,
-  actions: { onEdit, onStatusChange, onDelete },
+  actions: { onEdit, onMarkInactive, onDelete },
 }: {
   row: Row<Store>;
   actions: StoreRowActionsProps;
@@ -86,22 +86,17 @@ export const StoreRowActions = ({
               Edit
             </div>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={() => onStatusChange(storeId!, storeStatus!)}
-          >
-            {storeStatus === StoreStatus.ACTIVE ? (
+          {storeStatus === StoreStatus.ACTIVE && (
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => onMarkInactive(storeId!)}
+            >
               <div className="flex gap-2 items-center">
                 <CircleBackslashIcon className="w-4 h-4" />
                 Mark Inactive
               </div>
-            ) : (
-              <div className="flex gap-2 items-center">
-                <CheckCircledIcon className="w-4 h-4" />
-                Mark Active
-              </div>
-            )}
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+          )}
           <DialogTrigger asChild>
             <DropdownMenuItem className="cursor-pointer text-red-accent-400 hover:text-red-accent-700">
               <div className="flex gap-2 items-center">

@@ -20,6 +20,7 @@ import {
 import { MenuForm } from "@/components/store/menu/menu-form";
 import { Button } from "@/components/ui/button";
 import { ScheduleForm } from "@/components/store/schedule/schedule-form";
+import { StorePublish } from "@/components/store/publish/store-publish";
 
 export default function StoreCreateUpdatePage() {
   const router = useRouter();
@@ -101,7 +102,7 @@ export default function StoreCreateUpdatePage() {
           <ScheduleForm storeId={storeId} />
         </TabsContent>
         <TabsContent value="publish" className="pt-3">
-          Publish Store
+          <StorePublish storeId={storeId} />
         </TabsContent>
       </Tabs>
     </div>

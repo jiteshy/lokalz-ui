@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { ScheduleDelete } from "./schedule-delete";
 
 export const ScheduleCalendarHeader = ({
   type,
+  showResetBtn,
   onReset,
 }: {
   type: "fixed" | "recurring";
+  showResetBtn?: boolean;
   onReset: () => void;
 }) => (
   <>
@@ -18,18 +21,21 @@ export const ScheduleCalendarHeader = ({
       {type === "fixed"
         ? `Example: Create schedule for 1st, 3rd, 10th, 12th of the next month.`
         : `Example: Create schedule for every Monday and Thursday between current month and December.`}
-      <div className="font-medium text-deep-purple-accent-700 flex justify-between items-center">
+      <div className="font-medium text-deep-purple-accent-700 flex min-h-9 justify-between items-center">
         {type === "fixed"
-          ? "Select minimum 1 day"
-          : "Select minimum 1 week day & 2 weeks"}
-        <Button
-          onClick={onReset}
-          variant={"link"}
-          className="text-md underline flex gap-2 items-center !pr-0"
-        >
-          <ReloadIcon className="w-3 h-3" />
-          Reset Calendar
-        </Button>
+          ? "Select minimum 1 day for upto a month."
+          : "Select minimum 1 week day & 2 weeks."}
+        {showResetBtn && (
+          <ScheduleDelete onScheduleDelete={onReset}>
+            <Button
+              variant={"link"}
+              className="text-md underline flex gap-2 items-center text-red-accent-700 !pr-0"
+            >
+              <ReloadIcon className="w-3 h-3" />
+              Reset Calendar
+            </Button>
+          </ScheduleDelete>
+        )}
       </div>
     </div>
   </>

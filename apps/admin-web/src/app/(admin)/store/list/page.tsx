@@ -54,34 +54,26 @@ export default function StoresListPage() {
     (storeId: string) => router.push(`/store/${storeId}`),
     [],
   );
-  const onStatusChange = useCallback(
-    (storeId: string, storeStatus: StoreStatus) => {
-      const statusToUpdate =
-        storeStatus === StoreStatus.ACTIVE
-          ? StoreStatus.INACTIVE
-          : StoreStatus.ACTIVE;
-      const successMessage = `Store is marked ${statusToUpdate.toLowerCase()} successfully.`;
-      return axios.put(`/store/${storeId}/status/${statusToUpdate}`).then(
-        async () => {
-          await mutate();
-          toast({
-            title: "Success!",
-            duration: 5000,
-            description: successMessage,
-          });
-        },
-        () => {
-          toast({
-            variant: "destructive",
-            duration: 5000,
-            title: "Failure!",
-            description: successMessage,
-          });
-        },
-      );
-    },
-    [],
-  );
+  const onMarkInactive = useCallback((storeId: string) => {
+    return axios.put(`/store/${storeId}/status/${StoreStatus.INACTIVE}`).then(
+      async () => {
+        await mutate();
+        toast({
+          title: "Success!",
+          duration: 5000,
+          description: "Store status is changed to in-active successfully.",
+        });
+      },
+      () => {
+        toast({
+          variant: "destructive",
+          duration: 5000,
+          title: "Failure!",
+          description: "Store status change to in-active failed.",
+        });
+      },
+    );
+  }, []);
   const onDelete = useCallback((storeId: string) => {
     return axios.delete(`/store/${storeId}?execute=true`).then(
       async () => {
@@ -104,7 +96,7 @@ export default function StoresListPage() {
   }, []);
 
   const columns: ColumnDef<Store>[] = useMemo(
-    () => getStoreColumns({ onEdit, onStatusChange, onDelete }),
+    () => getStoreColumns({ onEdit, onMarkInactive, onDelete }),
     [],
   );
 

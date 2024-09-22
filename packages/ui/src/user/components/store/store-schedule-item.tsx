@@ -1,7 +1,6 @@
-"use client";
-
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useCallback } from "react";
 import { StoreScheduleItem } from "@repo/ui/types";
+import { cn } from "@repo/ui/utils";
 
 type FormattedSchedule = {
   date: number;
@@ -17,9 +16,11 @@ type FormattedSchedule = {
 
 export const ScheduleItem = ({
   storeScheduleItem,
+  className,
   children,
 }: {
   storeScheduleItem: StoreScheduleItem;
+  className?: string;
   children?: ReactNode;
 }) => {
   const isToday = useCallback((date: Date) => {
@@ -67,19 +68,19 @@ export const ScheduleItem = ({
 
   return (
     <div
-      className={`relative p-2 min-h-[72px] text-center w-full mb-2 shadow rounded border-l-8 ${formattedSchedule.isToday ? "border-l-deep-purple-accent-400 bg-indigo-50 pt-3" : "border-l-slate-300 bg-slate-50"}`}
+      className={`relative p-2 min-h-[72px] text-center w-full mb-2 shadow rounded border-l-8 ${className || (formattedSchedule.isToday ? "border-l-deep-purple-accent-400 bg-indigo-50" : "border-l-slate-300 bg-slate-50")}`}
     >
       <div className="flex gap-3 items-center">
         <div className="w-16 text-center">
           {formattedSchedule.isToday ? (
             <div className="text-xl">Today</div>
           ) : (
-            <div>
+            <>
               <div className="text-slate-800 text-2xl font-medium">
                 {formattedSchedule.date}
               </div>
               <div className="text-slate-500">{formattedSchedule.month}</div>
-            </div>
+            </>
           )}
         </div>
         <div className="text-sm text-left">
