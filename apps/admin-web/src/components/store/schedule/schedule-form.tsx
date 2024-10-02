@@ -13,14 +13,14 @@ import { useToast } from "@/hooks/use-toast";
 import { StoreSchedule, StoreScheduleItem } from "@repo/ui/types";
 import { ScheduleItem } from "@repo/ui/user/components";
 import { ScheduleDelete } from "./schedule-delete";
-import { ScheduleEdit, TimeUnits } from "./schedule-edit";
-import { addHours, addMinutes } from "date-fns";
+import { ScheduleEdit } from "./schedule-edit";
 import { scheduleFormSchema } from "./schedule-form-schema";
 import { z } from "zod";
 import useSWR from "swr";
 import { ADMIN_APIS, USER_APIS } from "@repo/ui/config";
 import Loading from "@/app/loading";
 import { useAxios } from "@/hooks/use-axios";
+import { addHoursAndMinutes } from "@/lib/utils";
 
 export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   const { toast } = useToast();
@@ -111,17 +111,6 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
     }
   };
 
-  const addHoursAdnMinutes = (
-    date: number,
-    hours: string,
-    minutes: string,
-    unit: TimeUnits,
-  ): number => {
-    const fromHours = unit === "PM" ? Number(hours) + 12 : Number(hours);
-    const fromWithHours = addHours(date, fromHours);
-    return addMinutes(fromWithHours, Number(minutes)).getTime();
-  };
-
   const onScheduleEdit = (
     scheduleForm: z.infer<typeof scheduleFormSchema>,
     schedule: StoreScheduleItem,
@@ -129,13 +118,13 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
     const currentSchedule = schedules.filter(
       (scheduleItem) => scheduleItem.from === schedule.from,
     )[0];
-    currentSchedule.from = addHoursAdnMinutes(
+    currentSchedule.from = addHoursAndMinutes(
       currentSchedule.date,
       scheduleForm.fromHour,
       scheduleForm.fromMinute,
       scheduleForm.fromUnit,
     );
-    currentSchedule.to = addHoursAdnMinutes(
+    currentSchedule.to = addHoursAndMinutes(
       currentSchedule.date,
       scheduleForm.toHour,
       scheduleForm.toMinute,
@@ -156,13 +145,13 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
       (scheduleItem) => {
         return {
           ...scheduleItem,
-          from: addHoursAdnMinutes(
+          from: addHoursAndMinutes(
             scheduleItem.date,
             scheduleForm.fromHour,
             scheduleForm.fromMinute,
             scheduleForm.fromUnit,
           ),
-          to: addHoursAdnMinutes(
+          to: addHoursAndMinutes(
             scheduleItem.date,
             scheduleForm.toHour,
             scheduleForm.toMinute,
@@ -179,34 +168,60 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
     return true;
   };
 
+  const areSchedulesValid = () => {
+    const invalidSchedules =
+      !schedules.length ||
+      schedules.some(
+        (schedule) =>
+          !schedule.date ||
+          !schedule.from ||
+          !schedule.to ||
+          !schedule.address.city ||
+          !schedule.address.state ||
+          !schedule.address.street ||
+          !schedule.address.zipCode,
+      );
+    if (invalidSchedules) {
+      toast({
+        variant: "destructive",
+        duration: 5000,
+        title: "Validation Failed!",
+        description: !schedules.length
+          ? "Store schedules missing. Please add schedules and try again."
+          : "Store schedule missing information. Please update schedule and try again.",
+      });
+    }
+    return !invalidSchedules;
+  };
+
   const handleScheduleSave = () => {
-    console.log(schedules);
-    // setSubmittingSchedule(true);
-    // const storeSchedule: StoreSchedule = {
-    //   storeId,
-    //   schedules: schedules,
-    // };
-    // axios.put(`/store/${storeId}/schedule`, storeSchedule).then(
-    //   async () => {
-    //     await mutate();
-    //     toast({
-    //       title: "Success!",
-    //       duration: 5000,
-    //       description: `Store menu updated successfully.`,
-    //     });
-    //     setSubmittingSchedule(false);
-    //     setScheduleChanged(false);
-    //   },
-    //   () => {
-    //     toast({
-    //       variant: "destructive",
-    //       duration: 5000,
-    //       title: "Failure!",
-    //       description: `Store menu update failed.`,
-    //     });
-    //     setSubmittingSchedule(false);
-    //   }
-    // );
+    if (areSchedulesValid()) {
+      setSubmittingSchedule(true);
+      const storeSchedule: StoreSchedule = {
+        storeId,
+        schedules: schedules,
+      };
+      axios.put(`/store/${storeId}/schedule`, storeSchedule).then(
+        async () => {
+          await mutate();
+          toast({
+            title: "Success!",
+            duration: 5000,
+            description: `Store schedule updated successfully.`,
+          });
+          setSubmittingSchedule(false);
+        },
+        () => {
+          toast({
+            variant: "destructive",
+            duration: 5000,
+            title: "Failure!",
+            description: `Store schedule update failed.`,
+          });
+          setSubmittingSchedule(false);
+        },
+      );
+    }
   };
 
   return isScheduleLoading || submittingSchedule ? (

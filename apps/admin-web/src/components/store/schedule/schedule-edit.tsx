@@ -33,22 +33,7 @@ import {
 } from "@/components/ui/form";
 import { US_STATES } from "@repo/ui/config";
 import { scheduleFormSchema } from "./schedule-form-schema";
-
-type Hours =
-  | "01"
-  | "02"
-  | "03"
-  | "04"
-  | "05"
-  | "06"
-  | "07"
-  | "08"
-  | "09"
-  | "10"
-  | "11"
-  | "12";
-type Minutes = "00" | "15" | "30" | "45";
-export type TimeUnits = "AM" | "PM";
+import { Hours, Minutes, TimeUnits } from "@/types/schedule";
 
 const createScheduelFormData = (
   schedule: StoreScheduleItem,
@@ -135,7 +120,11 @@ export const ScheduleEdit = ({
             onSubmit={scheduleForm.handleSubmit(onSubmit)}
             className="space-y-3 pt-3"
           >
-            <FormLabel className="font-normal">From Time*</FormLabel>
+            <FormLabel
+              className={`font-normal ${scheduleForm.formState.errors.fromHour ? "text-destructive" : ""}`}
+            >
+              Start Time*
+            </FormLabel>
             <div className="flex gap-1 pb-3">
               <FormField
                 control={scheduleForm.control}
@@ -227,7 +216,11 @@ export const ScheduleEdit = ({
                 )}
               />
             </div>
-            <FormLabel className="font-normal">To Time*</FormLabel>
+            <FormLabel
+              className={`font-normal ${scheduleForm.formState.errors.toHour ? "text-destructive" : ""}`}
+            >
+              End Time*
+            </FormLabel>
             <div className="flex gap-1">
               <FormField
                 control={scheduleForm.control}
@@ -375,14 +368,21 @@ export const ScheduleEdit = ({
                   <FormControl>
                     <Input placeholder="Enter zipcode" {...field} />
                   </FormControl>
-                  <div className="min-h-8">
-                    <FormMessage />
-                  </div>
                 </FormItem>
               )}
             />
+            <div className="min-h-8">
+              <div className="font-medium text-sm text-destructive">
+                {scheduleForm.formState.errors.address?.zipCode?.message ||
+                  scheduleForm.formState.errors.toHour?.message}
+              </div>
+            </div>
             <SheetFooter>
-              <Button className="-mt-3" type="submit">
+              <Button
+                className="-mt-3"
+                type="submit"
+                onClick={() => console.log(scheduleForm.formState.errors)}
+              >
                 Save changes
               </Button>
             </SheetFooter>
