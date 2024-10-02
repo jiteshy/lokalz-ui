@@ -1,6 +1,8 @@
 import { STORE_TYPES } from "@repo/ui/constants";
 import { Store } from "@repo/ui/types";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBolt } from "@fortawesome/free-solid-svg-icons";
 
 export const StoreCard = (props: { details: Store }) => {
   const { name, imageUrl, tags, rating, type } = props.details;
@@ -28,9 +30,14 @@ export const StoreCard = (props: { details: Store }) => {
             </div>
           </div>
         </div>
-        {Number(rating) > 0 && (
+        {Number(rating) > 0 ? (
           <div className="px-2 py-1 border border-gray-300 rounded-md text-deep-purple-accent-400">
             {rating}
+          </div>
+        ) : (
+          <div className="text-sm flex items-center gap-1 text-deep-purple-accent-400">
+            <FontAwesomeIcon icon={faBolt} />
+            New
           </div>
         )}
       </div>

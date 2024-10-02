@@ -12,11 +12,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { MoreHorizontal } from "lucide-react";
+import { CalendarIcon, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
@@ -25,10 +28,11 @@ import { StoreRowActionsProps } from "./store-columns";
 import { Row } from "@tanstack/react-table";
 import { Store, StoreStatus } from "@repo/ui/types";
 import {
-  CheckCircledIcon,
   CircleBackslashIcon,
   CrossCircledIcon,
-  Pencil2Icon,
+  IdCardIcon,
+  LightningBoltIcon,
+  ReaderIcon,
 } from "@radix-ui/react-icons";
 
 export const StoreRowActions = ({
@@ -77,15 +81,48 @@ export const StoreRowActions = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={() => onEdit(storeId!)}
-          >
-            <div className="flex gap-2 items-center">
-              <Pencil2Icon className="w-4 h-4" />
-              Edit
-            </div>
-          </DropdownMenuItem>
+          <DropdownMenuLabel>Store Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => onEdit(storeId!, "store")}
+            >
+              <div className="flex gap-2 items-center">
+                <IdCardIcon className="w-4 h-4" />
+                Edit Details
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => onEdit(storeId!, "menu")}
+            >
+              <div className="flex gap-2 items-center">
+                <ReaderIcon className="w-4 h-4" />
+                Edit Menu
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => onEdit(storeId!, "schedule")}
+            >
+              <div className="flex gap-2 items-center">
+                <CalendarIcon className="w-4 h-4" />
+                Edit Schedule
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => onEdit(storeId!, "publish")}
+            >
+              <div className="flex gap-2 items-center">
+                <LightningBoltIcon className="w-4 h-4" />
+                Store Preview
+              </div>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
           {storeStatus === StoreStatus.ACTIVE && (
             <DropdownMenuItem
               className="cursor-pointer"

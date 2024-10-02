@@ -4,14 +4,21 @@ import { Button } from "@/components/ui/button";
 import { useAxios } from "@/hooks/use-axios";
 import { useToast } from "@/hooks/use-toast";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { StoreStatus } from "@repo/ui/types";
+import { ADMIN_APIS } from "@repo/ui/config";
+import { Store, StoreStatus } from "@repo/ui/types";
 import { StorePage } from "@repo/ui/user/pages";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
 
 export const StorePublish = ({ storeId }: { storeId: string }) => {
   const axios = useAxios();
   const { toast } = useToast();
   const router = useRouter();
+
+  // TO-DO: Duplicate API call for status and getting preview page
+  const { data: storeData } = useSWR<Store>(
+    `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}`,
+  );
 
   const handlePublishStore = () => {
     return axios.put(`/store/${storeId}/status/${StoreStatus.ACTIVE}`).then(
@@ -44,10 +51,16 @@ export const StorePublish = ({ storeId }: { storeId: string }) => {
           </span>
         </h4>
         <div className="flex items-center gap-3">
-          <Button type="submit" onClick={handlePublishStore}>
-            <CheckIcon className="w-5 h-5" />
-            <span className="pl-2">Publish Store</span>
-          </Button>
+          {storeData?.status !== StoreStatus.ACTIVE ? (
+            <Button type="submit" onClick={handlePublishStore}>
+              <CheckIcon className="w-5 h-5" />
+              <span className="pl-2">Publish Store</span>
+            </Button>
+          ) : (
+            <div className="flex items-center gap-2 py-2 text-deep-purple-accent-700">
+              <CheckIcon className="w-5 h-5" /> Already Published
+            </div>
+          )}
         </div>
       </div>
       <div className="-ml-8 -mr-8 mt-3">

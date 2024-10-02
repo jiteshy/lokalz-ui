@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { StoreForm } from "@/components/store/store-form";
+import { StoreForm } from "@/components/store/details/store-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import {

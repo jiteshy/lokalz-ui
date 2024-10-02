@@ -10,7 +10,7 @@ import {
   Pencil2Icon,
 } from "@radix-ui/react-icons";
 import { MenuItemSheet } from "./menu-item-sheet";
-import { DeleteConfirmation } from "../delete-confirmation";
+import { DeleteConfirmation } from "../details/delete-confirmation";
 import { SortableItem } from "@/components/ui/sortable-item";
 import { useSortable } from "@dnd-kit/sortable";
 

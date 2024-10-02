@@ -1,6 +1,6 @@
 import { STORE_TYPES } from "@repo/ui/constants";
 import { Store } from "@repo/ui/types";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone, faBolt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 
@@ -26,20 +26,23 @@ export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
         </div>
         <div className="flex flex-col justify-center p-6 bg-white lg:w-1/2">
           <div className="flex justify-between">
-            <div>
-              <div className="px-4 pt-2 pb-[6px] mb-4 text-xs size-fit font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-                {STORE_TYPES[storeData.type]}
-              </div>
-              <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
-                {storeData.name}
-              </h5>
+            <div className="px-4 pt-2 pb-[6px] text-xs size-fit font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+              {STORE_TYPES[storeData.type]}
             </div>
-            {Number(storeData.rating) > 0 && (
-              <div className="text-center pt-[7px] w-10 h-10 border border-slate-400 rounded-md text-deep-purple-accent-400">
+            {Number(storeData.rating) > 0 ? (
+              <div className="px-2 py-1 border border-gray-300 rounded-md text-deep-purple-accent-400">
                 {storeData.rating}
+              </div>
+            ) : (
+              <div className="text-sm flex items-center gap-1 text-deep-purple-accent-400">
+                <FontAwesomeIcon icon={faBolt} />
+                New
               </div>
             )}
           </div>
+          <h5 className="my-3 text-3xl font-extrabold leading-none sm:text-4xl">
+            {storeData.name}
+          </h5>
           <p className="mb-5 text-gray-800">{storeData.description}</p>
           <div className="flex gap-3">
             {storeData.tags.map((tag, index) => (

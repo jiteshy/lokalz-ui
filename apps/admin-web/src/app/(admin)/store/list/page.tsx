@@ -50,10 +50,10 @@ export default function StoresListPage() {
     setCurrentFilter(status);
   };
 
-  const onEdit = useCallback(
-    (storeId: string) => router.push(`/store/${storeId}`),
-    [],
-  );
+  const onEdit = useCallback((storeId: string, tab?: string) => {
+    const path = tab ? `/store/${storeId}?tab=${tab}` : `/store/${storeId}`;
+    router.push(path);
+  }, []);
   const onMarkInactive = useCallback((storeId: string) => {
     return axios.put(`/store/${storeId}/status/${StoreStatus.INACTIVE}`).then(
       async () => {

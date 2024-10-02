@@ -6,9 +6,11 @@ import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
 import { StoreRowActions } from "./store-row-actions";
+import { Button } from "../ui/button";
+import { OpenInNewWindowIcon } from "@radix-ui/react-icons";
 
 export type StoreRowActionsProps = {
-  onEdit: (storeId: string) => void;
+  onEdit: (storeId: string, tab?: string) => void;
   onMarkInactive: (storeId: string) => Promise<void>;
   onDelete: (storeId: string) => Promise<void>;
 };
@@ -32,11 +34,31 @@ export const getStoreColumns = ({
     accessorKey: "name",
     enableHiding: false,
     meta: {
-      cellClassName: "whitespace-nowrap",
+      cellClassName: "whitespace-nowrap pl-4",
+      headerClassName: "pl-4",
     },
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
+    cell: ({ row }) => {
+      const { id: storeId, name } = row.original;
+      return (
+        <Button
+          variant="link"
+          className="underline p-0"
+          onClick={() =>
+            window.open(
+              `${process.env.NEXT_PUBLIC_APP_URL}/store?id=${storeId}`,
+            )
+          }
+        >
+          <div className="flex items-center gap-2">
+            {name}
+            <OpenInNewWindowIcon className="h-4 w-4 text-deep-purple-accent-700" />
+          </div>
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "description",

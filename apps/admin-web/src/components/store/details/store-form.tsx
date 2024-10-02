@@ -47,7 +47,7 @@ const createFormData = (store?: Store): z.infer<typeof storeFormSchema> =>
           state: store.address?.state,
           zipCode: store.address?.zipCode?.toString(),
         },
-        tags: store.tags.join(","),
+        tags: store.tags?.join(","),
         type: store.type,
       }
     : {

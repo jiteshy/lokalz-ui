@@ -23,7 +23,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { getMenuItemColumns } from "./menu-item-columns";
 import { CategorySheet } from "./category-sheet";
 import { MenuItemSheet } from "./menu-item-sheet";
-import { DeleteConfirmation } from "../delete-confirmation";
+import { DeleteConfirmation } from "../details/delete-confirmation";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import {
   arrayMove,
