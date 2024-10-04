@@ -73,4 +73,5 @@ export type StoreScheduleItem = {
   date: number;
   address: StoreAddress;
   existing?: boolean;
+  markedForDeletion?: boolean;
 };

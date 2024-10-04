@@ -21,6 +21,12 @@ export const ScheduleDelete = ({
   onScheduleDelete: (schedule?: StoreScheduleItem) => void;
   children: ReactNode;
 }) => {
+  const dateStr = (date: number) => {
+    const dateObj = new Date(date);
+    return `${dateObj.getDate()} ${dateObj.toLocaleDateString("en-us", {
+      month: "short",
+    })}`;
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -32,9 +38,14 @@ export const ScheduleDelete = ({
           <DialogDescription>
             Are you sure you want to{" "}
             {schedule
-              ? "delete the schedule"
+              ? `delete the schedule for ${dateStr(schedule.date)}`
               : "remove all the newly added schedules"}
-            ?
+            ?{" "}
+            <span className="pt-3 block text-red-accent-400">
+              {schedule?.existing
+                ? "This will mark the schedule for deletion. Please click Save Schedule button to permanently delete it."
+                : "This will discard the newly added schedule right away."}
+            </span>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="pt-5">

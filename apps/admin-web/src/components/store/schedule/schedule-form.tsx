@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   CheckIcon,
+  ExclamationTriangleIcon,
   Pencil2Icon,
   ReloadIcon,
+  ResetIcon,
   TrashIcon,
 } from "@radix-ui/react-icons";
 import { FixedScheduleCalendar } from "./fixed-schedule-calendar";
@@ -97,20 +99,37 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
 
   const onScheduleDelete = (schedule?: StoreScheduleItem) => {
     if (schedule) {
-      setSchedules((current) =>
-        current.filter(
-          (currentSchedule) => currentSchedule.date !== schedule.date,
-        ),
-      );
-      setDates((current) =>
-        current?.filter(
-          (currentDate) => currentDate.getTime() !== schedule.date,
-        ),
-      );
+      if (schedule.existing) {
+        toggleMarkForDeletion(schedule);
+      } else {
+        setSchedules((current) =>
+          current.filter(
+            (currentSchedule) => currentSchedule.date !== schedule.date,
+          ),
+        );
+        setDates((current) =>
+          current?.filter(
+            (currentDate) => currentDate.getTime() !== schedule.date,
+          ),
+        );
+      }
     } else {
       setSchedules([]);
       setDates([]);
     }
+  };
+
+  const toggleMarkForDeletion = (schedule: StoreScheduleItem) => {
+    setSchedules((current) => {
+      const updatedSchedules = [];
+      for (const item of current) {
+        if (item.id === schedule.id) {
+          item.markedForDeletion = !item.markedForDeletion;
+        }
+        updatedSchedules.push({ ...item });
+      }
+      return updatedSchedules;
+    });
   };
 
   const onScheduleEdit = (
@@ -199,9 +218,10 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   const handleScheduleSave = () => {
     if (areSchedulesValid()) {
       setSubmittingSchedule(true);
+      const filteredSchedules = schedules.filter(item => !item.markedForDeletion);
       const storeSchedule: StoreSchedule = {
         storeId,
-        schedules,
+        schedules: filteredSchedules,
       };
       axios.put(`/store/${storeId}/schedule`, storeSchedule).then(
         async () => {
@@ -302,36 +322,65 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
                   key={schedule.id || schedule.date}
                   storeScheduleItem={schedule}
                   className={
-                    !schedule.existing ? "border-l-amber-700 bg-amber-50" : ""
+                    !schedule.existing
+                      ? "border-l-amber-700 bg-amber-50"
+                      : schedule.markedForDeletion
+                        ? "border-l-red-accent-700 bg-red-50 relative after:content-[''] after:bg-red-50 after:absolute after:left-0 after:right-1/4 after:bottom-0 after:top-0 after:opacity-50"
+                        : ""
                   }
                 >
                   <>
-                    <div className="absolute top-1 right-4 flex items-center">
-                      <ScheduleEdit
-                        schedule={schedule}
-                        onScheduleEdit={onScheduleEdit}
-                      >
+                    <div className="absolute top-1 right-4 flex items-center opacity-100">
+                      {!schedule.markedForDeletion && (
+                        <ScheduleEdit
+                          schedule={schedule}
+                          onScheduleEdit={onScheduleEdit}
+                        >
+                          <Button
+                            variant="link"
+                            className="flex items-center gap-2 text-sm !pr-0"
+                          >
+                            <Pencil2Icon className="w-4 h-4" />
+                            Edit
+                          </Button>
+                        </ScheduleEdit>
+                      )}
+                      {!schedule.markedForDeletion ? (
+                        <ScheduleDelete
+                          schedule={schedule}
+                          onScheduleDelete={onScheduleDelete}
+                        >
+                          <Button
+                            variant="link"
+                            className="flex items-center gap-1 text-sm text-red-accent-700 !pr-0"
+                          >
+                            <TrashIcon className="w-4 h-4" />
+                            Delete
+                          </Button>
+                        </ScheduleDelete>
+                      ) : (
                         <Button
                           variant="link"
-                          className="flex items-center gap-2 text-sm !pr-0"
+                          className="flex items-center gap-1 text-sm !pr-0"
+                          onClick={() => toggleMarkForDeletion(schedule)}
                         >
-                          <Pencil2Icon className="w-4 h-4" />
-                          Edit
+                          <ResetIcon className="w-4 h-4" />
+                          Restore
                         </Button>
-                      </ScheduleEdit>
-                      <ScheduleDelete
-                        schedule={schedule}
-                        onScheduleDelete={onScheduleDelete}
-                      >
-                        <Button
-                          variant="link"
-                          className="flex items-center gap-2 text-sm text-red-accent-700 !pr-0"
-                        >
-                          <TrashIcon className="w-4 h-4" />
-                          Delete
-                        </Button>
-                      </ScheduleDelete>
+                      )}
                     </div>
+                    {!schedule.existing && (
+                      <div className="absolute bottom-2 right-4 text-red-accent-700 text-xs flex items-center gap-2">
+                        <ExclamationTriangleIcon className="h-4 w-4" /> Newly
+                        Added
+                      </div>
+                    )}
+                    {schedule.markedForDeletion && (
+                      <div className="absolute bottom-2 right-4 text-red-accent-700 text-xs flex items-center gap-2">
+                        <ExclamationTriangleIcon className="h-4 w-4" /> Marked
+                        For Deletion
+                      </div>
+                    )}
                   </>
                 </ScheduleItem>
               ))}
