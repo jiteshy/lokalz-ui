@@ -82,8 +82,8 @@ export const TermsPage = () => {
                   platform only for lawful purposes and in accordance with these
                   terms.
                   <br />
-                  <span className="ui-font-bold">Prohibited Use:</span> Do not use
-                  the platform for any fraudulent or harmful activities.
+                  <span className="ui-font-bold">Prohibited Use:</span> Do not
+                  use the platform for any fraudulent or harmful activities.
                 </p>
               </div>
             </div>
@@ -104,12 +104,12 @@ export const TermsPage = () => {
                   Business Listings
                 </p>
                 <p className="ui-text-sm ui-text-gray-700">
-                  <span className="ui-font-bold">Accuracy:</span> Ensure that all
-                  information provided about your business is accurate and
+                  <span className="ui-font-bold">Accuracy:</span> Ensure that
+                  all information provided about your business is accurate and
                   up-to-date.
                   <br />
-                  <span className="ui-font-bold">Content Ownership:</span> You own
-                  the content you submit but grant Lokalz a license to use,
+                  <span className="ui-font-bold">Content Ownership:</span> You
+                  own the content you submit but grant Lokalz a license to use,
                   display, and distribute it on our platform.
                 </p>
               </div>
@@ -154,12 +154,12 @@ export const TermsPage = () => {
                   Intellectual Property
                 </p>
                 <p className="ui-text-sm ui-text-gray-700">
-                  <span className="ui-font-bold">Ownership:</span> Lokalz owns all
-                  rights to the platform and its content, excluding
+                  <span className="ui-font-bold">Ownership:</span> Lokalz owns
+                  all rights to the platform and its content, excluding
                   user-submitted content. <br />
-                  <span className="ui-font-bold">Restrictions:</span> Do not copy,
-                  modify, or distribute any part of the platform without our
-                  permission.
+                  <span className="ui-font-bold">Restrictions:</span> Do not
+                  copy, modify, or distribute any part of the platform without
+                  our permission.
                 </p>
               </div>
             </div>
@@ -202,8 +202,9 @@ export const TermsPage = () => {
                   Disclaimers and Limitation of Liability
                 </p>
                 <p className="ui-text-sm ui-text-gray-700">
-                  <span className="ui-font-bold">No Warranty:</span> The platform
-                  is provided &quot;as is&quot; without any warranties. <br />
+                  <span className="ui-font-bold">No Warranty:</span> The
+                  platform is provided &quot;as is&quot; without any warranties.{" "}
+                  <br />
                   <span className="ui-font-bold">
                     Limitation of Liability:
                   </span>{" "}

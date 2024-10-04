@@ -9,6 +9,7 @@ import {
   ChatBubbleIcon,
   DashboardIcon,
   EnvelopeClosedIcon,
+  MixIcon,
   PlusIcon,
 } from "@radix-ui/react-icons";
 import { FC, ReactElement } from "react";
@@ -22,12 +23,12 @@ type MenuItem = {
   icon: ReactElement;
   label: string;
   route: string;
-}
+};
 
 type Menu = {
   name: string;
   menuItems: MenuItem[];
-}
+};
 
 const menuGroups: Menu[] = [
   {
@@ -36,7 +37,7 @@ const menuGroups: Menu[] = [
       {
         icon: <DashboardIcon className="w-5 h-5" />,
         label: "Dashboard",
-        route: "#",
+        route: "/store/list",
       },
       {
         icon: <PlusIcon className="h-5 w-5" />,
@@ -79,8 +80,15 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       >
         {/* <!-- SIDEBAR HEADER --> */}
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-          <Link href="/store/list">
-            <Logo />
+          <Link
+            href="/store/list"
+            className="flex gap-3 items-center text-2xl text-slate-100"
+          >
+            {/* TO-DO: Replace with icon */}
+            <MixIcon className="h-6 w-6" />{" "}
+            <div className="flex items-baseline gap-2">
+              Lokalz <span className="text-xs text-slate-300">ADMIN</span>
+            </div>
           </Link>
 
           <button
@@ -107,7 +115,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
         <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
           {/* <!-- Sidebar Menu --> */}
-          <nav className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
+          <nav className="mt-2 px-4 py-4 lg:px-6">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">

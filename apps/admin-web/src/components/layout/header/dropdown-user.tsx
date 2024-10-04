@@ -15,25 +15,25 @@ const DropdownUser = () => {
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="flex items-center gap-4"
+        className="flex items-center gap-3"
         href="#"
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            ${session?.user?.name || "User"}
+            {session?.user?.name || "User"}
           </span>
-          <span className="block text-xs">Super Admin</span>
+          <span className="block text-xs text-slate-600">Super Admin</span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
+        <span className="h-10 w-10 rounded-full">
           {session?.user?.image ? (
             <Image
-              width={112}
-              height={112}
+              width={40}
+              height={40}
               src={session.user.image}
               style={{
-                width: "auto",
-                height: "auto",
+                width: "40px",
+                height: "40px",
               }}
               alt="User"
             />

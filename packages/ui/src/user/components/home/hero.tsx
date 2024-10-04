@@ -90,7 +90,10 @@ export const Hero = ({ updateZipCode, filter, updateFilter }: HeroInputs) => {
               className="ui-flex ui-items-center ui-justify-center ui-bg-white ui-py-4 ui-px-8 sm:ui-px-12 lg:ui-px-16 ui-shadow ui-rounded-full ui-w-auto"
             >
               <div className="ui-w-full">
-                <label htmlFor="zipcode" className="ui-block ui-mb-1 ui-text-gray-700">
+                <label
+                  htmlFor="zipcode"
+                  className="ui-block ui-mb-1 ui-text-gray-700"
+                >
                   Zipcode{" "}
                   <span
                     className={cn(

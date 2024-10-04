@@ -80,7 +80,10 @@ export const ContactPage = () => {
                 className="ui-inline-block ui-mb-1 ui-font-medium ui-text-gray-900"
               >
                 How can we help you?{" "}
-                <span className="ui-text-sm ui-text-gray-600">(Max 1000 chars)</span>*
+                <span className="ui-text-sm ui-text-gray-600">
+                  (Max 1000 chars)
+                </span>
+                *
               </label>
               <textarea
                 rows={5}
