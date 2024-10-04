@@ -1,22 +1,22 @@
 export const StoreDetailsCardShimmer = () => {
   return (
     <>
-      <div className="flex flex-col max-w-screen-lg overflow-hidden border rounded shadow lg:flex-row sm:mx-auto">
-        <div className="relative h-48 md:h-96 lg:w-1/2 bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse">
+      <div className="ui-flex ui-flex-col ui-max-w-screen-lg ui-overflow-hidden ui-border ui-rounded ui-shadow lg:ui-flex-row sm:ui-mx-auto">
+        <div className="ui-relative ui-h-48 md:ui-h-96 lg:ui-w-1/2 ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse">
           <svg
-            className="absolute top-0 -right-1 hidden h-full text-white lg:inline-block"
+            className="ui-absolute ui-top-0 -ui-right-1 ui-hidden ui-h-full ui-text-white lg:ui-inline-block"
             viewBox="0 0 20 104"
             fill="currentColor"
           >
             <polygon points="17.3036738 5.68434189e-14 20 5.68434189e-14 20 104 0.824555778 104" />
           </svg>
         </div>
-        <div className="flex flex-col justify-start px-6 py-12 bg-white lg:w-1/2">
-          <div className="w-40 h-8 rounded-full bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
-          <div className="my-3 w-80 h-12 rounded-lg bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
-          <div className="mt-5 mb-2 h-4 w-full rounded-lg bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
-          <div className="mb-2 h-4 w-full rounded-lg bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
-          <div className="w-3/4 h-4 rounded-lg bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
+        <div className="ui-flex ui-flex-col ui-justify-start ui-px-6 ui-py-12 ui-bg-white lg:ui-w-1/2">
+          <div className="ui-w-40 ui-h-8 ui-rounded-full ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse"></div>
+          <div className="ui-my-3 ui-w-80 ui-h-12 ui-rounded-lg ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse"></div>
+          <div className="ui-mt-5 ui-mb-2 ui-h-4 ui-w-full ui-rounded-lg ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse"></div>
+          <div className="ui-mb-2 ui-h-4 ui-w-full ui-rounded-lg ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse"></div>
+          <div className="ui-w-3/4 ui-h-4 ui-rounded-lg ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse"></div>
         </div>
       </div>
     </>

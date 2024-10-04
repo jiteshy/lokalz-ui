@@ -19,42 +19,42 @@ export const StoreMenuDetails = ({ menuData }: { menuData: StoreMenu }) => {
 
   return (
     <>
-      <div className="mb-10 md:mx-auto text-center lg:max-w-2xl md:mb-12">
+      <div className="ui-mb-10 md:ui-mx-auto ui-text-center lg:ui-max-w-2xl md:ui-mb-12">
         <Title title="Menu" />
       </div>
-      <div className="grid max-w-screen-lg mx-auto space-y-6 lg:grid-cols-2 lg:space-y-0 gap-x-20">
+      <div className="ui-grid ui-max-w-screen-lg ui-mx-auto ui-space-y-6 lg:ui-grid-cols-2 lg:ui-space-y-0 ui-gap-x-20">
         {sortedMenuData &&
           sortedMenuData.map((menuCategory: StoreMenuCategory) => (
-            <div key={menuCategory.id} className="mr-5">
-              <div className="py-2 text-center">
-                <h4 className="pb-3 text-lg font-bold text-slate-600">
+            <div key={menuCategory.id} className="ui-mr-5">
+              <div className="ui-py-2 ui-text-center">
+                <h4 className="ui-pb-3 ui-text-lg ui-font-bold ui-text-slate-600">
                   {menuCategory.category}
                 </h4>
                 <hr />
                 {menuCategory.description && (
-                  <p className="py-3 text-sm text-slate-600 font-light">
+                  <p className="ui-py-3 ui-text-sm ui-text-slate-600 ui-font-light">
                     {menuCategory.description}
                   </p>
                 )}
               </div>
-              <div className="mb-5">
+              <div className="ui-mb-5">
                 {menuCategory.items.map((item: StoreMenuItem) => (
                   <div
-                    className="flex justify-between items-center"
+                    className="ui-flex ui-justify-between ui-items-center"
                     key={item.id}
                   >
-                    <div className="px-3 sm:px-0">
-                      <div className="py-3">
-                        <h6 className="mb-1 leading-5 text-gray-900">
+                    <div className="ui-px-3 sm:ui-px-0">
+                      <div className="ui-py-3">
+                        <h6 className="ui-mb-1 ui-leading-5 ui-text-gray-900">
                           {item.itemName}
                         </h6>
-                        <p className="text-sm text-gray-600 font-light">
+                        <p className="ui-text-sm ui-text-gray-600 ui-font-light">
                           {item.description}
                         </p>
                       </div>
                     </div>
                     {item.price && (
-                      <div className="text-gray-900">
+                      <div className="ui-text-gray-900">
                         ${Number(item.price).toFixed(2)}
                       </div>
                     )}

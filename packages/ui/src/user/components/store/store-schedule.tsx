@@ -19,20 +19,20 @@ export const Schedule = ({
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className="text-left w-full text-deep-purple-accent-400 font-sans text-3xl font-bold leading-none tracking-tight mb-5">
+      <div className="ui-flex ui-flex-col">
+        <div className="ui-text-left ui-w-full ui-text-deep-purple-accent-400 ui-font-sans ui-text-3xl ui-font-bold ui-leading-none ui-tracking-tight ui-mb-5">
           <FontAwesomeIcon icon={faCalendarDays} />
         </div>
         {storeSchedules.length === 0 && (
-          <div className="bg-slate-50 border-l-8 border-l-slate-300 p-2 pt-4 min-h-[72px] text-center w-full mb-2 shadow rounded">
-            <div className="flex gap-3 items-center">
-              <div className="text-slate-500 text-3xl w-16 text-center">
+          <div className="ui-bg-slate-50 ui-border-l-8 ui-border-l-slate-300 ui-p-2 ui-pt-4 ui-min-h-[72px] ui-text-center ui-w-full ui-mb-2 ui-shadow ui-rounded">
+            <div className="ui-flex ui-gap-3 ui-items-center">
+              <div className="ui-text-slate-500 ui-text-3xl ui-w-16 ui-text-center">
                 <FontAwesomeIcon icon={faBan} />
               </div>
               <div>
-                <div className="text-lg text-slate-800 mb-2 text-left">
+                <div className="ui-text-lg ui-text-slate-800 ui-mb-2 ui-text-left">
                   <div>No schedule available</div>
-                  <div className="text-sm text-slate-500">
+                  <div className="ui-text-sm ui-text-slate-500">
                     Please check back later.
                   </div>
                 </div>

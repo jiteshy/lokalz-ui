@@ -11,15 +11,15 @@ export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
   const pathname = usePathname();
 
   return (
-    <ul className="items-center hidden space-x-8 md:flex">
+    <ul className="ui-items-center ui-hidden ui-space-x-8 md:ui-flex">
       <li>
         <button
           onClick={() => handleLinkClick("/about")}
           className={cn(
             pathname === "/about"
-              ? "text-deep-purple-accent-700"
-              : "text-gray-800",
-            "items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
+              ? "ui-text-deep-purple-accent-700"
+              : "ui-text-gray-800",
+            "ui-items-center ui-pl-4 ui-whitespace-nowrap ui-inline-flex ui-transition-colors ui-duration-200 hover:ui-text-deep-purple-accent-700",
           )}
           aria-label="About Us"
         >
@@ -31,9 +31,9 @@ export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
           onClick={() => handleLinkClick("/onboard")}
           className={cn(
             pathname === "/onboard"
-              ? "text-deep-purple-accent-700"
-              : "text-gray-800",
-            "items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
+              ? "ui-text-deep-purple-accent-700"
+              : "ui-text-gray-800",
+            "ui-items-center ui-pl-4 ui-whitespace-nowrap ui-inline-flex ui-transition-colors ui-duration-200 hover:ui-text-deep-purple-accent-700",
           )}
           aria-label="Vendor Onboarding"
         >
@@ -45,9 +45,9 @@ export const NavLinks = ({ handleLinkClick }: NavLinksProps) => {
           onClick={() => handleLinkClick("/future")}
           className={cn(
             pathname === "/future"
-              ? "text-deep-purple-accent-700"
-              : "text-gray-800",
-            "items-center pl-4 whitespace-nowrap inline-flex transition-colors duration-200 hover:text-deep-purple-accent-700",
+              ? "ui-text-deep-purple-accent-700"
+              : "ui-text-gray-800",
+            "ui-items-center ui-pl-4 ui-whitespace-nowrap ui-inline-flex ui-transition-colors ui-duration-200 hover:ui-text-deep-purple-accent-700",
           )}
           aria-label="What's Coming"
         >

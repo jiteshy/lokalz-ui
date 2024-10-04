@@ -27,23 +27,23 @@ export const Nav = () => {
   };
 
   return (
-    <div className="shadow min-h-[57px]">
-      <div className="px-8 py-3 md:py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-8 lg:px-24 mb-[2px]">
+    <div className="ui-shadow ui-min-h-[57px]">
+      <div className="ui-px-8 ui-py-3 md:ui-py-5 ui-mx-auto sm:ui-max-w-xl md:ui-max-w-full lg:ui-max-w-screen-xl md:ui-px-8 lg:ui-px-24 ui-mb-[2px]">
         {/* Desktop nav bar */}
-        <div className="hidden md:flex relative items-center justify-between">
+        <div className="ui-hidden md:ui-flex ui-relative ui-items-center ui-justify-between">
           <NavLogo />
           <NavLinks handleLinkClick={handleLinkClick} />
         </div>
 
         {/* Mobile nav bar */}
-        <div className="md:hidden relative">
+        <div className="md:ui-hidden ui-relative">
           <div
-            className={`flex items-center gap-6 ${isMenuOpen && "fixed bg-white w-full left-0 top-0 px-8 py-3 z-10 border-b border-b-gray-200"}`}
+            className={`ui-flex ui-items-center ui-gap-6 ${isMenuOpen && "ui-fixed ui-bg-white ui-w-full ui-left-0 ui-top-0 ui-px-8 ui-py-3 ui-z-10 ui-border-b ui-border-b-gray-200"}`}
           >
             <button
               aria-label="Open Menu"
               title="Open Menu"
-              className="text-deep-purple-accent-400 transition duration-200 focus:outline-none focus:shadow-outline"
+              className="ui-text-deep-purple-accent-400 ui-transition ui-duration-200 focus:ui-outline-none focus:ui-shadow-outline"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
@@ -56,10 +56,10 @@ export const Nav = () => {
           </div>
 
           <div
-            className={`${isMenuOpen ? "translate-x-0" : "-translate-x-full"} fixed top-[57px] left-0 h-full w-10/12 bg-white z-10 transition-all duration-500 transform shadow-lg`}
+            className={`${isMenuOpen ? "ui-translate-x-0" : "-ui-translate-x-full"} ui-fixed ui-top-[57px] ui-left-0 ui-h-full ui-w-10/12 ui-bg-white ui-z-10 ui-transition-all ui-duration-500 ui-transform ui-shadow-lg`}
           >
-            <div className="h-screen">
-              <div className="px-8">
+            <div className="ui-h-screen">
+              <div className="ui-px-8">
                 <NavLinksMobile handleLinkClick={handleLinkClick} />
               </div>
             </div>

@@ -3,12 +3,12 @@ export const Title = ({ title }: { title: string }) => {
   const restJoined = rest.join(" ");
 
   return (
-    <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-deep-purple-accent-700 sm:text-4xl md:mx-auto">
-      <span className="relative inline-block">
+    <h2 className="ui-max-w-lg ui-mb-6 ui-font-sans ui-text-3xl ui-font-bold ui-leading-none ui-tracking-tight ui-text-deep-purple-accent-700 sm:ui-text-4xl md:ui-mx-auto">
+      <span className="ui-relative ui-inline-block">
         <svg
           viewBox="0 0 52 24"
           fill="currentColor"
-          className="absolute top-0 left-0 z-0 w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 block"
+          className="ui-absolute ui-top-0 ui-left-0 ui-z-0 ui-w-32 -ui-mt-8 -ui-ml-20 ui-text-blue-gray-100 lg:ui-w-32 lg:-ui-ml-28 lg:-ui-mt-10 ui-block"
         >
           <defs>
             <pattern
@@ -27,7 +27,7 @@ export const Title = ({ title }: { title: string }) => {
             height="24"
           />
         </svg>
-        <span className="relative">{first}</span>
+        <span className="ui-relative">{first}</span>
       </span>{" "}
       {restJoined}
     </h2>

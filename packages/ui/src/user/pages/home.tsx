@@ -92,7 +92,7 @@ const HomeContent = () => {
   }, [storesList, storeType]);
 
   return (
-    <div className="bg-gray-100">
+    <div className="ui-bg-gray-100">
       <Hero
         updateZipCode={updateZipCode}
         filter={storeType as StoreType}

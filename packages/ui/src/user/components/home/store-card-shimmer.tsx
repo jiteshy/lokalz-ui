@@ -1,7 +1,7 @@
 export const StoreCardShimmer = () => (
   <div>
-    <div className="object-fill w-full h-40 rounded-2xl bg-slate-200 bg-gradient-to-r from-slate-300 animate-pulse"></div>
-    <div className="m-2 h-5 w-2/3 bg-slate-200 rounded-sm"></div>
-    <div className="m-2 h-5 w-1/2 bg-slate-200 rounded-sm"></div>
+    <div className="ui-object-fill ui-w-full ui-h-40 ui-rounded-2xl ui-bg-slate-200 ui-bg-gradient-to-r ui-from-slate-300 ui-animate-pulse"></div>
+    <div className="ui-m-2 ui-h-5 ui-w-2/3 ui-bg-slate-200 ui-rounded-sm"></div>
+    <div className="ui-m-2 ui-h-5 ui-w-1/2 ui-bg-slate-200 ui-rounded-sm"></div>
   </div>
 );

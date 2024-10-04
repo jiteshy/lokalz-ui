@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 export const Footer = () => (
-  <footer className="mt-5">
-    <div className="relative bg-deep-purple-accent-400">
+  <footer className="ui-mt-5">
+    <div className="ui-relative ui-bg-deep-purple-accent-400">
       <svg
-        className="absolute top-0 w-full h-10 -mt-10 sm:h-16 text-deep-purple-accent-400"
+        className="ui-absolute ui-top-0 ui-w-full ui-h-10 -ui-mt-10 sm:ui-h-16 ui-text-deep-purple-accent-400"
         preserveAspectRatio="none"
         viewBox="0 0 1440 54"
       >
@@ -13,69 +13,69 @@ export const Footer = () => (
           d="M0 22L120 16.7C240 11 480 1.00001 720 0.700012C960 1.00001 1200 11 1320 16.7L1440 22V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z"
         />
       </svg>
-      <div className="w-full pt-10 flex items-center justify-center bg-deep-purple-accent-400">
-        <div className="lg:w-2/3 w-full px-12 lg:px-4 text-white flex flex-col">
-          <div className="w-full text-5xl font-bold">
-            <h1 className="w-full">Discover local vendors near you.</h1>
+      <div className="ui-w-full ui-pt-10 ui-flex ui-items-center ui-justify-center ui-bg-deep-purple-accent-400">
+        <div className="lg:ui-w-2/3 ui-w-full ui-px-12 lg:ui-px-4 ui-text-white ui-flex ui-flex-col">
+          <div className="ui-w-full ui-text-5xl ui-font-bold">
+            <h1 className="ui-w-full">Discover local vendors near you.</h1>
           </div>
-          <div className="mt-8">
-            <div className="w-full text-gray-300 text-xl">
+          <div className="ui-mt-8">
+            <div className="ui-w-full ui-text-gray-300 ui-text-xl">
               Subscribe for updates. We will send you updates about the upcoming
               features and vendors being added.
             </div>
-            <form className="flex flex-col mt-4 sm:flex-row w-full md:w-2/3">
+            <form className="ui-flex ui-flex-col ui-mt-4 sm:ui-flex-row ui-w-full md:ui-w-2/3">
               <input
                 placeholder="Email"
                 required
                 type="text"
-                className="w-full h-12 px-4 mb-3 transition duration-200 text-black bg-white border border-gray-300 rounded shadow-sm appearance-none sm:mr-4 md:mb-0 focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                className="ui-w-full ui-h-12 ui-px-4 ui-mb-3 ui-transition ui-duration-200 ui-text-black ui-bg-white ui-border ui-border-gray-300 ui-rounded ui-shadow-sm ui-appearance-none sm:ui-mr-4 md:ui-mb-0 focus:ui-border-deep-purple-accent-400 focus:ui-outline-none focus:ui-shadow-outline"
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-teal-accent-400 hover:bg-teal-accent-700 focus:shadow-outline focus:outline-none"
+                className="ui-inline-flex ui-items-center ui-justify-center ui-h-12 ui-px-6 ui-font-medium ui-tracking-wide ui-text-black ui-transition ui-duration-200 ui-rounded ui-shadow-md ui-bg-teal-accent-400 hover:ui-bg-teal-accent-700 focus:ui-shadow-outline focus:ui-outline-none"
               >
                 Subscribe
               </button>
             </form>
           </div>
           <div>
-            <div className="mt-6 md:mt-8 mb-6">
-              <div className="flex w-full flex-col md:flex-row md:justify-between md:items-center">
-                <div className="font-bold text-2xl uppercase hidden lg:block">
+            <div className="ui-mt-6 md:ui-mt-8 ui-mb-6">
+              <div className="ui-flex ui-w-full ui-flex-col md:ui-flex-row md:ui-justify-between md:ui-items-center">
+                <div className="ui-font-bold ui-text-2xl ui-uppercase ui-hidden lg:ui-block">
                   Lokalz
                 </div>
                 <Link
                   href={"/about"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
+                  className="sm:ui-text-sm ui-cursor-pointer ui-underline ui-underline-offset-4 ui-text-gray-300 hover:ui-text-white ui-whitespace-nowrap"
                 >
                   About Us
                 </Link>
                 <Link
                   href={"/future"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
+                  className="sm:ui-text-sm ui-cursor-pointer ui-underline ui-underline-offset-4 ui-text-gray-300 hover:ui-text-white ui-whitespace-nowrap"
                 >
                   What&apos;s Coming?
                 </Link>
                 <Link
                   href={"/onboard"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
+                  className="sm:ui-text-sm ui-cursor-pointer ui-underline ui-underline-offset-4 ui-text-gray-300 hover:ui-text-white ui-whitespace-nowrap"
                 >
                   Vendor Onboarding
                 </Link>
                 <Link
                   href={"/contact"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
+                  className="sm:ui-text-sm ui-cursor-pointer ui-underline ui-underline-offset-4 ui-text-gray-300 hover:ui-text-white ui-whitespace-nowrap"
                 >
                   Contact Us
                 </Link>
                 <Link
                   href={"/terms"}
-                  className="sm:text-sm cursor-pointer underline underline-offset-4 text-gray-300 hover:text-white whitespace-nowrap"
+                  className="sm:ui-text-sm ui-cursor-pointer ui-underline ui-underline-offset-4 ui-text-gray-300 hover:ui-text-white ui-whitespace-nowrap"
                 >
                   Terms & Conditions
                 </Link>
               </div>
-              {/* <div className="flex space-x-12 items-center md:justify-center gap-5 mt-6">
+              {/* <div className="ui-flex ui-space-x-12 ui-items-center md:ui-justify-center ui-gap-5 ui-mt-6">
                 <a>
                   <svg
                     width="12"
@@ -128,8 +128,8 @@ export const Footer = () => (
                 </a>
               </div> */}
             </div>
-            <hr className="border-gray-400" />
-            <p className="w-full text-center my-2 text-gray-300">
+            <hr className="ui-border-gray-400" />
+            <p className="ui-w-full ui-text-center ui-my-2 ui-text-gray-300">
               Copyright © 2024 | Lokalz
             </p>
           </div>

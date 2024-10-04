@@ -13,6 +13,7 @@
     "./components": "./src/components/index.ts",
     "./user/pages": "./src/user/pages/index.ts",
     "./user/components": "./src/user/components/index.ts",
+    "./hooks": "./src/hooks/index.ts",
     "./utils": "./src/utils.ts",
     "./types": "./src/types.ts",
     "./config": "./src/config.ts",

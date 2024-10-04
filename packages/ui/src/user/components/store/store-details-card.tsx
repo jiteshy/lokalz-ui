@@ -7,69 +7,69 @@ import Image from "next/image";
 export const StoreDetailsCard = ({ storeData }: { storeData: Store }) => {
   return (
     <>
-      <div className="flex flex-col overflow-hidden border rounded shadow lg:flex-row">
-        <div className="relative lg:w-1/2">
+      <div className="ui-flex ui-flex-col ui-overflow-hidden ui-border ui-rounded ui-shadow lg:ui-flex-row">
+        <div className="ui-relative lg:ui-w-1/2">
           <Image
             src={storeData.imageUrl}
             alt=""
             width={500}
             height={200}
-            className="object-cover w-full lg:absolute h-80 lg:h-full"
+            className="ui-object-cover ui-w-full lg:ui-absolute ui-h-80 lg:ui-h-full"
           />
           <svg
-            className="absolute top-0 -right-1 hidden h-full text-white lg:inline-block"
+            className="ui-absolute ui-top-0 -ui-right-1 ui-hidden ui-h-full ui-text-white lg:ui-inline-block"
             viewBox="0 0 20 104"
             fill="currentColor"
           >
             <polygon points="17.3036738 5.68434189e-14 20 5.68434189e-14 20 104 0.824555778 104" />
           </svg>
         </div>
-        <div className="flex flex-col justify-center p-6 bg-white lg:w-1/2">
-          <div className="flex justify-between">
-            <div className="px-4 pt-2 pb-[6px] text-xs size-fit font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+        <div className="ui-flex ui-flex-col ui-justify-center ui-p-6 ui-bg-white lg:ui-w-1/2">
+          <div className="ui-flex ui-justify-between">
+            <div className="ui-px-4 ui-pt-2 ui-pb-[6px] ui-text-xs ui-size-fit ui-font-semibold ui-tracking-wider ui-text-teal-900 ui-uppercase ui-rounded-full ui-bg-teal-accent-400">
               {STORE_TYPES[storeData.type]}
             </div>
             {Number(storeData.rating) > 0 ? (
-              <div className="px-2 py-1 border border-gray-300 rounded-md text-deep-purple-accent-400">
+              <div className="ui-px-2 ui-py-1 ui-border ui-border-gray-300 ui-rounded-md ui-text-deep-purple-accent-400">
                 {storeData.rating}
               </div>
             ) : (
-              <div className="text-sm flex items-center gap-1 text-deep-purple-accent-400">
+              <div className="ui-text-sm ui-flex ui-items-center ui-gap-1 ui-text-deep-purple-accent-400">
                 <FontAwesomeIcon icon={faBolt} />
                 New
               </div>
             )}
           </div>
-          <h5 className="my-3 text-3xl font-extrabold leading-none sm:text-4xl">
+          <h5 className="ui-my-3 ui-text-3xl ui-font-extrabold ui-leading-none sm:ui-text-4xl">
             {storeData.name}
           </h5>
-          <p className="mb-5 text-gray-800">{storeData.description}</p>
-          <div className="flex gap-3">
+          <p className="ui-mb-5 ui-text-gray-800">{storeData.description}</p>
+          <div className="ui-flex ui-gap-3">
             {storeData.tags.map((tag, index) => (
               <div key={index}>
-                <p className="inline-block px-3 py-2 mb-4 text-xs font-semibold tracking-wider text-deep-purple-accent-400 border border-slate-400 uppercase rounded-full">
+                <p className="ui-inline-block ui-px-3 ui-py-2 ui-mb-4 ui-text-xs ui-font-semibold ui-tracking-wider ui-text-deep-purple-accent-400 ui-border ui-border-slate-400 ui-uppercase ui-rounded-full">
                   {tag}
                 </p>
               </div>
             ))}
           </div>
-          <hr className="border-b border-b-gray-300" />
-          <div className="pt-3 text-sm text-slate-600 text-right">
-            <div className="pt-2">
+          <hr className="ui-border-b ui-border-b-gray-300" />
+          <div className="ui-pt-3 ui-text-sm ui-text-slate-600 ui-text-right">
+            <div className="ui-pt-2">
               <a
                 href={`tel:${storeData.phone}`}
-                className="hover:underline text-deep-purple-accent-400"
+                className="hover:ui-underline ui-text-deep-purple-accent-400"
               >
-                <span className="pr-3">{storeData.phone}</span>
+                <span className="ui-pr-3">{storeData.phone}</span>
                 <FontAwesomeIcon icon={faPhone} />
               </a>
             </div>
-            <div className="pt-2">
+            <div className="ui-pt-2">
               <a
                 href={`mailto:${storeData.email}`}
-                className="hover:underline text-deep-purple-accent-400"
+                className="hover:ui-underline ui-text-deep-purple-accent-400"
               >
-                <span className="pr-3">{storeData.email}</span>
+                <span className="ui-pr-3">{storeData.email}</span>
                 <FontAwesomeIcon icon={faEnvelope} />
               </a>
             </div>

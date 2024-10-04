@@ -218,7 +218,9 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   const handleScheduleSave = () => {
     if (areSchedulesValid()) {
       setSubmittingSchedule(true);
-      const filteredSchedules = schedules.filter(item => !item.markedForDeletion);
+      const filteredSchedules = schedules.filter(
+        (item) => !item.markedForDeletion,
+      );
       const storeSchedule: StoreSchedule = {
         storeId,
         schedules: filteredSchedules,

@@ -15,14 +15,14 @@ type StoresInput = {
 
 export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
   return (
-    <div className="pt-0 md:pt-8 pb-5 md:pb-16">
+    <div className="ui-pt-0 md:ui-pt-8 ui-pb-5 md:ui-pb-16">
       {isStoresDataLoading && (
-        <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-8 md:px-10 lg:px-0">
-          <h4 className="text-xl text-slate-800 mb-9 pb-3 border-b border-b-gray-300">
+        <div className="ui-p-5 lg:ui-w-11/12 xl:ui-w-3/4 ui-mx-auto ui-px-8 md:ui-px-10 lg:ui-px-0">
+          <h4 className="ui-text-xl ui-text-slate-800 ui-mb-9 ui-pb-3 ui-border-b ui-border-b-gray-300">
             <FontAwesomeIcon icon={faCircleNotch} spin />
-            <span className="pl-3">Finding local vendors..</span>
+            <span className="ui-pl-3">Finding local vendors..</span>
           </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          <div className="ui-grid ui-grid-cols-1 sm:ui-grid-cols-2 lg:ui-grid-cols-3 xl:ui-grid-cols-4 ui-gap-10">
             {Array.from({ length: 5 }, (_, index) => (
               <StoreCardShimmer key={index} />
             ))}
@@ -30,38 +30,38 @@ export const Stores = ({ storesList, isStoresDataLoading }: StoresInput) => {
         </div>
       )}
       {storesList?.length === 0 && (
-        <div className="px-8 mt-20 mb-40 text-center col-span-4">
+        <div className="ui-px-8 ui-mt-20 ui-mb-40 ui-text-center ui-col-span-4">
           <FontAwesomeIcon
             icon={faCircleExclamation}
-            className="text-7xl text-deep-purple-accent-400"
+            className="ui-text-7xl ui-text-deep-purple-accent-400"
           />
-          <h4 className="text-2xl text-slate-800 mt-3 mb-6">
+          <h4 className="ui-text-2xl ui-text-slate-800 ui-mt-3 ui-mb-6">
             No Results Found
           </h4>
-          <p className="pt-3 text-slate-800">
+          <p className="ui-pt-3 ui-text-slate-800">
             Uh-oh! Looks like we haven&apos;t onboarded the lokal gems in this
             area yet.
           </p>
-          <p className="pt-3 text-slate-800">Try a different zip code!</p>
+          <p className="ui-pt-3 ui-text-slate-800">Try a different zip code!</p>
         </div>
       )}
       {storesList?.length > 0 && (
-        <div className="p-5 lg:w-11/12 xl:w-3/4 mx-auto px-8 md:px-10 lg:px-0">
-          <h4 className="text-xl text-slate-800 mb-5 pb-3 border-b border-b-gray-300">
+        <div className="ui-p-5 lg:ui-w-11/12 xl:ui-w-3/4 ui-mx-auto ui-px-8 md:ui-px-10 lg:ui-px-0">
+          <h4 className="ui-text-xl ui-text-slate-800 ui-mb-5 ui-pb-3 ui-border-b ui-border-b-gray-300">
             Showing vendors in&nbsp;
-            <span className="text-deep-purple-accent-400 font-semibold">
+            <span className="ui-text-deep-purple-accent-400 ui-font-semibold">
               {storesList[0].address.zipCode}
             </span>
           </h4>
-          <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="ui-relative ui-grid ui-grid-cols-1 sm:ui-grid-cols-2 lg:ui-grid-cols-3 xl:ui-grid-cols-4 ui-gap-5">
             {storesList.map((store: Store) => (
               <Link key={store.id} href={`/store?id=${store.id}`}>
                 <StoreCard details={store} />
               </Link>
             ))}
           </div>
-          <div className="md:hidden pt-10 flex justify-center">
-            <div className="px-5 py-1 text-xs bg-gray-200 text-slate-800 rounded-full border border-gray-300 w-fit">
+          <div className="md:ui-hidden ui-pt-10 ui-flex ui-justify-center">
+            <div className="ui-px-5 ui-py-1 ui-text-xs ui-bg-gray-200 ui-text-slate-800 ui-rounded-full ui-border ui-border-gray-300 ui-w-fit">
               That's all we've got!
             </div>
           </div>

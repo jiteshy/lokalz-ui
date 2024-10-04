@@ -68,29 +68,29 @@ export const ScheduleItem = ({
 
   return (
     <div
-      className={`relative p-2 min-h-[72px] text-center w-full mb-2 shadow rounded border-l-8 ${className || (formattedSchedule.isToday ? "border-l-deep-purple-accent-400 bg-indigo-50" : "border-l-slate-300 bg-slate-50")}`}
+      className={`ui-relative ui-p-2 ui-min-h-[72px] ui-text-center ui-w-full ui-mb-2 ui-shadow ui-rounded ui-border-l-8 ${className || (formattedSchedule.isToday ? "ui-border-l-deep-purple-accent-400 ui-bg-indigo-50" : "ui-border-l-slate-300 ui-bg-slate-50")}`}
     >
-      <div className="flex gap-3 items-center">
-        <div className="w-16 text-center">
+      <div className="ui-flex ui-gap-3 ui-items-center">
+        <div className="ui-w-16 ui-text-center">
           {formattedSchedule.isToday ? (
-            <div className="text-xl">Today</div>
+            <div className="ui-text-xl">Today</div>
           ) : (
             <>
-              <div className="text-slate-800 text-2xl font-medium">
+              <div className="ui-text-slate-800 ui-text-2xl ui-font-medium">
                 {formattedSchedule.date}
               </div>
-              <div className="text-slate-500">{formattedSchedule.month}</div>
+              <div className="ui-text-slate-500">{formattedSchedule.month}</div>
             </>
           )}
         </div>
-        <div className="text-sm text-left">
-          <div className="text-lg text-slate-800 mb-2">
+        <div className="ui-text-sm ui-text-left">
+          <div className="ui-text-lg ui-text-slate-800 ui-mb-2">
             <div>{formattedSchedule.day}</div>
-            <div className="text-xs text-slate-500">
+            <div className="ui-text-xs ui-text-slate-500">
               {formattedSchedule.fromTime} to {formattedSchedule.toTime}
             </div>
           </div>
-          <div className="text-sm text-slate-600">
+          <div className="ui-text-sm ui-text-slate-600">
             <div>{formattedSchedule.street}</div>
             <div>
               {formattedSchedule.city}
