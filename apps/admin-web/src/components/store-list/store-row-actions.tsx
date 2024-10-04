@@ -86,7 +86,7 @@ export const StoreRowActions = ({
           <DropdownMenuGroup>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "store")}
+              onClick={() => onEdit(storeId!, "store", storeStatus)}
             >
               <div className="flex gap-2 items-center">
                 <IdCardIcon className="w-4 h-4" />
@@ -95,7 +95,7 @@ export const StoreRowActions = ({
             </DropdownMenuItem>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "menu")}
+              onClick={() => onEdit(storeId!, "menu", storeStatus)}
             >
               <div className="flex gap-2 items-center">
                 <ReaderIcon className="w-4 h-4" />
@@ -104,35 +104,38 @@ export const StoreRowActions = ({
             </DropdownMenuItem>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "schedule")}
+              onClick={() => onEdit(storeId!, "schedule", storeStatus)}
             >
               <div className="flex gap-2 items-center">
                 <CalendarIcon className="w-4 h-4" />
                 Edit Schedule
               </div>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "publish")}
-            >
-              <div className="flex gap-2 items-center">
-                <LightningBoltIcon className="w-4 h-4" />
-                Store Preview
-              </div>
-            </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           {storeStatus === StoreStatus.ACTIVE && (
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onClick={() => onMarkInactive(storeId!)}
-            >
-              <div className="flex gap-2 items-center">
-                <CircleBackslashIcon className="w-4 h-4" />
-                Mark Inactive
-              </div>
-            </DropdownMenuItem>
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => onEdit(storeId!, "publish")}
+              >
+                <div className="flex gap-2 items-center">
+                  <LightningBoltIcon className="w-4 h-4" />
+                  Store Preview
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => onMarkInactive(storeId!)}
+              >
+                <div className="flex gap-2 items-center">
+                  <CircleBackslashIcon className="w-4 h-4" />
+                  Mark Inactive
+                </div>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </>
           )}
           <DialogTrigger asChild>
             <DropdownMenuItem className="cursor-pointer text-red-accent-400 hover:text-red-accent-700">

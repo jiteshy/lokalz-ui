@@ -67,6 +67,7 @@ export type StoreSchedule = {
 };
 
 export type StoreScheduleItem = {
+  id?: string;
   from: number;
   to: number;
   date: number;

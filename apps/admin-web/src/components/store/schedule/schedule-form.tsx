@@ -77,6 +77,8 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
           schedule1.from - schedule2.from,
       );
       setSchedules(selectedSchedules);
+    } else {
+      setSchedules(scheduleData?.schedules || [])
     }
   }, [dates]);
 
@@ -199,7 +201,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
       setSubmittingSchedule(true);
       const storeSchedule: StoreSchedule = {
         storeId,
-        schedules: schedules,
+        schedules,
       };
       axios.put(`/store/${storeId}/schedule`, storeSchedule).then(
         async () => {
@@ -297,7 +299,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
               </div>
               {schedules.map((schedule: StoreScheduleItem) => (
                 <ScheduleItem
-                  key={schedule.date}
+                  key={schedule.id || schedule.date}
                   storeScheduleItem={schedule}
                   className={
                     !schedule.existing ? "border-l-amber-700 bg-amber-50" : ""

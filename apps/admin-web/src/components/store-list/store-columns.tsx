@@ -1,7 +1,7 @@
 "use client";
 
 import { STORE_TYPES } from "@repo/ui/constants";
-import { Store } from "@repo/ui/types";
+import { Store, StoreStatus } from "@repo/ui/types";
 import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 import { OpenInNewWindowIcon } from "@radix-ui/react-icons";
 
 export type StoreRowActionsProps = {
-  onEdit: (storeId: string, tab?: string) => void;
+  onEdit: (storeId: string, tab?: string, status?: StoreStatus) => void;
   onMarkInactive: (storeId: string) => Promise<void>;
   onDelete: (storeId: string) => Promise<void>;
 };

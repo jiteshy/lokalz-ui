@@ -380,7 +380,6 @@ export const ScheduleEdit = ({
               <Button
                 className="-mt-3"
                 type="submit"
-                onClick={() => console.log(scheduleForm.formState.errors)}
               >
                 Save changes
               </Button>

@@ -5,7 +5,7 @@ export const StoreMenuDetails = ({ menuData }: { menuData: StoreMenu }) => {
   // TO-DO: Remove ! after order once optional is removed from type
   // Sort the menu by category and items inside each category
   const sortedMenuData = menuData?.menu
-    .map((category: StoreMenuCategory) => {
+    ?.map((category: StoreMenuCategory) => {
       category.items.sort(
         (item1: StoreMenuItem, item2: StoreMenuItem) =>
           item1.order! - item2.order!,

@@ -21,12 +21,14 @@ import { MenuForm } from "@/components/store/menu/menu-form";
 import { Button } from "@/components/ui/button";
 import { ScheduleForm } from "@/components/store/schedule/schedule-form";
 import { StorePublish } from "@/components/store/publish/store-publish";
+import { StoreStatus } from "@repo/ui/types";
 
 export default function StoreCreateUpdatePage() {
   const router = useRouter();
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab");
+  const storeStatus = searchParams.get("status") as StoreStatus;
   const [activeTab, setActiveTab] = useState<string>(initialTab || "store");
 
   let { storeId } = useParams<{ storeId: string }>();
@@ -88,7 +90,7 @@ export default function StoreCreateUpdatePage() {
           <TabsTrigger value="publish" className="py-2" disabled={!storeId}>
             <div className="flex gap-2">
               <LightningBoltIcon className="w-5 h-5" />
-              Publish
+              {storeStatus === StoreStatus.ACTIVE ? "Preview" : "Publish"}
             </div>
           </TabsTrigger>
         </TabsList>
@@ -102,7 +104,7 @@ export default function StoreCreateUpdatePage() {
           <ScheduleForm storeId={storeId} />
         </TabsContent>
         <TabsContent value="publish" className="pt-3">
-          <StorePublish storeId={storeId} />
+          <StorePublish storeId={storeId} storeStatus={storeStatus} />
         </TabsContent>
       </Tabs>
     </div>
