@@ -51,7 +51,7 @@ export const StorePublish = ({
         </h4>
         <div className="flex items-center gap-3">
           {storeStatus !== StoreStatus.ACTIVE ? (
-            <Button type="submit" onClick={handlePublishStore}>
+            <Button type="submit" className="bg-deep-purple-accent-400" onClick={handlePublishStore}>
               <CheckIcon className="w-5 h-5" />
               <span className="pl-2">Publish Store</span>
             </Button>
