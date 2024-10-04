@@ -8,7 +8,13 @@ import { StoreStatus } from "@repo/ui/types";
 import { StorePage } from "@repo/ui/user/pages";
 import { useRouter } from "next/navigation";
 
-export const StorePublish = ({ storeId, storeStatus }: { storeId: string, storeStatus?: StoreStatus }) => {
+export const StorePublish = ({
+  storeId,
+  storeStatus,
+}: {
+  storeId: string;
+  storeStatus?: StoreStatus;
+}) => {
   const axios = useAxios();
   const { toast } = useToast();
   const router = useRouter();

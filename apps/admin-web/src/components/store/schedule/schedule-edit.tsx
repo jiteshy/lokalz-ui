@@ -377,10 +377,7 @@ export const ScheduleEdit = ({
               </div>
             </div>
             <SheetFooter>
-              <Button
-                className="-mt-3"
-                type="submit"
-              >
+              <Button className="-mt-3" type="submit">
                 Save changes
               </Button>
             </SheetFooter>

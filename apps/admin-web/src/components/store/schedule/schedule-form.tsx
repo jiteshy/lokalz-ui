@@ -78,7 +78,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
       );
       setSchedules(selectedSchedules);
     } else {
-      setSchedules(scheduleData?.schedules || [])
+      setSchedules(scheduleData?.schedules || []);
     }
   }, [dates]);
 

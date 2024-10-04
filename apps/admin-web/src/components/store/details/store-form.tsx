@@ -149,182 +149,19 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
       {isStoreDataLoading || storeForm.formState.isSubmitting ? (
         <Loading />
       ) : (
-        <Form {...storeForm}>
-          <form
-            key={storeId && storeForm.watch("email")}
-            onSubmit={storeForm.handleSubmit(onSubmit)}
-            className="space-y-3"
-          >
-            <FormField
-              control={storeForm.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Store Name*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter store name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contact Email*</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter contact email"
-                      {...field}
-                      disabled={!!storeId}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contact Phone*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter contact phone" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Store Type*</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    disabled={!!storeId}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a store type" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Object.entries(StoreType).map(([key, value]) => (
-                        <SelectItem key={key} value={key}>
-                          {value}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="tags"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Store Tags*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter store tags" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter comma separated tags</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="address.street"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Street*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter street" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="address.city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter city" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="address.state"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>State*</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a state" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Object.entries(US_STATES).map(([key, value]) => (
-                        <SelectItem key={key} value={key}>
-                          {value}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="address.zipCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Zipcode*</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter zipcode" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={storeForm.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Store Description*</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Enter store description"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>Max 1000 chars</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="pt-5">
+        <div className="sm:max-w-screen-lg m-auto pt-3">
+          <div className="flex items-center justify-between pb-2 mb-8 border-b border-b-slate-200">
+            <h4 className="text-xl">
+              Store Details
+              <span className="text-xs text-slate-500 pl-2">
+                (Add/Update store details below)
+              </span>
+            </h4>
+            <div className="flex items-center gap-3">
               <Button
-                type="button"
+                variant="outline"
                 onClick={() => storeForm.reset()}
-                className="bg-white text-gray-800 border border-gray-800 mr-3 hover:bg-gray-100"
+                className="shadow"
               >
                 <EraserIcon className="w-5 h-5" />
                 <span className="pl-2">Reset</span>
@@ -334,8 +171,183 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
                 <span className="pl-2">Save Store</span>
               </Button>
             </div>
-          </form>
-        </Form>
+          </div>
+          <Form {...storeForm}>
+            <form
+              key={storeId && storeForm.watch("email")}
+              onSubmit={storeForm.handleSubmit(onSubmit)}
+              className="space-y-3"
+            >
+              <FormField
+                control={storeForm.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Store Name*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter store name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contact Email*</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter contact email"
+                        {...field}
+                        disabled={!!storeId}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contact Phone*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter contact phone" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Store Type*</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      disabled={!!storeId}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a store type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Object.entries(StoreType).map(([key, value]) => (
+                          <SelectItem key={key} value={key}>
+                            {value}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="tags"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Store Tags*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter store tags" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Enter comma separated tags
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="address.street"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Street*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter street" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="address.city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter city" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="address.state"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>State*</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a state" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Object.entries(US_STATES).map(([key, value]) => (
+                          <SelectItem key={key} value={key}>
+                            {value}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="address.zipCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Zipcode*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter zipcode" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={storeForm.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Store Description*</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Enter store description"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>Max 1000 chars</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </form>
+          </Form>
+        </div>
       )}
     </div>
   );

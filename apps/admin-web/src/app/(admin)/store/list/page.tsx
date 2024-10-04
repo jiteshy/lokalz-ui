@@ -50,11 +50,17 @@ export default function StoresListPage() {
     setCurrentFilter(status);
   };
 
-  const onEdit = useCallback((storeId: string, tab?: string, status?: StoreStatus) => {
-    const path = tab && status ? `/store/${storeId}?tab=${tab}&status=${status}` : `/store/${storeId}`;
-    router.push(path);
-  }, []);
-  
+  const onEdit = useCallback(
+    (storeId: string, tab?: string, status?: StoreStatus) => {
+      const path =
+        tab && status
+          ? `/store/${storeId}?tab=${tab}&status=${status}`
+          : `/store/${storeId}`;
+      router.push(path);
+    },
+    [],
+  );
+
   const onMarkInactive = useCallback((storeId: string) => {
     return axios.put(`/store/${storeId}/status/${StoreStatus.INACTIVE}`).then(
       async () => {
