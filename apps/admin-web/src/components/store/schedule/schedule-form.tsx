@@ -19,7 +19,7 @@ import { ScheduleEdit } from "./schedule-edit";
 import { scheduleFormSchema } from "./schedule-form-schema";
 import { z } from "zod";
 import useSWR from "swr";
-import { ADMIN_APIS, USER_APIS } from "@repo/ui/config";
+import { ADMIN_APIS } from "@repo/ui/config";
 import Loading from "@/app/loading";
 import { useAxios } from "@/hooks/use-axios";
 import { addHoursAndMinutes } from "@/lib/utils";
@@ -36,7 +36,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
     isLoading: isScheduleLoading,
     mutate,
   } = useSWR<StoreSchedule>(
-    `${USER_APIS.STORE.STORE_DETAILS}/${storeId}/schedule/weekly`,
+    `${ADMIN_APIS.STORE.STORE_DETAILS}/${storeId}/schedule/monthly`,
   );
   const [schedules, setSchedules] = useState<StoreScheduleItem[]>([]);
   const [submittingSchedule, setSubmittingSchedule] = useState<boolean>(false);
