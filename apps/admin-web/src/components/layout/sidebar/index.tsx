@@ -74,12 +74,12 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${
+        className={`fixed left-0 top-0 z-9999 flex h-screen w-67.5 flex-col overflow-y-hidden bg-gradient-to-b from-indigo-500 to-boxdark duration-300 ease-linear dark:from-boxdark dark:to-boxdark-3 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* <!-- SIDEBAR HEADER --> */}
-        <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+        <div className="flex items-center justify-between gap-2 px-6 py-5.5">
           <Link
             href="/store/list"
             className="flex gap-3 items-center text-2xl text-slate-100"
@@ -87,7 +87,8 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             {/* TO-DO: Replace with icon */}
             <MixIcon className="h-6 w-6" />{" "}
             <div className="flex items-baseline gap-2">
-              Lokalz <span className="text-xs text-slate-300">ADMIN</span>
+              <span className="font-medium">Lokalz</span>{" "}
+              <span className="text-xs text-whiten">ADMIN</span>
             </div>
           </Link>
 
@@ -115,7 +116,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
         <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
           {/* <!-- Sidebar Menu --> */}
-          <nav className="mt-2 px-4 py-4 lg:px-6">
+          <nav className="px-4 py-4 lg:px-6">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">

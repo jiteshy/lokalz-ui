@@ -45,7 +45,7 @@ export const getStoreColumns = ({
       return (
         <Button
           variant="link"
-          className="underline p-0"
+          className="underline p-0 text-primary text-body dark:text-bodydark"
           onClick={() =>
             window.open(
               `${process.env.NEXT_PUBLIC_APP_URL}/store?id=${storeId}`,
@@ -54,7 +54,7 @@ export const getStoreColumns = ({
         >
           <div className="flex items-center gap-2">
             {name}
-            <OpenInNewWindowIcon className="h-4 w-4 text-deep-purple-accent-700" />
+            <OpenInNewWindowIcon className="h-4 w-4" />
           </div>
         </Button>
       );

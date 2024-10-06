@@ -42,13 +42,13 @@ export default function StoreCreateUpdatePage() {
   };
 
   return (
-    <div className="bg-white border border-text-300 w-full p-6 text-slate-700">
-      <div className="flex justify-between pb-2 border-b border-slate-200">
+    <div className="bg-white border border-text-300 w-full p-6 text-slate-700 dark:text-slate-200 shadow-default dark:border-strokedark dark:bg-boxdark">
+      <div className="flex justify-between pb-2 border-b border-slate-200 dark:border-strokedark">
         <div>
           <h4 className="text-2xl font-semibold pb-1">
             {storeId ? "Update" : "Add"} Store
           </h4>
-          <div className="text-sm text-slate-500">
+          <div className="text-sm text-slate-500 dark:text-slate-400">
             Please provide details for the Store
           </div>
         </div>
@@ -68,27 +68,27 @@ export default function StoreCreateUpdatePage() {
         onValueChange={handleTabChange}
         className="w-full pt-5"
       >
-        <TabsList className="grid sm:max-w-screen-lg m-auto grid-cols-4 h-12 mb-3 px-[6px] text-center bg-slate-100">
+        <TabsList className="grid sm:max-w-screen-lg m-auto grid-cols-4 h-12 mb-3 px-[6px] text-center bg-gradient-to-r from-indigo-100 via-pink-50 to-indigo-100 dark:from-boxdark-0 dark:to-boxdark-0">
           <TabsTrigger value="store" className="py-2">
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
               <IdCardIcon className="w-5 h-5" />
               Store Details
             </div>
           </TabsTrigger>
           <TabsTrigger value="menu" className="py-2" disabled={!storeId}>
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
               <ReaderIcon className="w-5 h-5" />
               Menu
             </div>
           </TabsTrigger>
           <TabsTrigger value="schedule" className="py-2" disabled={!storeId}>
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
               <CalendarIcon className="w-5 h-5" />
               Schedule
             </div>
           </TabsTrigger>
           <TabsTrigger value="publish" className="py-2" disabled={!storeId}>
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
               <LightningBoltIcon className="w-5 h-5" />
               {storeStatus === StoreStatus.ACTIVE ? "Preview" : "Publish"}
             </div>

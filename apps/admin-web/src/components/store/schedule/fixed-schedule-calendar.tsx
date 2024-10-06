@@ -50,7 +50,7 @@ export const FixedScheduleCalendar = ({
       onSelect={setDates}
       className="rounded-md border"
       classNames={{
-        day_today: "border bg-deep-purple-accent-400 text-white",
+        day_today: "border border-indigo-500 bg-indigo-500 text-white",
         root: "shadow-md",
         day: "w-12 h-12",
         caption_label: "text-xl",
@@ -58,8 +58,10 @@ export const FixedScheduleCalendar = ({
       }}
       footer={
         datesStr && (
-          <div className="text-xs text-center w-full pt-3 text-deep-purple-accent-700 font-medium">
-            <span className="text-slate-600 font-normal">Selected Dates:</span>{" "}
+          <div className="text-xs text-center w-full pt-3 text-indigo-500 dark:text-muted-foreground font-medium">
+            <span className="text-muted-foreground font-normal">
+              Selected Dates:
+            </span>{" "}
             {datesStr}
           </div>
         )

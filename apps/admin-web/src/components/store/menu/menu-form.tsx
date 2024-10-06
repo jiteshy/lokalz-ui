@@ -319,10 +319,10 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     <Loading />
   ) : (
     <div className="sm:max-w-screen-lg m-auto pt-3">
-      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200">
+      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl">
           Menu Categories
-          <span className="text-xs text-slate-500 pl-2">
+          <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
             (Expand below categories to see items)
           </span>
         </h4>

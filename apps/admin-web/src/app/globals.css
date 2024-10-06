@@ -19,9 +19,6 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -102,6 +99,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply relative z-1 bg-slate-200 font-sans text-base font-normal text-body;
   }
 }

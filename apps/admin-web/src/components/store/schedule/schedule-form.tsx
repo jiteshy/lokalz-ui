@@ -252,10 +252,10 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
     <Loading />
   ) : (
     <div className="sm:max-w-screen-lg m-auto pt-3">
-      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200">
+      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl">
           Store Schedule
-          <span className="text-xs text-slate-500 pl-2">
+          <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
             (Create/update your schedules below.)
           </span>
         </h4>
@@ -278,7 +278,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
               <Button
                 variant={"link"}
                 disabled={dates?.length === disabledDates.length}
-                className="text-sm underline flex gap-2 items-center !pr-0"
+                className="text-sm underline flex gap-2 items-center !pr-0 text-slate-900 dark:text-slate-200"
               >
                 <ReloadIcon className="w-3 h-3" />
                 Reset Calendar
@@ -302,7 +302,9 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
           {schedules.length > 0 && (
             <>
               <div className="min-h-12 flex items-center justify-between pb-3">
-                <div className="text-xl text-slate-900">Schedules</div>
+                <div className="text-xl text-slate-900 dark:text-slate-200">
+                  Schedules
+                </div>
                 {schedules.length > 1 && (
                   <div className="flex items-center">
                     <ScheduleEdit
@@ -311,7 +313,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
                     >
                       <Button
                         variant="link"
-                        className="flex items-center gap-2 text-sm underline !pr-0"
+                        className="flex items-center gap-2 text-sm underline !pr-0 dark:text-slate-200"
                       >
                         Update All Schedules
                       </Button>

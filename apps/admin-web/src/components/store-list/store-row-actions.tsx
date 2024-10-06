@@ -115,7 +115,6 @@ export const StoreRowActions = ({
           <DropdownMenuSeparator />
           {storeStatus === StoreStatus.ACTIVE && (
             <>
-              <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="cursor-pointer"
                 onClick={() => onEdit(storeId!, "publish")}

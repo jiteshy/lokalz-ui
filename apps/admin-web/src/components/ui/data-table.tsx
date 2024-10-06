@@ -79,7 +79,7 @@ export function DataTable<TData, TValue>({
         <DebouncedInput
           value={globalFilter ?? ""}
           onChange={(value) => setGlobalFilter(String(value))}
-          className="max-w-sm"
+          className="max-w-sm border dark:border-form-strokedark mr-6"
           placeholder="Search all columns..."
         />
         <DropdownMenu>
@@ -109,9 +109,9 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border-0">
         <Table>
-          <TableHeader className="bg-slate-100">
+          <TableHeader className="bg-slate-200 dark:bg-boxdark-0 rounded">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {

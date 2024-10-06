@@ -25,11 +25,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn("bg-white", inter.className)}>
-        <SessionProvider session={session}>
-          <SWRProvider>{children}</SWRProvider>
-        </SessionProvider>
-        <Toaster />
+      <body className={inter.className}>
+        <div className="dark:bg-boxdark-0 dark:text-bodydark">
+          <SessionProvider session={session}>
+            <SWRProvider>{children}</SWRProvider>
+          </SessionProvider>
+          <Toaster />
+        </div>
       </body>
     </html>
   );

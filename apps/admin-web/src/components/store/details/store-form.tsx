@@ -150,34 +150,37 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
         <Loading />
       ) : (
         <div className="sm:max-w-screen-lg m-auto pt-3">
-          <div className="flex items-center justify-between pb-2 mb-8 border-b border-b-slate-200">
-            <h4 className="text-xl">
-              Store Details
-              <span className="text-xs text-slate-500 pl-2">
-                (Add/Update store details below)
-              </span>
-            </h4>
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                onClick={() => storeForm.reset()}
-                className="shadow"
-              >
-                <EraserIcon className="w-5 h-5" />
-                <span className="pl-2">Reset</span>
-              </Button>
-              <Button type="submit" disabled={storeForm.formState.isSubmitting}>
-                <CheckIcon className="w-5 h-5" />
-                <span className="pl-2">Save Store</span>
-              </Button>
-            </div>
-          </div>
           <Form {...storeForm}>
             <form
               key={storeId && storeForm.watch("email")}
               onSubmit={storeForm.handleSubmit(onSubmit)}
               className="space-y-3"
             >
+              <div className="flex items-center justify-between pb-2 mb-8 border-b border-b-slate-200 dark:border-strokedark">
+                <h4 className="text-xl">
+                  Store Details
+                  <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
+                    (Add/Update store details below)
+                  </span>
+                </h4>
+                <div className="flex items-center gap-3">
+                  <Button
+                    variant="outline"
+                    onClick={() => storeForm.reset()}
+                    className="shadow"
+                  >
+                    <EraserIcon className="w-5 h-5" />
+                    <span className="pl-2">Reset</span>
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={storeForm.formState.isSubmitting}
+                  >
+                    <CheckIcon className="w-5 h-5" />
+                    <span className="pl-2">Save Store</span>
+                  </Button>
+                </div>
+              </div>
               <FormField
                 control={storeForm.control}
                 name="name"
@@ -345,6 +348,23 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
                   </FormItem>
                 )}
               />
+              <div className="flex items-center gap-3 pt-6">
+                <Button
+                  variant="outline"
+                  onClick={() => storeForm.reset()}
+                  className="shadow"
+                >
+                  <EraserIcon className="w-5 h-5" />
+                  <span className="pl-2">Reset</span>
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={storeForm.formState.isSubmitting}
+                >
+                  <CheckIcon className="w-5 h-5" />
+                  <span className="pl-2">Save Store</span>
+                </Button>
+              </div>
             </form>
           </Form>
         </div>

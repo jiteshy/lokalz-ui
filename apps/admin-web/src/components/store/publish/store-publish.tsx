@@ -42,10 +42,10 @@ export const StorePublish = ({
 
   return (
     <div className="sm:max-w-screen-lg m-auto pt-3">
-      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200">
+      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl">
           Store Preview
-          <span className="text-xs text-slate-500 pl-2">
+          <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
             (Below is how users would see your store.)
           </span>
         </h4>
@@ -66,7 +66,7 @@ export const StorePublish = ({
           )}
         </div>
       </div>
-      <div className="-ml-8 -mr-8 mt-3">
+      <div className="-ml-8 -mr-8 mt-6">
         <StorePage store={storeId} isPreview={true} />
       </div>
     </div>
