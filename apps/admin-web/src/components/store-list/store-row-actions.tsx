@@ -86,7 +86,7 @@ export const StoreRowActions = ({
           <DropdownMenuGroup>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "store", storeStatus)}
+              onClick={() => onEdit(storeId!, storeName, "store", storeStatus)}
             >
               <div className="flex gap-2 items-center">
                 <IdCardIcon className="w-4 h-4" />
@@ -95,7 +95,7 @@ export const StoreRowActions = ({
             </DropdownMenuItem>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "menu", storeStatus)}
+              onClick={() => onEdit(storeId!, storeName, "menu", storeStatus)}
             >
               <div className="flex gap-2 items-center">
                 <ReaderIcon className="w-4 h-4" />
@@ -104,7 +104,9 @@ export const StoreRowActions = ({
             </DropdownMenuItem>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => onEdit(storeId!, "schedule", storeStatus)}
+              onClick={() =>
+                onEdit(storeId!, storeName, "schedule", storeStatus)
+              }
             >
               <div className="flex gap-2 items-center">
                 <CalendarIcon className="w-4 h-4" />
@@ -117,7 +119,9 @@ export const StoreRowActions = ({
             <>
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => onEdit(storeId!, "publish")}
+                onClick={() =>
+                  onEdit(storeId!, storeName, "publish", storeStatus)
+                }
               >
                 <div className="flex gap-2 items-center">
                   <LightningBoltIcon className="w-4 h-4" />

@@ -10,7 +10,12 @@ import { Button } from "../ui/button";
 import { OpenInNewWindowIcon } from "@radix-ui/react-icons";
 
 export type StoreRowActionsProps = {
-  onEdit: (storeId: string, tab?: string, status?: StoreStatus) => void;
+  onEdit: (
+    storeId: string,
+    storeName: string,
+    tab?: string,
+    status?: StoreStatus,
+  ) => void;
   onMarkInactive: (storeId: string) => Promise<void>;
   onDelete: (storeId: string) => Promise<void>;
 };

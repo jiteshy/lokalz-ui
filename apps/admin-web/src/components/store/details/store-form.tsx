@@ -81,7 +81,13 @@ const createStoreData = (formData: z.infer<typeof storeFormSchema>): Store => ({
   imageUrl: "",
 });
 
-export const StoreForm = ({ storeId }: { storeId: string }) => {
+export const StoreForm = ({
+  storeId,
+  storeName,
+}: {
+  storeId: string;
+  storeName: string;
+}) => {
   const { toast } = useToast();
   const router = useRouter();
   const axios = useAxios();
@@ -119,7 +125,9 @@ export const StoreForm = ({ storeId }: { storeId: string }) => {
     if (!storeId) {
       const newStoreId = response.data?.objectId;
       if (newStoreId) {
-        router.push(`/store/${newStoreId}?tab=menu`);
+        router.push(
+          `/store/${newStoreId}?tab=store&name=${storeForm.getValues().name}`,
+        );
       } else {
         router.push("/store/list");
       }

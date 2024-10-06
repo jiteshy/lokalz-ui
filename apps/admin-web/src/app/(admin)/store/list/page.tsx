@@ -103,10 +103,15 @@ export default function StoresListPage() {
   };
 
   const onEdit = useCallback(
-    (storeId: string, tab?: string, status?: StoreStatus) => {
+    (
+      storeId: string,
+      storeName: string,
+      tab?: string,
+      status?: StoreStatus,
+    ) => {
       const path =
-        tab && status
-          ? `/store/${storeId}?tab=${tab}&status=${status}`
+        tab && storeName && status
+          ? `/store/${storeId}?name=${storeName}&tab=${tab}&status=${status}`
           : `/store/${storeId}`;
       router.push(path);
     },

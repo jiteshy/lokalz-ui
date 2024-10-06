@@ -62,7 +62,7 @@ export const StoreTypeStats = ({
 
   const totalStores = useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.count, 0);
-  }, []);
+  }, [chartData]);
 
   return (
     <div className="w-full rounded-sm border border-stroke bg-white pt-6 shadow-default dark:border-strokedark dark:bg-boxdark">

@@ -7,11 +7,9 @@ import { ClickOutside } from "@repo/ui/components";
 import {
   CaretDownIcon,
   CaretUpIcon,
-  ExitIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
-import { signOut } from "@/auth";
 import { Logout } from "./logout";
 
 const DropdownUser = () => {
@@ -66,6 +64,7 @@ const DropdownUser = () => {
           <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-4 dark:border-strokedark">
             <li>
               <Link
+                onClick={() => setDropdownOpen(false)}
                 href="/profile"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary"
               >

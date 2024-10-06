@@ -29,6 +29,7 @@ export default function StoreCreateUpdatePage() {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab");
   const storeStatus = searchParams.get("status") as StoreStatus;
+  const storeName = searchParams.get("name");
   const [activeTab, setActiveTab] = useState<string>(initialTab || "store");
 
   let { storeId } = useParams<{ storeId: string }>();
@@ -38,7 +39,9 @@ export default function StoreCreateUpdatePage() {
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    router.push(`${pathName}?tab=${value}`);
+    router.push(
+      `${pathName}?tab=${value}&name=${storeName}&status=${storeStatus}`,
+    );
   };
 
   return (
@@ -46,7 +49,10 @@ export default function StoreCreateUpdatePage() {
       <div className="flex justify-between pb-2 border-b border-slate-200 dark:border-strokedark">
         <div>
           <h4 className="text-2xl font-semibold pb-1">
-            {storeId ? "Update" : "Add"} Store
+            {storeId ? "Update" : "Add"} Store{" "}
+            <span className="text-indigo-500">
+              {storeName ? ` (${storeName})` : ""}
+            </span>
           </h4>
           <div className="text-sm text-slate-500 dark:text-slate-400">
             Please provide details for the Store
@@ -95,7 +101,7 @@ export default function StoreCreateUpdatePage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="store" className="pt-3">
-          <StoreForm storeId={storeId} />
+          <StoreForm storeId={storeId} storeName={storeName!} />
         </TabsContent>
         <TabsContent value="menu" className="pt-3">
           <MenuForm storeId={storeId} />
