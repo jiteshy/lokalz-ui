@@ -20,13 +20,13 @@ const isTokenValid = (token: string | undefined) => {
 
 export const authConfig = {
   pages: {
-    signIn: "/login",
+    signIn: "/signin",
   },
   callbacks: {
     // Called on each page navigation
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname.startsWith("/login");
+      const isOnLoginPage = nextUrl.pathname.startsWith("/signin");
 
       let targetUrl;
       if (isOnLoginPage) {
@@ -35,7 +35,7 @@ export const authConfig = {
         }
       } else {
         if (!isLoggedIn) {
-          targetUrl = "/login";
+          targetUrl = "/signin";
         }
       }
 

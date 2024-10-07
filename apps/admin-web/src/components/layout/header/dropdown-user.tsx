@@ -4,11 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ClickOutside } from "@repo/ui/components";
-import {
-  CaretDownIcon,
-  CaretUpIcon,
-  PersonIcon,
-} from "@radix-ui/react-icons";
+import { CaretDownIcon, CaretUpIcon, PersonIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
 import { Logout } from "./logout";
 
