@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { MixIcon } from "@radix-ui/react-icons";
 import { DarkModeSwitcher } from "@repo/ui/components";
 import { signIn } from "@/auth";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Lokalz - Admin | Login",
@@ -14,21 +15,22 @@ export default function SignIn() {
       <div className="absolute top-10 right-20">
         <DarkModeSwitcher />
       </div>
-      <div className="min-w-125 min-h- p-10 rounded-xl shadow-default bg-black">
+      <div className="min-w-125 min-h- p-10 pb-5 rounded-xl shadow-default bg-black">
         <div className="flex flex-col items-center gap-4 px-6 py-5.5 text-whiten mx-auto">
           <div className="bg-black dark:bg-black shadow-default p-8 rounded-full text-slate-300 -mt-32">
             <MixIcon className="h-16 w-16" />
           </div>
-          <div className="flex items-baseline gap-2 pb-4">
+          <div className="flex items-baseline gap-2 pb-4 -mt-3">
             <span className="font-medium text-3xl">Lokalz</span>
             <span className="text-xs">ADMIN</span>
           </div>
           <div className="w-full text-center">
             <p className="text-slate-300 text-sm">
-              Welcome Back! Login with google to manage stores.
+              Welcome Back! Sign in to manage your stores.
             </p>
           </div>
           <form
+            className="w-full"
             action={async () => {
               "use server";
               await signIn("google");
@@ -71,6 +73,16 @@ export default function SignIn() {
               Sign in with Google
             </button>
           </form>
+          {/* <div className="text-muted-foreground text-xs">
+            By continuing, you agree to Lokalz's
+            <Button
+              variant="link"
+              className="text-xs pl-1 text-muted-foreground underline"
+              onClick={() => {}}
+            >
+              Terms of Service
+            </Button>{" "}
+          </div> */}
         </div>
       </div>
     </div>
