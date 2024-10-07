@@ -26,7 +26,7 @@ export const visibleColumns: VisibilityState = {
   email: false,
   phone: false,
   type: true,
-  status: true,
+  status: false,
   tags: false,
 };
 
@@ -50,14 +50,14 @@ export const getStoreColumns = ({
       return (
         <Button
           variant="link"
-          className="underline p-0 text-primary text-body dark:text-bodydark"
+          className="p-0"
           onClick={() =>
             window.open(
               `${process.env.NEXT_PUBLIC_APP_URL}/store?id=${storeId}`,
             )
           }
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-indigo-500 dark:text-slate-200">
             {name}
             <OpenInNewWindowIcon className="h-4 w-4" />
           </div>

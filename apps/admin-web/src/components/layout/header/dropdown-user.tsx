@@ -20,10 +20,10 @@ const DropdownUser = () => {
         href="#"
       >
         <span className="hidden text-right lg:block pr-2">
-          <span className="block text-sm font-medium text-black dark:text-whiter">
+          <span className="block text-sm font-medium text-whiter dark:text-whiter">
             {session?.user?.name || "User"}
           </span>
-          <span className="block text-xs text-muted-foreground dark:text-slate-400">
+          <span className="block text-xs text-slate-200 dark:text-slate-400">
             Super Admin
           </span>
         </span>
@@ -46,9 +46,9 @@ const DropdownUser = () => {
         </span>
 
         {dropdownOpen ? (
-          <CaretUpIcon className="h-5 w-5 dark:text-white" />
+          <CaretUpIcon className="h-5 w-5 text-white" />
         ) : (
-          <CaretDownIcon className="h-5 w-5 dark:text-white" />
+          <CaretDownIcon className="h-5 w-5 text-white" />
         )}
       </Link>
 

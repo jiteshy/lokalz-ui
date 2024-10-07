@@ -17,7 +17,7 @@ export default function DefaultLayout({
         <div className="relative flex flex-1 flex-col lg:ml-67.5">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <main>
-            <div className="mx-auto max-w-screen-2xl pb-6 px-6">{children}</div>
+            <div className="mx-auto">{children}</div>
           </main>
         </div>
       </div>

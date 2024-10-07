@@ -84,7 +84,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             href="/store/list"
             className="flex gap-3 items-center text-2xl text-slate-100"
           >
-            {/* TO-DO: Replace with icon */}
+            {/* TO-DO: Replace with lokalz icon */}
             <MixIcon className="h-6 w-6" />{" "}
             <div className="flex items-baseline gap-2">
               <span className="font-medium">Lokalz</span>{" "}
@@ -98,7 +98,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             className="block lg:hidden"
           >
             <svg
-              className="fill-current"
+              className="fill-current text-slate-100"
               width="20"
               height="18"
               viewBox="0 0 20 18"

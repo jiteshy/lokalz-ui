@@ -167,14 +167,24 @@ export default function StoresListPage() {
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="flex gap-6 -ml-6">
-      <div className="fixed left-67.5 top-0 z-9999 h-screen w-80 overflow-y-auto no-scrollbar bg-slate-200 dark:bg-boxdark-0">
+    <div className="md:flex md:gap-6">
+      <div className="relative shadow-default md:fixed lg:left-67.5 md:top-18 lg:top-0 z-9999 md:h-screen w-full md:w-80 md:overflow-y-auto md:no-scrollbar bg-slate-200 dark:bg-boxdark-0">
         <StoresStatistics stats={storeStats} />
       </div>
-      <div className="w-full ml-80 rounded-sm border border-stroke bg-white p-6 shadow-default dark:border-strokedark dark:bg-boxdark">
-        <h4 className="text-2xl font-semibold">All Stores</h4>
-        <div className="text-sm pt-2 text-slate-500">
-          List of all the Stores
+      <div className="w-full md:ml-80 rounded-sm border border-stroke bg-white p-4 pt-6 md:p-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="flex justify-between items-center">
+          <div>
+            <h4 className="text-2xl font-semibold">All Stores</h4>
+            <div className="text-sm pt-2 text-slate-500">
+              List of all the Stores
+            </div>
+          </div>
+          <Link href={"/store/new"}>
+            <Button>
+              <PlusIcon className="w-5 h-5" />
+              <span className="pl-2">Create Store</span>
+            </Button>
+          </Link>
         </div>
         <div className="flex justify-between items-center p-2 bg-slate-200 dark:bg-boxdark-0 rounded mt-4 bg-gradient-to-r from-indigo-100 via-pink-50 to-indigo-100 dark:from-boxdark-0 dark:to-boxdark-0">
           <div className="flex items-center gap-2 rounded">
@@ -203,12 +213,12 @@ export default function StoresListPage() {
               Inactive
             </button>
           </div>
-          <Link href={"/store/new"}>
+          {/* <Link href={"/store/new"}>
             <Button>
               <PlusIcon className="w-5 h-5" />
               <span className="pl-2">Create Store</span>
             </Button>
-          </Link>
+          </Link> */}
         </div>
 
         <div className="pt-3">

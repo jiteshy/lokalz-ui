@@ -253,9 +253,9 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
   ) : (
     <div className="sm:max-w-screen-lg m-auto pt-3">
       <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
-        <h4 className="text-xl">
+        <h4 className="text-xl flex flex-col gap-2 md:flex-row md:items-center">
           Store Schedule
-          <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
+          <span className="text-xs text-slate-500 dark:text-slate-400">
             (Create/update your schedules below.)
           </span>
         </h4>
@@ -271,8 +271,8 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
           ? "Schedules in yellow are unsaved changes. Click Save Schedule above when you're done."
           : ""}
       </div>
-      <div className="pb-6 flex gap-8">
-        <div className="min-w-[360px]">
+      <div className="pb-6 flex flex-col md:flex-row gap-8">
+        <div className="max-w-[360px] mx-auto">
           <div className="pb-3 flex justify-end">
             <ScheduleDelete onScheduleDelete={resetCalendar}>
               <Button

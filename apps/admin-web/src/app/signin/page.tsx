@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function SignIn() {
   return (
-    <div className="relative w-full min-h-screen flex justify-center items-center mx-auto from-purple-900 via-indigo-800 to-indigo-500 bg-gradient-to-br dark:from-boxdark dark:to-boxdark-0">
-      <div className="absolute top-10 right-20">
+    <div className="relative p-6 w-full min-h-screen flex justify-center items-center mx-auto from-purple-900 via-indigo-800 to-indigo-500 bg-gradient-to-br dark:from-boxdark dark:to-boxdark-0">
+      <div className="absolute top-6 right-6 sm:top-10 sm:right-10">
         <DarkModeSwitcher />
       </div>
-      <div className="min-w-125 min-h- p-10 pb-5 rounded-xl shadow-default bg-black">
-        <div className="flex flex-col items-center gap-4 px-6 py-5.5 text-whiten mx-auto">
+      <div className="w-full sm:w-125 p-6 md:p-10 md:pb-6 rounded-xl shadow-default bg-black">
+        <div className="flex flex-col items-center gap-4 pt-6 text-whiten mx-auto">
           <div className="bg-black dark:bg-black shadow-default p-8 rounded-full text-slate-300 -mt-32">
             <MixIcon className="h-16 w-16" />
           </div>
@@ -36,7 +36,7 @@ export default function SignIn() {
               await signIn("google");
             }}
           >
-            <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border text-boxdark-2 border-slate-300 bg-slate-200 p-4 hover:bg-slate-100 dark:text-slate-200 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+            <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border text-boxdark-2 border-slate-300 bg-slate-200 p-3 hover:bg-slate-100 dark:text-slate-200 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
               <span>
                 <svg
                   width="20"

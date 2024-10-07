@@ -319,18 +319,18 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
     <Loading />
   ) : (
     <div className="sm:max-w-screen-lg m-auto pt-3">
-      <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
+      <div className="flex flex-col gap-6 md:flex-row md:items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl">
           Menu Categories
           <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
             (Expand below categories to see items)
           </span>
         </h4>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 justify-end">
           <CategorySheet onCategorySubmit={onAddCategory}>
             <Button variant={"outline"} className="shadow">
               <PlusIcon className="w-5 h-5" />
-              Add Menu Category
+              Add Category
             </Button>
           </CategorySheet>
           <Button type="submit" onClick={handleMenuSave}>
@@ -367,7 +367,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
                         {menuCategory.category}
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col md:flex-row items-center justify-between">
                           <div className="text-xs text-slate-500 w-full">
                             {menuCategory.description}
                           </div>

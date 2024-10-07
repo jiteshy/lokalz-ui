@@ -2,14 +2,15 @@ import Link from "next/link";
 import { DarkModeSwitcher, Logo } from "@repo/ui/components";
 import DropdownNotification from "./dropdown-notification";
 import DropdownUser from "./dropdown-user";
+import { MixIcon } from "@radix-ui/react-icons";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
   return (
-    <header className="sticky top-0 z-999 flex w-full drop-shadow-none bg-slate-200 dark:bg-boxdark-0 dark:drop-shadow-none">
-      <div className="flex flex-grow items-start justify-between px-4 py-4 md:px-6 2xl:px-11">
+    <header className="sticky top-0 z-999 flex w-full drop-shadow-none bg-slate-200 dark:bg-boxdark-0 dark:drop-shadow-none bg-gradient-to-r from-indigo-500 to-boxdark duration-300 ease-linear dark:from-boxdark dark:to-boxdark-3">
+      <div className="flex flex-grow items-start justify-between px-4 py-4 md:px-6">
         <div>
           <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
             {/* <!-- Hamburger Toggle BTN --> */}
@@ -57,9 +58,14 @@ const Header = (props: {
 
             <Link
               href="/store/list"
-              className="flex gap-3 items-center text-2xl text-slate-100"
+              className="flex gap-2 pl-3 items-center text-2xl text-slate-100"
             >
-              <Logo />
+              {/* TO-DO: Replace with lokalz icon */}
+              <MixIcon className="h-6 w-6" />{" "}
+              <div className="flex items-baseline gap-1">
+                <span className="font-medium">Lokalz</span>{" "}
+                <span className="text-xs text-whiten">ADMIN</span>
+              </div>
             </Link>
           </div>
         </div>

@@ -53,17 +53,17 @@ export const getMenuItemColumns = ({
   },
   {
     accessorKey: "description",
-    header: "Item Description",
+    header: "Description",
     cell: ({ row }) => row.original.description || "--",
   },
   {
     accessorKey: "price",
-    header: "Item Price",
+    header: "Price",
     cell: ({ row }) => `$${Number(row.original.price).toFixed(2)}`,
   },
   {
     accessorKey: "available",
-    header: "Item Available?",
+    header: "Available?",
     cell: ({ row }) => (
       <Checkbox
         checked={row.original.available}

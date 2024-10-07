@@ -45,13 +45,13 @@ export default function StoreCreateUpdatePage() {
   };
 
   return (
-    <div className="bg-white border border-text-300 w-full p-6 text-slate-700 dark:text-slate-200 shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="bg-white border border-text-300 w-full p-4 md:p-6 text-slate-700 dark:text-slate-200 shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex justify-between pb-2 border-b border-slate-200 dark:border-strokedark">
         <div>
-          <h4 className="text-2xl font-semibold pb-1">
+          <h4 className="text-2xl font-semibold pb-1 dark:text-slate-400">
             {storeId ? "Update" : "Add"} Store{" "}
-            <span className="text-indigo-500">
-              {storeName ? ` (${storeName})` : ""}
+            <span className="text-indigo-500 dark:text-slate-200">
+              {storeName ? ` : ${storeName}` : ""}
             </span>
           </h4>
           <div className="text-sm text-slate-500 dark:text-slate-400">
@@ -76,25 +76,25 @@ export default function StoreCreateUpdatePage() {
       >
         <TabsList className="grid sm:max-w-screen-lg m-auto grid-cols-4 h-12 mb-3 px-[6px] text-center bg-gradient-to-r from-indigo-100 via-pink-50 to-indigo-100 dark:from-boxdark-0 dark:to-boxdark-0">
           <TabsTrigger value="store" className="py-2">
-            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
+            <div className="flex gap-1 sm:gap-2 text-slate-900 dark:text-slate-200">
               <IdCardIcon className="w-5 h-5" />
-              Store Details
+              Details
             </div>
           </TabsTrigger>
           <TabsTrigger value="menu" className="py-2" disabled={!storeId}>
-            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
+            <div className="flex gap-1 sm:gap-2 text-slate-900 dark:text-slate-200">
               <ReaderIcon className="w-5 h-5" />
               Menu
             </div>
           </TabsTrigger>
           <TabsTrigger value="schedule" className="py-2" disabled={!storeId}>
-            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
+            <div className="flex gap-1 sm:gap-2 text-slate-900 dark:text-slate-200">
               <CalendarIcon className="w-5 h-5" />
               Schedule
             </div>
           </TabsTrigger>
           <TabsTrigger value="publish" className="py-2" disabled={!storeId}>
-            <div className="flex gap-2 text-slate-900 dark:text-slate-200">
+            <div className="flex gap-1 sm:gap-2 text-slate-900 dark:text-slate-200">
               <LightningBoltIcon className="w-5 h-5" />
               {storeStatus === StoreStatus.ACTIVE ? "Preview" : "Publish"}
             </div>
