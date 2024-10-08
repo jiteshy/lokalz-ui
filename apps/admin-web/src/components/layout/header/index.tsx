@@ -69,7 +69,7 @@ const Header = (props: {
             </Link>
           </div>
         </div>
-        <div className="flex items-center gap-8 2xsm:gap-7">
+        <div className="flex items-center gap-4 md:gap-8 2xsm:gap-7">
           <ul className="flex items-center gap-4 2xsm:gap-4">
             <DarkModeSwitcher />
             <DropdownNotification />

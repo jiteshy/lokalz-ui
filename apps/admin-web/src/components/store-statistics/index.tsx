@@ -24,7 +24,7 @@ export type StoreStats = {
 export const StoresStatistics = ({ stats }: { stats: StoreStats }) => {
   return (
     <div className="p-4 md:p-6 md:pt-3.5 md:min-h-screen">
-      <div className="pb-3.5 pl-12 md:pl-0 flex items-center md:items-start gap-2 md:flex-col">
+      <div className="pb-3.5 md:pl-0 flex items-center md:items-start gap-2 md:flex-col">
         <h3 className="text-lg font-medium text-slate-600 dark:text-whiter">
           Today's Statistics
         </h3>
@@ -32,7 +32,7 @@ export const StoresStatistics = ({ stats }: { stats: StoreStats }) => {
           {new Date().toLocaleString()}
         </h6>
       </div>
-      <div className="md:hidden px-12">
+      <div className="md:hidden">
         <Carousel>
           <CarouselContent>
             <CarouselItem className="basis-1/2 sm:basis-1/3">

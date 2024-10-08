@@ -39,6 +39,7 @@ const DropdownUser = () => {
                 height: "40px",
               }}
               alt="User"
+              className="rounded-full"
             />
           ) : (
             <PersonIcon className="h-5 w-5" />
