@@ -168,7 +168,7 @@ export default function StoresListPage() {
     <Loading />
   ) : (
     <div className="md:flex md:gap-6">
-      <div className="relative shadow-default md:fixed lg:left-67.5 md:top-18 lg:top-0 md:z-9999 md:h-screen w-full md:w-80 md:overflow-y-auto md:no-scrollbar bg-slate-200 dark:bg-boxdark-0">
+      <div className="relative shadow-default md:fixed lg:left-67.5 md:top-18 lg:top-0 lg:z-9999 md:h-screen w-full md:w-80 md:overflow-y-auto md:no-scrollbar bg-slate-200 dark:bg-boxdark-0">
         <StoresStatistics stats={storeStats} />
       </div>
       <div className="w-full md:ml-80 rounded-sm border border-stroke bg-white p-4 pt-6 md:p-6 shadow-default dark:border-strokedark dark:bg-boxdark">

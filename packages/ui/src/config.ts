@@ -5,6 +5,9 @@ export const USER_APIS = {
     STORES_LIST: `${API_BASE_PATH}/store/zip`,
     STORE_DETAILS: `${API_BASE_PATH}/store`,
   },
+  SUPPORT: {
+    SUBSCRIPTIONS: `${API_BASE_PATH}/subscription/subscribe`,
+  },
   THIRD_PARTY: {
     FETCH_IP: "https://api.ipify.org/?format=json",
     FETCH_LOCATION_FROM_IP: "https://ipapi.co/",
@@ -23,9 +26,13 @@ export const ADMIN_APIS = {
     STORES_LIST: `${ADMIN_API_BASE_PATH}/store/list`,
     STORE_DETAILS: `${ADMIN_API_BASE_PATH}/store`,
   },
+  SUPPORT: {
+    SUBSCRIPTIONS: `${ADMIN_API_BASE_PATH}/subscription`,
+  },
 };
 
 export const ZIPCODE_REGEX = /^\d{5}$/;
+export const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const US_STATES: Record<string, string> = {
   AL: "Alabama",

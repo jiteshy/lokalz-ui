@@ -75,3 +75,7 @@ export type StoreScheduleItem = {
   existing?: boolean;
   markedForDeletion?: boolean;
 };
+
+export type Subscription = {
+  emailAddress: string;
+}

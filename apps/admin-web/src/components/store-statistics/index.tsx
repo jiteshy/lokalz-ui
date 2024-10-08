@@ -25,7 +25,7 @@ export const StoresStatistics = ({ stats }: { stats: StoreStats }) => {
   return (
     <div className="p-4 md:p-6 md:pt-3.5 md:min-h-screen">
       <div className="pb-3.5 md:pl-0 flex items-center md:items-start gap-2 md:flex-col">
-        <h3 className="text-lg font-medium text-slate-600 dark:text-whiter">
+        <h3 className="text-base md:text-lg font-medium text-slate-600 dark:text-whiter">
           Today's Statistics
         </h3>
         <h6 className="text-xs text-slate-400">

@@ -1,14 +1,14 @@
 "use client";
 
-import { CONFIG } from "@/utils/config";
-import { Store } from "@repo/ui/types";
+import { Subscription } from "@repo/ui/types";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useSWR from "swr";
+import { ADMIN_APIS } from "@repo/ui/config";
 
 export default function SubscriptionsPage() {
-  const { data: stores, isLoading } = useSWR<Store[]>(
-    `${CONFIG.API_BASE_PATH}/vendors`,
+  const { data: stores, isLoading } = useSWR<Subscription[]>(
+    `${ADMIN_APIS.SUPPORT.SUBSCRIPTIONS}`,
   );
 
   return (
@@ -39,7 +39,7 @@ export default function SubscriptionsPage() {
               <tbody>
                 {stores.map((store, index) => (
                   <tr className="border-t border-t-slate-200" key={index}>
-                    <td className="px-6 py-3">{store.email}</td>
+                    <td className="px-6 py-3">{store.emailAddress}</td>
                   </tr>
                 ))}
               </tbody>

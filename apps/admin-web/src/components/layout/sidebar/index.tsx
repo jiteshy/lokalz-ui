@@ -135,13 +135,13 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </ul>
               </div>
             ))}
-            
-            <div className="sm:hidden flex items-center justify-between border-t border-t-strokedark pt-3">
-            <h3 className="ml-4 text-sm font-semibold text-bodydark2">
-                  DARK MODE
-                </h3>
-                <DarkModeSwitcher />
-                </div>
+
+            <div className="flex items-center justify-between border-t border-t-strokedark pt-3">
+              <h3 className="ml-4 text-sm font-semibold text-bodydark2">
+                DARK MODE
+              </h3>
+              <DarkModeSwitcher />
+            </div>
           </nav>
           {/* <!-- Sidebar Menu --> */}
         </div>
