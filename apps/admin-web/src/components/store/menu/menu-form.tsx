@@ -322,7 +322,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
       <div className="flex flex-col gap-6 md:flex-row md:items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl">
           Menu Categories
-          <span className="text-xs text-slate-500 dark:text-slate-400 pl-2">
+          <span className="text-sm text-slate-500 dark:text-slate-400 pl-2">
             (Expand below categories to see items)
           </span>
         </h4>
@@ -368,7 +368,7 @@ export const MenuForm = ({ storeId }: { storeId: string }) => {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="flex flex-col md:flex-row items-center justify-between">
-                          <div className="text-xs text-slate-500 w-full">
+                          <div className="text-sm text-slate-500 w-full">
                             {menuCategory.description}
                           </div>
                           <div className="w-full text-right">

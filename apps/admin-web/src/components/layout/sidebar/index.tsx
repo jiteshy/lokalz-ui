@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { SidebarItem } from "@/components/layout/sidebar/sidebar-item";
-import { ClickOutside, Logo } from "@repo/ui/components";
+import { ClickOutside, DarkModeSwitcher, Logo } from "@repo/ui/components";
 import { useLocalStorage } from "@repo/ui/hooks";
 import {
   BookmarkIcon,
@@ -114,7 +114,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         </div>
         {/* <!-- SIDEBAR HEADER --> */}
 
-        <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+        <div className="relative no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
           {/* <!-- Sidebar Menu --> */}
           <nav className="px-4 py-4 lg:px-6">
             {menuGroups.map((group, groupIndex) => (
@@ -135,6 +135,13 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </ul>
               </div>
             ))}
+            
+            <div className="sm:hidden flex items-center justify-between border-t border-t-strokedark pt-3">
+            <h3 className="ml-4 text-sm font-semibold text-bodydark2">
+                  DARK MODE
+                </h3>
+                <DarkModeSwitcher />
+                </div>
           </nav>
           {/* <!-- Sidebar Menu --> */}
         </div>

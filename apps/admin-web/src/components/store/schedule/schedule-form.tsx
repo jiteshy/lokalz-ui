@@ -255,7 +255,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
       <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl flex flex-col gap-2 md:flex-row md:items-center">
           Store Schedule
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-sm text-slate-500 dark:text-slate-400">
             (Create/update your schedules below.)
           </span>
         </h4>
@@ -356,7 +356,7 @@ export const ScheduleForm = ({ storeId }: { storeId: string }) => {
                         >
                           <Button
                             variant="link"
-                            className="flex items-center gap-1 text-sm text-red-accent-700 !pr-0"
+                            className="flex items-center gap-1 text-sm text-red-700 !pr-0"
                           >
                             <TrashIcon className="w-4 h-4" />
                             Delete

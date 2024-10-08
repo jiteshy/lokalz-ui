@@ -45,7 +45,7 @@ export const StorePublish = ({
       <div className="flex items-center justify-between pb-2 border-b border-b-slate-200 dark:border-strokedark">
         <h4 className="text-xl flex flex-col gap-2 md:flex-row md:items-center">
           Store Preview
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-sm text-slate-500 dark:text-slate-400">
             (Below is how users would see your store.)
           </span>
         </h4>

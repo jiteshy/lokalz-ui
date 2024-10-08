@@ -167,7 +167,7 @@ export const StoreForm = ({
               <div className="flex items-center justify-between pb-2 mb-8 border-b border-b-slate-200 dark:border-strokedark">
                 <h4 className="text-xl flex flex-col gap-2 md:flex-row md:items-center">
                   Store Details
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                  <div className="text-sm text-slate-500 dark:text-slate-400">
                     (Add/Update store details below)
                   </div>
                 </h4>
