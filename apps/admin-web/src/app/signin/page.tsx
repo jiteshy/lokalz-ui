@@ -3,6 +3,7 @@ import { MixIcon } from "@radix-ui/react-icons";
 import { DarkModeSwitcher } from "@repo/ui/components";
 import { signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Lokalz - Admin | Login",
@@ -11,10 +12,22 @@ export const metadata: Metadata = {
 
 export default function SignIn() {
   return (
-    <div className="relative p-6 w-full min-h-screen flex justify-center items-center mx-auto from-purple-900 via-indigo-800 to-indigo-500 bg-gradient-to-br dark:from-boxdark dark:to-boxdark-0">
-      <div className="absolute top-6 right-6 sm:top-10 sm:right-10">
+    <div className="from-purple-900 via-indigo-800 to-indigo-500 bg-gradient-to-br dark:from-boxdark dark:to-boxdark-0">
+      <div className="px-6 sm:px-10 py-6 flex items-center justify-between">
+      <Link
+            href="/store/list"
+            className="flex gap-3 items-center text-2xl text-slate-100"
+          >
+            {/* TO-DO: Replace with lokalz icon */}
+            <MixIcon className="h-6 w-6" />{" "}
+            <div className="flex items-baseline gap-2">
+              <span className="font-medium">Lokalz</span>{" "}
+              <span className="text-xs text-whiten">ADMIN</span>
+            </div>
+          </Link>
         <DarkModeSwitcher />
       </div>
+    <div className="relative p-6 w-full min-h-screen flex justify-center items-center mx-auto">
       <div className="w-full sm:w-125 p-6 md:p-10 md:pb-6 rounded-xl shadow-default bg-black">
         <div className="flex flex-col items-center gap-4 pt-6 text-whiten mx-auto">
           <div className="bg-black dark:bg-black shadow-default p-8 rounded-full text-slate-300 -mt-32">
@@ -85,6 +98,7 @@ export default function SignIn() {
           </div> */}
         </div>
       </div>
+    </div>
     </div>
   );
 }
